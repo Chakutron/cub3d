@@ -66,7 +66,7 @@ typedef struct s_map
 	t_color	cell;
 	int		w;
 	int		h;
-	int		**matrix;
+	char	**matrix;
 	t_info	info;
 	int		complete_info;
 }			t_map;

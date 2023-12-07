@@ -103,6 +103,8 @@ void	read_variables(t_data *data, char *line)
 		if (!data->map.info.n)
 		{
 			data->map.NO_file = ft_strdup2(&line[3]);
+			if (ft_strlen(data->map.NO_file) > 0)
+				data->map.NO_file[ft_strlen(data->map.NO_file) - 1] = '\0';
 			data->map.info.n = 1;
 			check_variables(data);
 		}
@@ -114,6 +116,8 @@ void	read_variables(t_data *data, char *line)
 		if (!data->map.info.s)
 		{
 			data->map.SO_file = ft_strdup2(&line[3]);
+			if (ft_strlen(data->map.SO_file) > 0)
+				data->map.SO_file[ft_strlen(data->map.SO_file) - 1] = '\0';
 			data->map.info.s = 1;
 			check_variables(data);
 		}
@@ -125,6 +129,8 @@ void	read_variables(t_data *data, char *line)
 		if (!data->map.info.w)
 		{
 			data->map.WE_file = ft_strdup2(&line[3]);
+			if (ft_strlen(data->map.WE_file) > 0)
+				data->map.WE_file[ft_strlen(data->map.WE_file) - 1] = '\0';
 			data->map.info.w = 1;
 			check_variables(data);
 		}
@@ -136,6 +142,8 @@ void	read_variables(t_data *data, char *line)
 		if (!data->map.info.e)
 		{
 			data->map.EA_file = ft_strdup2(&line[3]);
+			if (ft_strlen(data->map.EA_file) > 0)
+				data->map.EA_file[ft_strlen(data->map.EA_file) - 1] = '\0';
 			data->map.info.e = 1;
 			check_variables(data);
 		}
@@ -220,21 +228,29 @@ void	read_variables(t_data *data, char *line)
 
 void print_variables(t_data *data)
 {
+	int	i;
+	
 	printf("NO file = %s\n", data->map.NO_file);
 	printf("SO file = %s\n", data->map.SO_file);
 	printf("WE file = %s\n", data->map.WE_file);
 	printf("EA file = %s\n", data->map.EA_file);
 	printf("Floor color = (%i, %i, %i)\n", data->map.floor.r, data->map.floor.g, data->map.floor.b);
 	printf("Cell color = (%i, %i, %i)\n", data->map.cell.r, data->map.cell.g, data->map.cell.b);
+	printf("Map dimension = (%i x %i)\n\n", data->map.h, data->map.w);
+	i = 0;
+	while (data->map.matrix[i])
+	{
+		printf("%s\n", data->map.matrix[i]);
+		i++;
+	}
 }
 
 void	load_map(t_data *data)
 {
 	int		fd;
 	char	*line;
-	int		x;
-	int		y;
 	int		mapstart;
+	int		i;
 
 	fd = open(data->map.filename, O_RDONLY);
 	if (fd == -1)
@@ -243,38 +259,48 @@ void	load_map(t_data *data)
 		exit(1);
 	}
 	mapstart = 0;
-	y = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
-		mapstart++;
 		if (line == NULL)
 			break ;
 		if (line[0] != '\r')
 		{
 			if (data->map.complete_info)
 			{
-				x = 0;
-				y = 0;
-				print_variables(data);
-				if (line[0] != '\r')
-					break ;
-				//break ;
-				/*x = 0;
-				while (line[x])
-				{
-					read_map(data, line, x, y);
-					x++;
-				}
-				y++;*/
+				if (((int)ft_strlen(line) - 1) > data->map.w)
+					data->map.w = ft_strlen(line) - 1;
+				data->map.h++;
 			}
 			else
+			{
 				read_variables(data, line);
+				mapstart++;
+			}
 		}
+		else
+			mapstart++;
 		free(line);
 	}
-	printf("\nMap starting at line: %i\n", mapstart);
-	data->map.w = x;
-	data->map.h = y;
 	close(fd);
+	printf("- Map starting at line: %i\n\n", mapstart);
+	data->map.matrix = malloc(sizeof(char *) * (data->map.h + 1));
+	fd = open(data->map.filename, O_RDONLY);
+	i = 0;
+	while (i < mapstart)
+	{
+		line = get_next_line(fd);
+		free(line);
+		i++;
+	}
+	i = 0;
+	while (i < data->map.h)
+	{
+		data->map.matrix[i] = get_next_line(fd);
+		data->map.matrix[i][ft_strlen(data->map.matrix[i]) - 2] = '\0';
+		i++;
+	}
+	data->map.matrix[i] = NULL;
+	close(fd);
+	print_variables(data);
 }

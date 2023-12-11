@@ -27,8 +27,9 @@ void	init_variables(t_data *data)
 
 void	load_images(t_data *data)
 {
-	data->map.NO_texture = load_image(data->map.NO_file, data);
+	(void)data;
+	/*data->map.NO_texture = load_image(data->map.NO_file, data);
 	data->map.SO_texture = load_image(data->map.SO_file, data);
 	data->map.WE_texture = load_image(data->map.WE_file, data);
-	data->map.EA_texture = load_image(data->map.EA_file, data);
+	data->map.EA_texture = load_image(data->map.EA_file, data);*/
 }

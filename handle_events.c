@@ -37,6 +37,36 @@ void	check_movement_keys(int keysym, t_data *data, int x, int y)
 	}
 }
 
+void	free_variables(t_data *data)
+{
+	int	i;
+	
+	if (data->map.h && data->map.w)
+	{
+		i = 0;
+		while (i <= data->map.h)
+		{
+			free(data->map.matrix[i]);
+			i++;
+		}
+		free(data->map.matrix);
+	}
+	if (data->map.info.n)
+		free(data->map.NO_file);
+	if (data->map.info.s)
+		free(data->map.SO_file);
+	if (data->map.info.w)
+		free(data->map.WE_file);
+	if (data->map.info.e)
+		free(data->map.EA_file);
+}
+
+int	x_press(t_data *data)
+{
+	data->endgame = 1;
+	return (0);
+}
+
 void	close_game(t_data *data)
 {
 	//mlx_mouse_show(data->mlx_ptr, data->win_ptr);
@@ -49,7 +79,7 @@ void	close_game(t_data *data)
 int	handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
-		close_game(data);
+		data->endgame = 1;
 	//check_movement_keys(keysym, data, data->player.x, data->player.y);
 	return (0);
 }

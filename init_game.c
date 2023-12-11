@@ -14,6 +14,7 @@
 
 void	init_variables(t_data *data)
 {
+	data->endgame = 0;
 	data->map.info.n = 0;
 	data->map.info.s = 0;
 	data->map.info.w = 0;

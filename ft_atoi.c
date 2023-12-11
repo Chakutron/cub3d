@@ -16,20 +16,17 @@ int	ft_atoi(char *str)
 {
 	int	i;
 	int	res;
-	int	sign;
 
 	i = 0;
 	res = 0;
-	sign = 1;
 	if (str[i] == '-')
-	{
-		sign = -1;
-		i++;
-	}
+		return (-42);
 	while (str[i])
 	{
 		res = res * 10 + (str[i] - 48);
 		i++;
 	}
-	return (res * sign);
+	if (res > 255)
+		return (-42);
+	return (res);
 }

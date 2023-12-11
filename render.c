@@ -53,6 +53,11 @@ int	render(t_data *data)
 	}
 	else
 		check_movement(data);*/
-	(void)data;
+	if (data->endgame)
+	{
+		close_game(data);
+		free_variables(data);
+		exit(0);
+	}
 	return (0);
 }

@@ -22,6 +22,7 @@
 # include <stdio.h>
 # include <string.h>
 # include "gnl/get_next_line.h"
+# include <stdnoreturn.h>
 
 typedef struct s_image
 {
@@ -85,6 +86,9 @@ typedef struct s_data
 	void		*win_ptr;
 	t_map		map;
 	t_player	player;
+	int			fd;
+	char		*line;
+	int			endgame;
 }				t_data;
 
 char	*ft_strcat2(char *s, char c);
@@ -102,7 +106,9 @@ void	open_map(t_data *data);
 void	init_variables(t_data *data);
 int		check_extension(t_data *data);
 void	print_error(t_data *data, int error);
+void	free_variables(t_data *data);
 void	load_map(t_data *data);
+int		x_press(t_data *data);
 int		check_map(t_data *data);
 t_image	load_image(char *file, t_data *data);
 void	load_images(t_data *data);

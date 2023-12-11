@@ -15,15 +15,19 @@
 
 void	start_game(t_data *data)
 {
-	data->win_ptr = mlx_new_window(data->mlx_ptr, 1920,
-			1080, "Cub3D by Chaku & Trorioll");
+	data->mlx_ptr = mlx_init();
+	if (!data->mlx_ptr)
+		print_error(data, 1);
+	data->win_ptr = mlx_new_window(data->mlx_ptr, 640,
+			480, "Cub3D by Chaku & Trorioll");
 	if (!data->win_ptr)
-		free(data->win_ptr);
+		print_error(data, 1);
 	else
 	{
-		//mlx_loop_hook(data->mlx_ptr, &render, data);
+		mlx_loop_hook(data->mlx_ptr, &render, data);
 		mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
-		//mlx_do_key_autorepeaton(data->mlx_ptr);
+		mlx_hook(data->win_ptr, 17, 1L << 0, &x_press, data);
+		mlx_do_key_autorepeaton(data->mlx_ptr);
 		//mlx_mouse_hide(data->mlx_ptr, data->win_ptr);
 		printf("--- GAME STARTED ---\n");
 		mlx_loop(data->mlx_ptr);
@@ -38,9 +42,6 @@ int	main(int argc, char *argv[])
 	printf("\n\033[0;32m*** Cub3D by Chaku & Oriol ***\033[0m\n\n");
 	if (argc == 2)
 	{
-		data.mlx_ptr = mlx_init();
-		if (!data.mlx_ptr)
-			return (1);
 		data.map.filename = argv[1];
 		if (check_extension(&data))
 			print_error(&data, 3);

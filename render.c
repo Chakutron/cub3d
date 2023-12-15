@@ -31,6 +31,7 @@ void	check_movement(t_data *data)
 
 int	render(t_data *data)
 {
+	t_image	canvas;
 	/*int			end;
 	int			num;
 
@@ -59,5 +60,11 @@ int	render(t_data *data)
 		free_variables(data);
 		exit(0);
 	}
+	canvas = new_img(640, 480, data);
+	put_img_to_img(&canvas, &(data->map.C_image), 0, 0);
+	put_img_to_img(&canvas, &(data->map.F_image), 0, 240);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, canvas.ptr, 0, 0);
+	sleep(1);
+	mlx_destroy_image(data->mlx_ptr, canvas.ptr);
 	return (0);
 }

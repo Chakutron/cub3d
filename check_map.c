@@ -12,106 +12,145 @@
 
 #include "cub3d.h"
 
-int	check_path2(t_data *data, int x, int y, char c)
+int	check_nearly_elems(t_data *data, int x, int y)
 {
-	/*if ((x == 0 || x == data->map_x - 1) && c != '1')
-	{
-		printf("\033[0;31m%c\033[0m", c);
-		return (-1);
-	}
-	else if ((y == 0 || y == data->map_y - 1) && c != '1')
-	{
-		printf("\033[0;31m%c\033[0m", c);
-		return (-1);
-	}
-	else if (c == 'P' || c == 'C' || c == 'E')
-	{
-		printf("\033[0;31m%c\033[0m", c);
-		return (-1);
-	}
-	else if (c == '*')
-		printf("\033[0;33m%c\033[0m", c);
-	else
-		printf("%c", c);
-	if (c == 'P' || c == 'C' || c == 'E')
-		return (-1);
-	return (0);*/
-	(void)data;
-	(void)x;
-	(void)y;
-	(void)c;
+	if (data->map.matrix[y][x] != '0' && data->map.matrix[y][x] != '1'
+		&& data->map.matrix[y][x] != 'N' && data->map.matrix[y][x] != 'S'
+		&& data->map.matrix[y][x] != 'E' && data->map.matrix[y][x] != 'W')
+		return (1);
 	return (0);
 }
 
-int	check_path(t_data *data)
+int	check_surround(t_data *data, int x, int y)
 {
-	/*int		x;
-	int		y;
-	char	c;
-	int		path;
+	if (x == 0 || y == 0)
+		return (1);
+	else if (x == data->map.w - 1 || y == data->map.h - 1)
+		return (1);
+	if (check_nearly_elems(data, x - 1, y - 1))
+		return (1);
+	if (check_nearly_elems(data, x, y - 1))
+		return (1);
+	if (check_nearly_elems(data, x + 1, y - 1))
+		return (1);
+	if (check_nearly_elems(data, x - 1, y))
+		return (1);
+	if (check_nearly_elems(data, x + 1, y))
+		return (1);
+	if (check_nearly_elems(data, x - 1, y + 1))
+		return (1);
+	if (check_nearly_elems(data, x, y + 1))
+		return (1);
+	if (check_nearly_elems(data, x + 1, y + 1))
+		return (1);
+	return (0);
+}
 
-	path = 0;
+int	check_map(t_data *data)
+{
+	int	x;
+	int	y;
+	int error_found;
+
+	error_found = 0;
 	y = 0;
-	while (y < data->map_y)
+	while (y < data->map.h)
 	{
 		x = 0;
-		while (x < data->map_x)
+		while (x < data->map.w)
 		{
-			c = data->map2[x][y];
-			if (check_path2(data, x, y, c) == -1)
-				path = -1;
+			if (data->map.matrix[y][x] == ' ')
+				printf(GREENB " " NC);
+			else if (data->map.matrix[y][x] == '1')
+				printf(VIOLETB " " NC);
+			else if (data->map.matrix[y][x] == 'N')
+			{
+				if (data->player.nbr)
+				{
+					printf(BLACK REDB "%c" NC, data->map.matrix[y][x]);
+					error_found = 1;
+				}
+				else
+				{
+					printf(BLUEB " " NC);
+					data->player.x = x;
+					data->player.y = y;
+					data->player.angle = 90;
+					data->player.nbr = 1;
+				}
+			}
+			else if (data->map.matrix[y][x] == 'S')
+			{
+				if (data->player.nbr)
+				{
+					printf(BLACK REDB "%c" NC, data->map.matrix[y][x]);
+					error_found = 1;
+				}
+				else
+				{
+					printf(BLUEB " " NC);
+					data->player.x = x;
+					data->player.y = y;
+					data->player.angle = 270;
+					data->player.nbr = 1;
+				}
+			}
+			else if (data->map.matrix[y][x] == 'E')
+			{
+				if (data->player.nbr)
+				{
+					printf(BLACK REDB "%c" NC, data->map.matrix[y][x]);
+					error_found = 1;
+				}
+				else
+				{
+					printf(BLUEB " " NC);
+					data->player.x = x;
+					data->player.y = y;
+					data->player.angle = 0;
+					data->player.nbr = 1;
+				}
+			}
+			else if (data->map.matrix[y][x] == 'W')
+			{
+				if (data->player.nbr)
+				{
+					printf(BLACK REDB "%c" NC, data->map.matrix[y][x]);
+					error_found = 1;
+				}
+				else
+				{
+					printf(BLUEB " " NC);
+					data->player.x = x;
+					data->player.y = y;
+					data->player.angle = 180;
+					data->player.nbr = 1;
+				}
+			}
+			else if (data->map.matrix[y][x] == '0')
+			{
+				if (check_surround(data, x, y))
+				{
+					printf(BLACK REDB "%c" NC, data->map.matrix[y][x]);
+					error_found = 1;
+				}
+				else
+					printf(YELLOWB " " NC);
+			}
+			else if (data->map.matrix[y][x] == '\0')
+				break;
+			else
+			{
+				printf(BLACK REDB "%c" NC, data->map.matrix[y][x]);
+				error_found = 1;
+			}
 			x++;
 		}
 		printf("\n");
 		y++;
 	}
 	printf("\n");
-	return (path);*/
-	(void)data;
-	return (0);
-}
-
-void	make_path(t_data *data, int x, int y)
-{
-	/*if (x >= 0 && x < data->map_x && y >= 0 && y < data->map_y)
-	{
-		if (data->map2[x][y] != '1' && data->map2[x][y] != '*')
-		{
-			data->map2[x][y] = '*';
-			make_path(data, x + 1, y);
-			make_path(data, x - 1, y);
-			make_path(data, x, y + 1);
-			make_path(data, x, y - 1);
-		}
-	}*/
-	(void)data;
-	(void)x;
-	(void)y;
-}
-
-void	copy_map(t_data *data)
-{
-	/*int	x;
-	int	y;
-
-	printf("\n- Checking map..\n\n");
-	y = 0;
-	while (y < data->map_y)
-	{
-		x = 0;
-		while (x < data->map_x)
-		{
-			data->map2[x][y] = data->map[x][y];
-			x++;
-		}
-		y++;
-	}*/
-	(void)data;
-}
-
-int	check_map(t_data *data)
-{
-	copy_map(data);
-	make_path(data, data->player.x, data->player.y);
-	return (check_path(data));
+	if (!data->player.nbr)
+		error_found = 1;
+	return (error_found);
 }

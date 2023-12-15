@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   load_map.c                                         :+:      :+:    :+:   */
@@ -46,13 +46,15 @@ void	print_error(t_data *data, int error)
 	if (error == 1)
 		write_error("  Error when generating display/window!\n");
 	else if (error == 2)
-		write_error("  Wrong format!\n");
+		write_error("  Wrong variable format!\n");
 	else if (error == 3)
 		write_error("  Wrong extension file!\n");
 	else if (error == 4)
 		write_error("  Cant open the file!\n");
 	else if (error == 5)
 		write_error("  Cant open the texture file!\n");
+	else if (error == 6)
+		write_error("  Wrong map format!\n");
 	write_error("\e[0m");
 	if (error == 1)
 		close_game(data);
@@ -252,6 +254,7 @@ void	read_variables(t_data *data, char *line)
 			data->map.floor.b = nbr;
 			free(tmp);			
 			data->map.info.f = 1;
+			data->map.floor.color = create_trgb(0, data->map.floor.r, data->map.floor.g, data->map.floor.b);
 			check_variables(data);
 		}
 		else
@@ -307,6 +310,7 @@ void	read_variables(t_data *data, char *line)
 			data->map.cell.b = nbr;
 			free(tmp);			
 			data->map.info.c = 1;
+			data->map.cell.color = create_trgb(0, data->map.cell.r, data->map.cell.g, data->map.cell.b);
 			check_variables(data);
 		}
 		else
@@ -322,11 +326,11 @@ void print_variables(t_data *data)
 	printf("SO file = %s\n", data->map.SO_file);
 	printf("WE file = %s\n", data->map.WE_file);
 	printf("EA file = %s\n", data->map.EA_file);
-	printf("Floor color = (%i, %i, %i)\n", data->map.floor.r, data->map.floor.g, data->map.floor.b);
-	printf("Cell color = (%i, %i, %i)\n", data->map.cell.r, data->map.cell.g, data->map.cell.b);
+	printf("Floor color = 0x%08X (%i, %i, %i)\n", data->map.floor.color, data->map.floor.r, data->map.floor.g, data->map.floor.b);
+	printf("Cell color = 0x%08X (%i, %i, %i)\n", data->map.cell.color, data->map.cell.r, data->map.cell.g, data->map.cell.b);
 	printf("Map dimension = (%i x %i)\n\n", data->map.h, data->map.w);
 	i = 0;
-	while (data->map.matrix[i])
+	while (i < data->map.h)
 	{
 		printf("%s\n", data->map.matrix[i]);
 		i++;
@@ -371,8 +375,8 @@ void	load_map(t_data *data)
 		print_error(data, 2);
 	printf("- Map starting at line: %i\n\n", mapstart);
 	if (!data->map.h || !data->map.w)
-		print_error(data, 2);
-	data->map.matrix = malloc(sizeof(char *) * (data->map.h + 1));
+		print_error(data, 6);
+	data->map.matrix = malloc(sizeof(char *) * (data->map.h));
 	data->fd = open(data->map.filename, O_RDONLY);
 	i = 0;
 	while (i < mapstart)
@@ -390,6 +394,5 @@ void	load_map(t_data *data)
 	}
 	data->line = get_next_line(data->fd);
 	finish_gnl(data);
-	data->map.matrix[i] = NULL;
 	print_variables(data);
 }

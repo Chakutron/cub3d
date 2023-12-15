@@ -44,7 +44,7 @@ void	free_variables(t_data *data)
 	if (data->map.h && data->map.w)
 	{
 		i = 0;
-		while (i <= data->map.h)
+		while (i < data->map.h)
 		{
 			free(data->map.matrix[i]);
 			i++;
@@ -71,7 +71,7 @@ void	close_game(t_data *data)
 {
 	//mlx_mouse_show(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	//unload_images(data);
+	unload_images(data);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 }

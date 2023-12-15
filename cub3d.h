@@ -24,6 +24,20 @@
 # include "gnl/get_next_line.h"
 # include <stdnoreturn.h>
 
+# define BLACK "\e[30m"
+# define BLACKB "\e[40m"
+# define RED "\e[31m"
+# define REDB "\e[41m"
+# define GREEN "\e[32m"
+# define GREENB "\e[42m"
+# define YELLOW "\e[33m"
+# define YELLOWB "\e[43m"
+# define BLUE "\e[34m"
+# define BLUEB "\e[44m"
+# define VIOLET "\e[35m"
+# define VIOLETB "\e[45m"
+# define NC "\e[0m"
+
 typedef struct s_image
 {
 	void	*ptr;
@@ -37,9 +51,10 @@ typedef struct s_image
 
 typedef struct s_color
 {
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
+	int	r;
+	int	g;
+	int	b;
+	int	color;
 }					t_color;
 
 typedef struct s_info
@@ -64,7 +79,9 @@ typedef struct s_map
 	char	*EA_file;
 	t_image	EA_texture;
 	t_color	floor;
+	t_image	F_image;
 	t_color	cell;
+	t_image	C_image;
 	int		w;
 	int		h;
 	char	**matrix;
@@ -74,9 +91,12 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
-	int	angle;
+	int		x;
+	int		y;
+	double	xx;
+	double	yy;
+	int		angle;
+	int		nbr;
 }		t_player;
 
 
@@ -96,11 +116,13 @@ int		ft_atoi(char *str);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_bzero(void *s, size_t n);
 char	*ft_strdup2(char *s);
+char	*ft_strjoin3(char *s1, char *s2);
 
 t_image	new_img(int w, int h, t_data *window);
 t_image	new_file_img(char *path, t_data *window);
 void	put_pixel_img(t_image *img, int x, int y, int color);
 void	put_img_to_img(t_image *dst, t_image *src, int x, int y);
+int		create_trgb(int t, int r, int g, int b);
 
 void	open_map(t_data *data);
 void	init_variables(t_data *data);

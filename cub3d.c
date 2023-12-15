@@ -29,7 +29,8 @@ void	start_game(t_data *data)
 		mlx_hook(data->win_ptr, 17, 1L << 0, &x_press, data);
 		mlx_do_key_autorepeaton(data->mlx_ptr);
 		//mlx_mouse_hide(data->mlx_ptr, data->win_ptr);
-		printf("--- GAME STARTED ---\n");
+		load_images(data);
+		printf("\n--- GAME STARTED ---\n");
 		mlx_loop(data->mlx_ptr);
 	}
 }
@@ -38,13 +39,13 @@ int	main(int argc, char *argv[])
 {
 	t_data	data;
 
-	init_variables(&data);
-	printf("\n\033[0;32m*** Cub3D by Chaku & Oriol ***\033[0m\n\n");
+	printf(GREEN "\n*** Cub3D by Chaku & Oriol ***\n\n" NC);
 	if (argc == 2)
 	{
 		data.map.filename = argv[1];
 		if (check_extension(&data))
 			print_error(&data, 3);
+		init_variables(&data);
 		open_map(&data);
 		start_game(&data);
 	}

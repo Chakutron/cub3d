@@ -6,7 +6,7 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2023/05/02 13:14:51 by mchiboub         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:00:41 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	render(t_data *data)
 	put_img_to_img(&canvas, &(data->map.C_image), 0, 0);
 	put_img_to_img(&canvas, &(data->map.F_image), 0, 240);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, canvas.ptr, 0, 0);
-	sleep(1);
+	raycasting(data);
 	mlx_destroy_image(data->mlx_ptr, canvas.ptr);
 	return (0);
 }

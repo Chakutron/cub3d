@@ -6,7 +6,7 @@
 #    By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 15:15:55 by mchiboub          #+#    #+#              #
-#    Updated: 2023/12/07 13:49:42 by mchiboub         ###   ########.fr        #
+#    Updated: 2023/12/19 17:20:13 by ocassany         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS =	cub3d.c						\
 		ft_strdup2.c				\
 		ft_strjoin3.c				\
 		color.c						\
+		raycasting.c				\
 		${GNL}/get_next_line.c		\
 		${GNL}/get_next_line_utils.c
 
@@ -52,11 +53,11 @@ NC = \033[0m
 all: ${NAME}
 
 .c.o:
-		@${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -Lmlx -lmlx -Imlx -lX11 -lXext
+		@${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -lm -Lmlx -lmlx -Imlx -lX11 -lXext
 
 ${NAME}: ${OBJS}
 		@echo "Generating ${GREEN}${NAME}${NC} executable.."
-		@${CC} -o ${NAME} ${OBJS} ${MLX}/${MLX_LIB} -Lmlx -lmlx -Imlx -lX11 -lXext
+		@${CC} -o ${NAME} ${OBJS} ${MLX}/${MLX_LIB} -lm -Lmlx -lmlx -Imlx -lX11 -lXext
 
 clean:
 		@echo "Deleting object files.."

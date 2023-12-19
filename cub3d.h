@@ -6,7 +6,7 @@
 /*   By: mchiboub <mchiboub@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:30:57 by mchiboub          #+#    #+#             */
-/*   Updated: 2023/12/07 13:49:26 by mchiboub         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:19:01 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <string.h>
 # include "gnl/get_next_line.h"
 # include <stdnoreturn.h>
+# include <math.h>
 
 # define BLACK "\e[30m"
 # define BLACKB "\e[40m"
@@ -37,6 +38,32 @@
 # define VIOLET "\e[35m"
 # define VIOLETB "\e[45m"
 # define NC "\e[0m"
+
+# define HEIGHT 480
+# define WIDTH 640
+
+typedef struct	s_rc
+{
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+}	t_rc;
 
 typedef struct s_image
 {
@@ -106,6 +133,7 @@ typedef struct s_data
 	void		*win_ptr;
 	t_map		map;
 	t_player	player;
+	t_rc		rc;
 	int			fd;
 	char		*line;
 	int			endgame;
@@ -148,5 +176,7 @@ void	show_interface(t_data *data);
 void	enemy_move(t_data *data);
 void	close_game(t_data *data);
 void	unload_images(t_data *data);
+
+void	raycasting(t_data *data);
 
 #endif

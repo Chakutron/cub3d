@@ -12,28 +12,48 @@
 
 #include "cub3d.h"
 
-void	check_movement_keys(int keysym, t_data *data, int x, int y)
+void	check_movement_keys(t_data *data)
 {
-	(void)data;
-	if (keysym == 119 || keysym == 65362)
+	double x_old;
+	double y_old;
+
+	x_old = data->player.xx;
+	y_old = data->player.yy;
+	if (data->key.w)
 	{
-		// up
-		y--;
+		data->player.yy -= data->player.y_temp;
+		data->player.xx += data->player.x_temp;
+		if (data->map.matrix[(int)data->player.yy][(int)data->player.xx] != '0')
+		{
+			data->player.yy = y_old;
+			data->player.xx = x_old;
+		}
+		data->player.y = data->player.yy;
+		data->player.x = data->player.xx;
 	}
-	else if (keysym == 115 || keysym == 65364)
+	if (data->key.s)
 	{
-		// down
-		y++;
+		data->player.yy += data->player.y_temp;
+		data->player.xx -= data->player.x_temp;
+		if (data->map.matrix[(int)data->player.yy][(int)data->player.xx] != '0')
+		{
+			data->player.yy = y_old;
+			data->player.xx = x_old;
+		}
+		data->player.y = data->player.yy;
+		data->player.x = data->player.xx;
 	}
-	else if (keysym == 97 || keysym == 65361)
+	if (data->key.a)
 	{
-		// left
-		x--;
+		data->player.angle += 1;
+		if (data->player.angle > 360)
+			data->player.angle -= 360;
 	}
-	else if (keysym == 100 || keysym == 65363)
+	if (data->key.d)
 	{
-		// right
-		x++;
+		data->player.angle -= 1;
+		if (data->player.angle < 0)
+			data->player.angle += 360;
 	}
 }
 
@@ -80,6 +100,26 @@ int	handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
 		data->endgame = 1;
-	//check_movement_keys(keysym, data, data->player.x, data->player.y);
+	if (keysym == 119 || keysym == 65362)
+		data->key.w = 1;
+	if (keysym == 115 || keysym == 65364)
+		data->key.s = 1;
+	if (keysym == 97 || keysym == 65361)
+		data->key.a = 1;
+	if (keysym == 100 || keysym == 65363)
+		data->key.d = 1;
+	return (0);
+}
+
+int	handle_keyrelease(int keysym, t_data *data)
+{
+	if (keysym == 119 || keysym == 65362)
+		data->key.w = 0;
+	if (keysym == 115 || keysym == 65364)
+		data->key.s = 0;
+	if (keysym == 97 || keysym == 65361)
+		data->key.a = 0;
+	if (keysym == 100 || keysym == 65363)
+		data->key.d = 0;
 	return (0);
 }

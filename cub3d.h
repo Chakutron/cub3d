@@ -39,8 +39,8 @@
 # define VIOLETB "\e[45m"
 # define NC "\e[0m"
 
-# define HEIGHT 480
-# define WIDTH 640
+# define WIDTH 900
+# define HEIGHT 450
 
 typedef struct	s_rc
 {
@@ -122,21 +122,35 @@ typedef struct s_player
 	int		y;
 	double	xx;
 	double	yy;
+	double	x_temp;
+	double	y_temp;
 	int		angle;
+	double	radians;
 	int		nbr;
 }		t_player;
+
+typedef	struct s_keys
+{
+	int	w;
+	int	s;
+	int	a;
+	int	d;
+}		t_keys;
 
 
 typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	void		*win_ptr2;
 	t_map		map;
 	t_player	player;
+	t_image		canvas;
 	t_rc		rc;
 	int			fd;
 	char		*line;
 	int			endgame;
+	t_keys		key;
 }				t_data;
 
 char	*ft_strcat2(char *s, char c);
@@ -151,6 +165,7 @@ t_image	new_file_img(char *path, t_data *window);
 void	put_pixel_img(t_image *img, int x, int y, int color);
 void	put_img_to_img(t_image *dst, t_image *src, int x, int y);
 int		create_trgb(int t, int r, int g, int b);
+void	ft_draw_vertical_line(t_data *data, int x, int color);
 
 void	open_map(t_data *data);
 void	init_variables(t_data *data);
@@ -166,6 +181,8 @@ int		title_render(t_data *data);
 int		title_keypress(int keysym, t_data *data);
 int		render(t_data *data);
 int		handle_keypress(int keysym, t_data *data);
+int		handle_keyrelease(int keysym, t_data *data);
+void	check_movement_keys(t_data *data);
 int		handle_mouse_move(int x, int y, t_data *data);
 int		handle_mouse_click(int button, int x, int y, t_data *data);
 void	update_player(t_data *data, int x, int y);
@@ -176,7 +193,5 @@ void	show_interface(t_data *data);
 void	enemy_move(t_data *data);
 void	close_game(t_data *data);
 void	unload_images(t_data *data);
-
-void	raycasting(t_data *data);
 
 #endif

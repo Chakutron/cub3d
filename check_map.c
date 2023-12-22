@@ -60,88 +60,100 @@ int	check_map(t_data *data)
 		while (x < data->map.w)
 		{
 			if (data->map.matrix[y][x] == ' ')
-				printf(GREENB " " NC);
+				printf(GREENB "  " NC);
 			else if (data->map.matrix[y][x] == '1')
-				printf(VIOLETB " " NC);
+				printf(VIOLETB "  " NC);
 			else if (data->map.matrix[y][x] == 'N')
 			{
 				if (data->player.nbr)
 				{
-					printf(BLACK REDB "%c" NC, data->map.matrix[y][x]);
+					printf(BLACK REDB "%c " NC, data->map.matrix[y][x]);
 					error_found = 1;
 				}
 				else
 				{
-					printf(BLUEB " " NC);
+					printf(BLUEB "  " NC);
 					data->player.x = x;
 					data->player.y = y;
+					data->player.xx = (double)x + 0.5;
+					data->player.yy = (double)y + 0.5;
 					data->player.angle = 90;
 					data->player.nbr = 1;
+					data->map.matrix[y][x] = '0';
 				}
 			}
 			else if (data->map.matrix[y][x] == 'S')
 			{
 				if (data->player.nbr)
 				{
-					printf(BLACK REDB "%c" NC, data->map.matrix[y][x]);
+					printf(BLACK REDB "%c " NC, data->map.matrix[y][x]);
 					error_found = 1;
 				}
 				else
 				{
-					printf(BLUEB " " NC);
+					printf(BLUEB "  " NC);
 					data->player.x = x;
 					data->player.y = y;
+					data->player.xx = (double)x + 0.5;
+					data->player.yy = (double)y + 0.5;
 					data->player.angle = 270;
 					data->player.nbr = 1;
+					data->map.matrix[y][x] = '0';
 				}
 			}
 			else if (data->map.matrix[y][x] == 'E')
 			{
 				if (data->player.nbr)
 				{
-					printf(BLACK REDB "%c" NC, data->map.matrix[y][x]);
+					printf(BLACK REDB "%c " NC, data->map.matrix[y][x]);
 					error_found = 1;
 				}
 				else
 				{
-					printf(BLUEB " " NC);
+					printf(BLUEB "  " NC);
 					data->player.x = x;
 					data->player.y = y;
+					data->player.xx = (double)x + 0.5;
+					data->player.yy = (double)y + 0.5;
 					data->player.angle = 0;
 					data->player.nbr = 1;
+					data->map.matrix[y][x] = '0';
 				}
 			}
 			else if (data->map.matrix[y][x] == 'W')
 			{
 				if (data->player.nbr)
 				{
-					printf(BLACK REDB "%c" NC, data->map.matrix[y][x]);
+					printf(BLACK REDB "%c " NC, data->map.matrix[y][x]);
 					error_found = 1;
 				}
 				else
 				{
-					printf(BLUEB " " NC);
+					printf(BLUEB "  " NC);
 					data->player.x = x;
 					data->player.y = y;
+					data->player.xx = (double)x + 0.5;
+					data->player.yy = (double)y + 0.5;
 					data->player.angle = 180;
 					data->player.nbr = 1;
+					data->map.matrix[y][x] = '0';
 				}
 			}
 			else if (data->map.matrix[y][x] == '0')
 			{
 				if (check_surround(data, x, y))
 				{
-					printf(BLACK REDB "%c" NC, data->map.matrix[y][x]);
+					printf(BLACK REDB "%c " NC, data->map.matrix[y][x]);
 					error_found = 1;
 				}
 				else
-					printf(YELLOWB " " NC);
+					printf(YELLOWB "  " NC);
 			}
 			else if (data->map.matrix[y][x] == '\0')
 				break;
 			else
 			{
-				printf(BLACK REDB "%c" NC, data->map.matrix[y][x]);
+				printf(BLACK REDB "%c " NC, data->map.matrix[y][x]);
 				error_found = 1;
 			}
 			x++;

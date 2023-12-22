@@ -64,40 +64,6 @@ void	print_error(t_data *data, int error)
 	exit(1);
 }
 
-void	read_map(t_data *data, char *line, int x, int y)
-{
-	if (line[0] == '\0' || line[0] == '\n')
-		print_error(data, 2);
-	data->map.matrix[x][y] = line[x];
-	printf("%c", line[x]);
-	if (line[x] == 'N')
-	{
-		data->player.x = x;
-		data->player.y = y;
-		data->player.angle = 90;
-	}
-	else if (line[x] == 'S')
-	{
-		data->player.x = x;
-		data->player.y = y;
-		data->player.angle = 270;
-	}
-	else if (line[x] == 'W')
-	{
-		data->player.x = x;
-		data->player.y = y;
-		data->player.angle = 180;
-	}
-	else if (line[x] == 'E')
-	{
-		data->player.x = x;
-		data->player.y = y;
-		data->player.angle = 0;
-	}
-	else if (line[x] != '1' && line[x] != '0' && line[x] != '\n')
-		print_error(data, 2);
-}
-
 void	check_variables(t_data *data)
 {
 	int	info;

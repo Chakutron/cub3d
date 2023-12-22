@@ -41,7 +41,6 @@ SRCS =	cub3d.c						\
 		ft_strdup2.c				\
 		ft_strjoin3.c				\
 		color.c						\
-		raycasting.c				\
 		${GNL}/get_next_line.c		\
 		${GNL}/get_next_line_utils.c
 

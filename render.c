@@ -131,6 +131,8 @@ void	draw_player(t_data *data)
 {
 	draw_square(data, 220, 220, 10, 0x0000FF);
 	//draw_square(data, 225 - data->player.y_temp * 2500, 225 + data->player.x_temp * 2500, 3, 0x000000FF);
+	put_img_to_img(&data->canvas, &(data->map.C_image), 450, 0);
+	put_img_to_img(&data->canvas, &(data->map.F_image), 450, 240);
 	draw_rays2D(data);
 }
 
@@ -182,8 +184,6 @@ int	render(t_data *data)
 		exit(0);
 	}
 	data->canvas = new_img(WIDTH, HEIGHT, data);
-	//put_img_to_img(&data->canvas, &(data->map.C_image), 0, 0);
-	//put_img_to_img(&data->canvas, &(data->map.F_image), 0, 240);
 	//raycasting(data);
 	check_movement_keys(data);
 	calculate_vector_player(data);

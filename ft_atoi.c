@@ -14,8 +14,8 @@
 
 int	ft_atoi(char *str)
 {
-	int	i;
-	int	res;
+	int			i;
+	long long	res;
 
 	i = 0;
 	res = 0;
@@ -26,7 +26,7 @@ int	ft_atoi(char *str)
 		res = res * 10 + (str[i] - 48);
 		i++;
 	}
-	if (res > 255)
+	if (res < 0 || res > 255)
 		return (-42);
-	return (res);
+	return ((int)res);
 }

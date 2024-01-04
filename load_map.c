@@ -17,6 +17,8 @@ int	check_extension(t_data *data)
 	int	i;
 
 	i = ft_strlen(data->map.filename) - 4;
+	if (i < 0)
+		return (1);
 	if (data->map.filename[i] == '.' && data->map.filename[i + 1] == 'c'
 		&& data->map.filename[i + 2] == 'u' && data->map.filename[i + 3] == 'b')
 		return (0);
@@ -58,8 +60,10 @@ void	print_error(t_data *data, int error)
 	write_error("\e[0m");
 	if (error == 1)
 		close_game(data);
+	else if (error == 3)
+		(void)data;
 	else
-	finish_gnl(data);
+		finish_gnl(data);
 	free_variables(data);
 	exit(1);
 }

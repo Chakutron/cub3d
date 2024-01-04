@@ -6,7 +6,7 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2023/12/19 17:00:41 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/04 20:13:51 by mchiboub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	draw_square2(t_data *data, int y_init, int x_init, int y_end, int x_end)
 		while (x < x_end)
 		{
 			//if (y >= 0 && y <= 450 && x >= 0 && x <= 450)
-			put_pixel_img(&(data->canvas), x, y, 0x00FF0000);
+			put_pixel_img(&(data->canvas), x, y, 0x00880000);
 			x++;
 		} 
 		y++;
@@ -117,7 +117,7 @@ void	draw_rays2D(t_data *data)
 			if (data->map.matrix[(int)dy][(int)dx] == '1')
 			{
 				draw_line(data, 225, 225, 225 - y, 225 + x);		
-				draw_square2(data, 225 - 225 * 50 / (50 + offset), 675 + i * 9, 225 + 225 * 50 / (50 + offset), 675 + i * 9 + 9);
+				draw_square2(data, 225 - 225 * 50 / (50 + offset), 675 - i * 9 - 9, 225 + 225 * 50 / (50 + offset), 675 - i * 9);
 				break;
 			}
 			offset++;

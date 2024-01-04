@@ -107,7 +107,7 @@ int	handle_keypress(int keysym, t_data *data)
 	if (keysym == 97 || keysym == 65361)
 		data->key.a = 1;
 	if (keysym == 100 || keysym == 65363)
-		data->key.d = 1;
+		data->key.d = 1;	
 	return (0);
 }
 

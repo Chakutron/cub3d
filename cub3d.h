@@ -44,26 +44,17 @@
 
 typedef struct	s_rc
 {
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-	double	camera_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	perp_wall_dist;
-	int		step_x;
-	int		step_y;
-	int		hit;
-	int		side;
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
-}	t_rc;
+	int		r;
+	int		mx;
+	int		my;
+	int		mp;
+	int		dof;
+	float	rx;
+	float	ry;
+	float	ra;
+	float	xo;
+	float	yo;
+}			t_rc;
 
 typedef struct s_image
 {
@@ -125,7 +116,7 @@ typedef struct s_player
 	double	x_temp;
 	double	y_temp;
 	int		angle;
-	double	radians;
+	float	radians;
 	int		nbr;
 }		t_player;
 
@@ -136,7 +127,6 @@ typedef	struct s_keys
 	int	a;
 	int	d;
 }		t_keys;
-
 
 typedef struct s_data
 {
@@ -151,6 +141,7 @@ typedef struct s_data
 	char		*line;
 	int			endgame;
 	t_keys		key;
+	int			i;
 }				t_data;
 
 char	*ft_strcat2(char *s, char c);

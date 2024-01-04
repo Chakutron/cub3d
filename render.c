@@ -30,7 +30,10 @@ void	draw_line(t_data *data, int y0, int x0, int y1, int x1)
 
     while (!(x0 == x1 && y0 == y1))
 	{
-		put_pixel_img(&(data->canvas), x0, y0, 0x000000FF);
+		if (x0 >= 0 && x0 <= WIDTH / 2 && y0 >= 0 && y0 <= HEIGHT)
+			put_pixel_img(&(data->canvas), x0, y0, 0x000000FF);
+		else
+			break;
         e2 = 2 * err;
         if (e2 > -dy)
 		{
@@ -64,11 +67,71 @@ void	draw_square(t_data *data, int y_init, int x_init, int extra, int color)
 	}
 }
 
+void	draw_square2(t_data *data, int y_init, int x_init, int y_end, int x_end)
+{
+	int y;
+	int x;
+
+	y = y_init;
+	while (y < y_end)
+	{
+		x = x_init;
+		while (x < x_end)
+		{
+			//if (y >= 0 && y <= 450 && x >= 0 && x <= 450)
+			put_pixel_img(&(data->canvas), x, y, 0x00FF0000);
+			x++;
+		} 
+		y++;
+	}
+}
+void	calculate_vector_player(t_data *data)
+{
+	data->player.radians = (data->player.angle * M_PI) / 180.0;
+	data->player.y_temp = 0.01 * sin(data->player.radians);
+	data->player.x_temp = 0.01 * cos(data->player.radians);
+}
+
+void	draw_rays2D(t_data *data)
+{
+	int		offset;
+	double	y;
+	double	x;
+	double	dy;
+	double	dx;
+	int		i;
+
+	i = -25;
+	while (i < 25)
+	{
+		data->player.radians = ((data->player.angle + i )* M_PI) / 180.0;
+		data->player.y_temp = 0.01 * sin(data->player.radians);
+		data->player.x_temp = 0.01 * cos(data->player.radians);
+		offset = 1;
+		while (1)
+		{
+			y = data->player.y_temp * offset * 100;
+			x = data->player.x_temp * offset * 100;
+			dy = ((225 - y) - 4.5 * 50) / 50 + data->player.yy;
+			dx = ((225 + x) - 4.5 * 50) / 50 + data->player.xx;
+			if (data->map.matrix[(int)dy][(int)dx] == '1')
+			{
+				draw_line(data, 225, 225, 225 - y, 225 + x);		
+				draw_square2(data, 225 - 225 * 50 / (50 + offset), 675 + i * 9, 225 + 225 * 50 / (50 + offset), 675 + i * 9 + 9);
+				break;
+			}
+			offset++;
+		}
+		i++;
+	}
+	calculate_vector_player(data);
+}
+
 void	draw_player(t_data *data)
 {
-	draw_line(data, 225, 225, 226 - data->player.y_temp * 2500, 226 + data->player.x_temp * 2500);
 	draw_square(data, 220, 220, 10, 0x0000FF);
-	draw_square(data, 225 - data->player.y_temp * 2500, 225 + data->player.x_temp * 2500, 3, 0x000000FF);
+	//draw_square(data, 225 - data->player.y_temp * 2500, 225 + data->player.x_temp * 2500, 3, 0x000000FF);
+	draw_rays2D(data);
 }
 
 void	draw_map(t_data *data)
@@ -108,13 +171,6 @@ void	draw_map(t_data *data)
 		yy++;
 	}
 	draw_player(data);
-}
-
-void	calculate_vector_player(t_data *data)
-{
-	data->player.radians = data->player.angle * M_PI / 180.0;
-	data->player.y_temp = 0.01 * sin(data->player.radians);
-	data->player.x_temp = 0.01 * cos(data->player.radians);
 }
 
 int	render(t_data *data)

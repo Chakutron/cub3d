@@ -29,6 +29,7 @@ void	init_variables(t_data *data)
 	data->key.a = 0;
 	data->key.d = 0;
 	data->endgame = 0;
+	data->rc_max_angle = 15;
 }
 
 void	make_floor_and_cell(t_data *data)

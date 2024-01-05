@@ -78,8 +78,8 @@ void	draw_square2(t_data *data, int y_init, int x_init, int y_end, int x_end)
 		x = x_init;
 		while (x < x_end)
 		{
-			//if (y >= 0 && y <= 450 && x >= 0 && x <= 450)
-			put_pixel_img(&(data->canvas), x, y, 0x00880000);
+			if (y >= 0 && y <= 450 && x >= 450 && x <= 900)
+				put_pixel_img(&(data->canvas), x, y, 0x00BB00FF);
 			x++;
 		} 
 		y++;
@@ -99,10 +99,10 @@ void	draw_rays2D(t_data *data)
 	double	x;
 	double	dy;
 	double	dx;
-	int		i;
+	float	i;
 
-	i = -25;
-	while (i < 25)
+	i = -data->rc_max_angle;
+	while (i < data->rc_max_angle)
 	{
 		data->player.radians = ((data->player.angle + i )* M_PI) / 180.0;
 		data->player.y_temp = 0.01 * sin(data->player.radians);
@@ -116,13 +116,18 @@ void	draw_rays2D(t_data *data)
 			dx = ((225 + x) - 4.5 * 50) / 50 + data->player.xx;
 			if (data->map.matrix[(int)dy][(int)dx] == '1')
 			{
-				draw_line(data, 225, 225, 225 - y, 225 + x);		
-				draw_square2(data, 225 - 225 * 50 / (50 + offset), 675 - i * 9 - 9, 225 + 225 * 50 / (50 + offset), 675 - i * 9);
+				draw_line(data, 225, 225, 225 - y, 225 + x);
+				data->rc_dist_offset = (int)(450 / data->rc_max_angle) / 2;
+				if (i < 0)
+					draw_square2(data, 225 - (50 * HEIGHT / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * HEIGHT / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset);
+				else
+					draw_square2(data, 225 - (50 * HEIGHT / (offset * cos((i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * HEIGHT / (offset * cos((i * M_PI) / 180))), 675 - i * data->rc_dist_offset);
+				//draw_square2(data, 225 - 225 * 50 / (49 + offset), 675 - i * 9 - 9, 225 + 225 * 50 / (49 + offset), 675 - i * 9);
 				break;
 			}
 			offset++;
 		}
-		i++;
+		i += 0.25;
 	}
 	calculate_vector_player(data);
 }
@@ -132,7 +137,7 @@ void	draw_player(t_data *data)
 	draw_square(data, 220, 220, 10, 0x0000FF);
 	//draw_square(data, 225 - data->player.y_temp * 2500, 225 + data->player.x_temp * 2500, 3, 0x000000FF);
 	put_img_to_img(&data->canvas, &(data->map.C_image), 450, 0);
-	put_img_to_img(&data->canvas, &(data->map.F_image), 450, 240);
+	put_img_to_img(&data->canvas, &(data->map.F_image), 450, 225);
 	draw_rays2D(data);
 }
 

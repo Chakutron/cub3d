@@ -142,6 +142,8 @@ typedef struct s_data
 	int			endgame;
 	t_keys		key;
 	int			i;
+	int			rc_max_angle;
+	float		rc_dist_offset;
 }				t_data;
 
 char	*ft_strcat2(char *s, char c);

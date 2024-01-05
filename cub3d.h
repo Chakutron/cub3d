@@ -118,6 +118,7 @@ typedef struct s_player
 	int		angle;
 	float	radians;
 	int		nbr;
+	float	speed;
 }		t_player;
 
 typedef	struct s_keys

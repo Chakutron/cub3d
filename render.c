@@ -67,7 +67,7 @@ void	draw_square(t_data *data, int y_init, int x_init, int extra, int color)
 	}
 }
 
-void	draw_square2(t_data *data, int y_init, int x_init, int y_end, int x_end)
+void	draw_square_N(t_data *data, int y_init, int x_init, int y_end, int x_end)
 {
 	int y;
 	int x;
@@ -79,20 +79,78 @@ void	draw_square2(t_data *data, int y_init, int x_init, int y_end, int x_end)
 		while (x < x_end)
 		{
 			if (y >= 0 && y <= 450 && x >= 450 && x <= 900)
-				put_pixel_img(&(data->canvas), x, y, 0x00BB00FF);
+				put_pixel_img(&(data->canvas), x, y, 0x00FF0000);
 			x++;
 		} 
 		y++;
 	}
 }
+
+void	draw_square_S(t_data *data, int y_init, int x_init, int y_end, int x_end)
+{
+	int y;
+	int x;
+
+	y = y_init;
+	while (y < y_end)
+	{
+		x = x_init;
+		while (x < x_end)
+		{
+			if (y >= 0 && y <= 450 && x >= 450 && x <= 900)
+				put_pixel_img(&(data->canvas), x, y, 0x000000FF);
+			x++;
+		} 
+		y++;
+	}
+}
+
+void	draw_square_E(t_data *data, int y_init, int x_init, int y_end, int x_end)
+{
+	int y;
+	int x;
+
+	y = y_init;
+	while (y < y_end)
+	{
+		x = x_init;
+		while (x < x_end)
+		{
+			if (y >= 0 && y <= 450 && x >= 450 && x <= 900)
+				put_pixel_img(&(data->canvas), x, y, 0x0000FF00);
+			x++;
+		} 
+		y++;
+	}
+}
+
+void	draw_square_W(t_data *data, int y_init, int x_init, int y_end, int x_end)
+{
+	int y;
+	int x;
+
+	y = y_init;
+	while (y < y_end)
+	{
+		x = x_init;
+		while (x < x_end)
+		{
+			if (y >= 0 && y <= 450 && x >= 450 && x <= 900)
+				put_pixel_img(&(data->canvas), x, y, 0x00FF00FF);
+			x++;
+		} 
+		y++;
+	}
+}
+
 void	calculate_vector_player(t_data *data)
 {
 	data->player.radians = (data->player.angle * M_PI) / 180.0;
-	data->player.y_temp = 0.01 * sin(data->player.radians);
-	data->player.x_temp = 0.01 * cos(data->player.radians);
+	data->player.y_temp = data->player.speed * sin(data->player.radians);
+	data->player.x_temp = data->player.speed * cos(data->player.radians);
 }
 
-void	draw_rays2D(t_data *data)
+void	draw_rays2D_v1(t_data *data)
 {
 	int		offset;
 	double	y;
@@ -101,8 +159,8 @@ void	draw_rays2D(t_data *data)
 	double	dx;
 	float	i;
 
-	i = -data->rc_max_angle;
-	while (i < data->rc_max_angle)
+	i = 0;
+	while (i <= data->rc_max_angle + 1)
 	{
 		data->player.radians = ((data->player.angle + i )* M_PI) / 180.0;
 		data->player.y_temp = 0.01 * sin(data->player.radians);
@@ -117,11 +175,43 @@ void	draw_rays2D(t_data *data)
 			if (data->map.matrix[(int)dy][(int)dx] == '1')
 			{
 				draw_line(data, 225, 225, 225 - y, 225 + x);
-				data->rc_dist_offset = (int)(450 / data->rc_max_angle) / 2;
-				if (i < 0)
-					draw_square2(data, 225 - (50 * HEIGHT / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * HEIGHT / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset);
-				else
-					draw_square2(data, 225 - (50 * HEIGHT / (offset * cos((i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * HEIGHT / (offset * cos((i * M_PI) / 180))), 675 - i * data->rc_dist_offset);
+				data->rc_dist_offset = (int)((WIDTH / 2) / data->rc_max_angle) / 2;
+
+				float	y3;
+				float	x3;
+				y3 = data->player.y - dy;
+				x3 = data->player.x - dx;
+
+				//printf("P(%i, %i) W(%f, %f) D(%f, %f)\n", data->player.y, data->player.x, dy, dx, -y3, -x3);
+				
+				if (y3 >= 0.0 && fabs(y3) - (int)fabs(y3) < fabs(x3) - (int)fabs(x3))
+				{
+					if (i < 0)
+						draw_square_N(data, 225 - (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+					else
+						draw_square_N(data, 225 - (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+				}
+				else if (y3 < 0.0 && (fabs(y3) - (int)fabs(y3)) < (fabs(x3) - (int)fabs(x3)))
+				{
+					if (i < 0)
+						draw_square_S(data, 225 - (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+					else
+						draw_square_S(data, 225 - (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+				}
+				else if (x3 >= 0.0 && (fabs(y3) - (int)fabs(y3)) > (fabs(x3) - (int)fabs(x3)))
+				{
+					if (i < 0)
+						draw_square_E(data, 225 - (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+					else
+						draw_square_E(data, 225 - (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+				}
+				else if (x3 < 0.0 && (fabs(y3) - (int)fabs(y3)) > (fabs(x3) - (int)fabs(x3)))
+				{
+					if (i < 0)
+						draw_square_W(data, 225 - (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+					else
+						draw_square_W(data, 225 - (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+				}
 				//draw_square2(data, 225 - 225 * 50 / (49 + offset), 675 - i * 9 - 9, 225 + 225 * 50 / (49 + offset), 675 - i * 9);
 				break;
 			}
@@ -129,16 +219,87 @@ void	draw_rays2D(t_data *data)
 		}
 		i += 0.25;
 	}
-	calculate_vector_player(data);
+}
+
+void	draw_rays2D_v2(t_data *data)
+{
+	int		offset;
+	double	y;
+	double	x;
+	double	dy;
+	double	dx;
+	float	i;
+
+	i = 0;
+	while (i >= -(data->rc_max_angle + 1))
+	{
+		data->player.radians = ((data->player.angle + i )* M_PI) / 180.0;
+		data->player.y_temp = 0.01 * sin(data->player.radians);
+		data->player.x_temp = 0.01 * cos(data->player.radians);
+		offset = 1;
+		while (1)
+		{
+			y = data->player.y_temp * offset * 100;
+			x = data->player.x_temp * offset * 100;
+			dy = ((225 - y) - 4.5 * 50) / 50 + data->player.yy;
+			dx = ((225 + x) - 4.5 * 50) / 50 + data->player.xx;
+			if (data->map.matrix[(int)dy][(int)dx] == '1')
+			{
+				draw_line(data, 225, 225, 225 - y, 225 + x);
+				data->rc_dist_offset = (int)((WIDTH / 2) / data->rc_max_angle) / 2;
+
+				float	y3;
+				float	x3;
+				y3 = data->player.y - dy;
+				x3 = data->player.x - dx;
+
+				//printf("P(%i, %i) W(%f, %f) D(%f, %f)\n", data->player.y, data->player.x, dy, dx, -y3, -x3);
+				
+				if (y3 >= 0.0 && fabs(y3) - (int)fabs(y3) < fabs(x3) - (int)fabs(x3))
+				{
+					if (i < 0)
+						draw_square_N(data, 225 - (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+					else
+						draw_square_N(data, 225 - (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+				}
+				else if (y3 < 0.0 && (fabs(y3) - (int)fabs(y3)) < (fabs(x3) - (int)fabs(x3)))
+				{
+					if (i < 0)
+						draw_square_S(data, 225 - (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+					else
+						draw_square_S(data, 225 - (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+				}
+				else if (x3 >= 0.0 && (fabs(y3) - (int)fabs(y3)) > (fabs(x3) - (int)fabs(x3)))
+				{
+					if (i < 0)
+						draw_square_E(data, 225 - (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+					else
+						draw_square_E(data, 225 - (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+				}
+				else if (x3 < 0.0 && (fabs(y3) - (int)fabs(y3)) > (fabs(x3) - (int)fabs(x3)))
+				{
+					if (i < 0)
+						draw_square_W(data, 225 - (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+					else
+						draw_square_W(data, 225 - (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+				}
+				//draw_square2(data, 225 - 225 * 50 / (49 + offset), 675 - i * 9 - 9, 225 + 225 * 50 / (49 + offset), 675 - i * 9);
+				break;
+			}
+			offset++;
+		}
+		i -= 0.25;
+	}
 }
 
 void	draw_player(t_data *data)
 {
 	draw_square(data, 220, 220, 10, 0x0000FF);
-	//draw_square(data, 225 - data->player.y_temp * 2500, 225 + data->player.x_temp * 2500, 3, 0x000000FF);
 	put_img_to_img(&data->canvas, &(data->map.C_image), 450, 0);
 	put_img_to_img(&data->canvas, &(data->map.F_image), 450, 225);
-	draw_rays2D(data);
+	draw_rays2D_v1(data);
+	draw_rays2D_v2(data);
+	calculate_vector_player(data);
 }
 
 void	draw_map(t_data *data)
@@ -189,7 +350,6 @@ int	render(t_data *data)
 		exit(0);
 	}
 	data->canvas = new_img(WIDTH, HEIGHT, data);
-	//raycasting(data);
 	check_movement_keys(data);
 	calculate_vector_player(data);
 	draw_map(data);

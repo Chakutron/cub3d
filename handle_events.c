@@ -123,15 +123,15 @@ int	handle_keyrelease(int keysym, t_data *data)
 		data->key.d = 0;
 	if (keysym ==  65451)
 	{
-		data->rc_max_angle++;
-		if (data->rc_max_angle > 360)
-			data->rc_max_angle = 360;
+		data->player.speed += 0.01;
+		if (data->player.speed > 0.1)
+			data->player.speed = 0.1;
 	}
 	if (keysym ==  65453)
 	{
-		data->rc_max_angle--;
-		if (data->rc_max_angle < 1)
-			data->rc_max_angle = 1;
+		data->player.speed -= 0.01;
+		if (data->player.speed < 0.01)
+			data->player.speed = 0.01;
 	}
 	return (0);
 }

@@ -12,13 +12,6 @@
 
 #include "cub3d.h"
 
-int	round_up(float nbr)
-{
-	if ((nbr - (int)nbr) >= 0.5)
-		return ((int)(nbr) + 1);
-	return ((int)nbr);
-}
-
 void	draw_line(t_data *data, int y0, int x0, int y1, int x1)
 {
     int dx = abs(x1 - x0);
@@ -30,8 +23,16 @@ void	draw_line(t_data *data, int y0, int x0, int y1, int x1)
 
     while (!(x0 == x1 && y0 == y1))
 	{
-		if (x0 >= 0 && x0 <= WIDTH / 2 && y0 >= 0 && y0 <= HEIGHT)
-			put_pixel_img(&(data->canvas), x0, y0, 0x000000FF);
+		if (x0 >= 0 && x0 <= MINIMAP / data->ratio && y0 >= 0 && y0 <= MINIMAP / data->ratio)
+		{
+			if (data->ratio <= 2)
+			{
+				if ((y0 + x0) % 2 == 0)
+					put_pixel_img(&(data->canvas), x0, y0, 0x000000FF);
+			}
+			else
+				put_pixel_img(&(data->canvas), x0, y0, 0x000000FF);
+		}
 		else
 			break;
         e2 = 2 * err;
@@ -59,88 +60,56 @@ void	draw_square(t_data *data, int y_init, int x_init, int extra, int color)
 		x = x_init;
 		while (x < x_init + extra)
 		{
-			if (y >= 0 && y <= 450 && x >= 0 && x <= 450)
-				put_pixel_img(&(data->canvas), x, y, color);
+			if (y >= 0 && y <= MINIMAP / data->ratio && x >= 0 && x <= MINIMAP / data->ratio)
+			{
+				if (data->ratio <= 2)
+				{
+					if ((y + x) % 2 == 0)
+						put_pixel_img(&(data->canvas), x, y, color);
+				}
+				else
+					put_pixel_img(&(data->canvas), x, y, color);
+			}
 			x++;
 		} 
 		y++;
 	}
 }
 
-void	draw_square_N(t_data *data, int y_init, int x_init, int y_end, int x_end)
+void	draw_wall(t_data *data, int index)
 {
 	int y;
 	int x;
 
-	y = y_init;
-	while (y < y_end)
+	y = data->r3d[index].y_init;
+	while (y < data->r3d[index].y_end)
 	{
-		x = x_init;
-		while (x < x_end)
+		x = data->r3d[index].x_init;
+		while (x < data->r3d[index].x_end)
 		{
-			if (y >= 0 && y <= 450 && x >= 450 && x <= 900)
-				put_pixel_img(&(data->canvas), x, y, 0x00FF0000);
+			if (y >= 0 && y <= HEIGHT && x >= 0 && x <= WIDTH)
+			{
+				if (get_pixel_img(&data->canvas, x, y) == (unsigned int)data->map.cell.color || get_pixel_img(&data->canvas, x, y) == (unsigned int)data->map.floor.color)
+				{
+					if (data->r3d[index].wall == 'N')
+						put_pixel_img(&(data->canvas), x, y, get_pixel_img(&data->map.NO_texture, data->r3d[index].texture_init, (y - data->r3d[index].y_init) * (49 / (data->r3d[index].y_end - data->r3d[index].y_init))));
+					else if (data->r3d[index].wall == 'S')
+						put_pixel_img(&(data->canvas), x, y, get_pixel_img(&data->map.SO_texture, data->r3d[index].texture_init, (y - data->r3d[index].y_init) * (49 / (data->r3d[index].y_end - data->r3d[index].y_init))));
+					else if (data->r3d[index].wall == 'E')
+						put_pixel_img(&(data->canvas), x, y, get_pixel_img(&data->map.EA_texture, data->r3d[index].texture_init, (y - data->r3d[index].y_init) * (49 / (data->r3d[index].y_end - data->r3d[index].y_init))));
+					else if (data->r3d[index].wall == 'W')
+						put_pixel_img(&(data->canvas), x, y, get_pixel_img(&data->map.WE_texture, data->r3d[index].texture_init, (y - data->r3d[index].y_init) * (49 / (data->r3d[index].y_end - data->r3d[index].y_init))));
+				}
+			}
 			x++;
-		} 
+		}
 		y++;
 	}
 }
 
-void	draw_square_S(t_data *data, int y_init, int x_init, int y_end, int x_end)
+void	draw_player(t_data *data)
 {
-	int y;
-	int x;
-
-	y = y_init;
-	while (y < y_end)
-	{
-		x = x_init;
-		while (x < x_end)
-		{
-			if (y >= 0 && y <= 450 && x >= 450 && x <= 900)
-				put_pixel_img(&(data->canvas), x, y, 0x000000FF);
-			x++;
-		} 
-		y++;
-	}
-}
-
-void	draw_square_E(t_data *data, int y_init, int x_init, int y_end, int x_end)
-{
-	int y;
-	int x;
-
-	y = y_init;
-	while (y < y_end)
-	{
-		x = x_init;
-		while (x < x_end)
-		{
-			if (y >= 0 && y <= 450 && x >= 450 && x <= 900)
-				put_pixel_img(&(data->canvas), x, y, 0x0000FF00);
-			x++;
-		} 
-		y++;
-	}
-}
-
-void	draw_square_W(t_data *data, int y_init, int x_init, int y_end, int x_end)
-{
-	int y;
-	int x;
-
-	y = y_init;
-	while (y < y_end)
-	{
-		x = x_init;
-		while (x < x_end)
-		{
-			if (y >= 0 && y <= 450 && x >= 450 && x <= 900)
-				put_pixel_img(&(data->canvas), x, y, 0x00FF00FF);
-			x++;
-		} 
-		y++;
-	}
+	draw_square(data, (MINIMAP / 2 - MINIMAP / 45) / data->ratio, (MINIMAP / 2 - MINIMAP / 45) / data->ratio, (MINIMAP / 45 * 2) / data->ratio, 0x000000FF);
 }
 
 void	calculate_vector_player(t_data *data)
@@ -150,19 +119,29 @@ void	calculate_vector_player(t_data *data)
 	data->player.x_temp = data->player.speed * cos(data->player.radians);
 }
 
-void	draw_rays2D_v1(t_data *data)
+void	draw_rays(t_data *data)
 {
-	int		offset;
+	float	offset;
 	double	y;
 	double	x;
 	double	dy;
 	double	dx;
 	float	i;
+	int		index;
+	float	angle;
 
-	i = 0;
-	while (i <= data->rc_max_angle + 1)
+	//index = 64;
+	//i = 0;
+	index = 0;
+	i = -16;
+	while (i <= 16)
 	{
-		data->player.radians = ((data->player.angle + i )* M_PI) / 180.0;
+		angle = data->player.angle + i;
+		if (angle < 0)
+			angle += 360;
+		if (angle > 360)
+			angle -= 360;
+		data->player.radians = (angle * M_PI) / 180.0;
 		data->player.y_temp = 0.01 * sin(data->player.radians);
 		data->player.x_temp = 0.01 * cos(data->player.radians);
 		offset = 1;
@@ -170,139 +149,121 @@ void	draw_rays2D_v1(t_data *data)
 		{
 			y = data->player.y_temp * offset * 100;
 			x = data->player.x_temp * offset * 100;
-			dy = ((225 - y) - 4.5 * 50) / 50 + data->player.yy;
-			dx = ((225 + x) - 4.5 * 50) / 50 + data->player.xx;
+			dy = ((MINIMAP / 2 - y) - 4.5 * (MINIMAP / 9)) / (MINIMAP / 9) + data->player.yy;
+			dx = ((MINIMAP / 2 + x) - 4.5 * (MINIMAP / 9)) / (MINIMAP / 9) + data->player.xx;
 			if (data->map.matrix[(int)dy][(int)dx] == '1')
 			{
-				draw_line(data, 225, 225, 225 - y, 225 + x);
-				data->rc_dist_offset = (int)((WIDTH / 2) / data->rc_max_angle) / 2;
-
+				draw_square(data, MINIMAP / data->ratio / 2 - (data->player.y - (int)dy) * (MINIMAP / data->ratio / 9) - (data->player.yy - data->player.y) * (MINIMAP / data->ratio / 9), MINIMAP / data->ratio / 2 - (data->player.x - (int)dx) * (MINIMAP / data->ratio / 9) - (data->player.xx - data->player.x) * (MINIMAP / data->ratio / 9), (MINIMAP / data->ratio / 9) - 1 , 0x00FF0000);
+				draw_line(data, MINIMAP / data->ratio / 2, MINIMAP / data->ratio / 2, (MINIMAP / 2 - y) / data->ratio, (MINIMAP / 2 + x) / data->ratio);
 				float	y3;
 				float	x3;
 				y3 = data->player.y - dy;
 				x3 = data->player.x - dx;
-
-				//printf("P(%i, %i) W(%f, %f) D(%f, %f)\n", data->player.y, data->player.x, dy, dx, -y3, -x3);
-				
-				if (y3 >= 0.0 && fabs(y3) - (int)fabs(y3) < fabs(x3) - (int)fabs(x3))
+				//data->r3d[index].dist = (fabs(y3) + fabs(x3)) / 2;
+				data->r3d[index].y_init = 225 - ((MINIMAP / 9) * (HEIGHT - (MINIMAP / 9)) / (offset * cos((fabs(-i) * M_PI) / 180)));
+				data->r3d[index].x_init = 900 - (index + 1) * (WIDTH / RAYS);
+				data->r3d[index].y_end = 225 + ((MINIMAP / 9) * (HEIGHT - (MINIMAP / 9)) / (offset * cos((fabs(-i) * M_PI) / 180)));
+				data->r3d[index].x_end = data->r3d[index].x_init + (WIDTH / RAYS);
+				if (y3 <= 0.0 && fabs(y3) - (int)fabs(y3) < fabs(x3) - (int)fabs(x3) && data->map.matrix[(int)dy - 1][(int)dx] == '0' && data->player.yy < dy)
 				{
-					if (i < 0)
-						draw_square_N(data, 225 - (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
-					else
-						draw_square_N(data, 225 - (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+					data->r3d[index].wall = 'N';
+					data->r3d[index].texture_init = (int)((1 - (dx - (int)dx)) * 49);
+					//printf("N Texture position: %ipx\n", data->r3d[index].texture_init);
+					//printf("  Wall height: %i\n", (int)(data->r3d[index].y_end - data->r3d[index].y_init));
 				}
-				else if (y3 < 0.0 && (fabs(y3) - (int)fabs(y3)) < (fabs(x3) - (int)fabs(x3)))
+				else if (y3 >= 0.0 && fabs(y3) - (int)fabs(y3) < fabs(x3) - (int)fabs(x3) && data->map.matrix[(int)dy + 1][(int)dx] == '0' && data->player.yy > dy)
 				{
-					if (i < 0)
-						draw_square_S(data, 225 - (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
-					else
-						draw_square_S(data, 225 - (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+					data->r3d[index].wall = 'S';
+					data->r3d[index].texture_init = (int)((dx - (int)dx) * 49);
+					//printf("S Texture position: %ipx\n", data->r3d[index].texture_init);
 				}
-				else if (x3 >= 0.0 && (fabs(y3) - (int)fabs(y3)) > (fabs(x3) - (int)fabs(x3)))
+				else if (x3 >= 0.0 && fabs(y3) - (int)fabs(y3) > fabs(x3) - (int)fabs(x3) && data->map.matrix[(int)dy][(int)dx + 1] == '0' && data->player.xx > dx)
 				{
-					if (i < 0)
-						draw_square_E(data, 225 - (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
-					else
-						draw_square_E(data, 225 - (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+					data->r3d[index].wall = 'E';
+					data->r3d[index].texture_init = (int)((1 - (dy - (int)dy)) * 49);
+					//printf("E Texture position: %ipx\n", data->r3d[index].texture_init);
 				}
-				else if (x3 < 0.0 && (fabs(y3) - (int)fabs(y3)) > (fabs(x3) - (int)fabs(x3)))
+				else if (x3 <= 0.0 && fabs(y3) - (int)fabs(y3) > fabs(x3) - (int)fabs(x3) && data->map.matrix[(int)dy][(int)dx - 1] == '0' && data->player.xx < dx)
 				{
-					if (i < 0)
-						draw_square_W(data, 225 - (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
-					else
-						draw_square_W(data, 225 - (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
+					data->r3d[index].wall = 'W';
+					data->r3d[index].texture_init = (int)((dy - (int)dy) * 49);
+					//printf("W Texture position: %ipx\n", data->r3d[index].texture_init);
 				}
-				//draw_square2(data, 225 - 225 * 50 / (49 + offset), 675 - i * 9 - 9, 225 + 225 * 50 / (49 + offset), 675 - i * 9);
+				draw_wall(data, index);
 				break;
 			}
-			offset++;
+			offset += 0.1;
 		}
 		i += 0.25;
+		index++;
 	}
 }
 
-void	draw_rays2D_v2(t_data *data)
+void	fix_map_3D(t_data *data)
 {
-	int		offset;
-	double	y;
-	double	x;
-	double	dy;
-	double	dx;
-	float	i;
+	int	index;
+
+	index = 1;
+	while (index < RAYS)
+	{
+		if (data->r3d[index - 1].wall == data->r3d[index + 1].wall)
+			data->r3d[index].wall = data->r3d[index - 1].wall;
+		index++;
+	}	
+}
+
+void	sort_map_3D(t_data *data)
+{
+	int		i;
+	int		j;
+	t_r3d	tmp;
 
 	i = 0;
-	while (i >= -(data->rc_max_angle + 1))
+	while (i < RAYS)
 	{
-		data->player.radians = ((data->player.angle + i )* M_PI) / 180.0;
-		data->player.y_temp = 0.01 * sin(data->player.radians);
-		data->player.x_temp = 0.01 * cos(data->player.radians);
-		offset = 1;
-		while (1)
+		j = 0;
+		while (j < RAYS)
 		{
-			y = data->player.y_temp * offset * 100;
-			x = data->player.x_temp * offset * 100;
-			dy = ((225 - y) - 4.5 * 50) / 50 + data->player.yy;
-			dx = ((225 + x) - 4.5 * 50) / 50 + data->player.xx;
-			if (data->map.matrix[(int)dy][(int)dx] == '1')
+			if (data->r3d[j].dist < data->r3d[j + 1].dist)
 			{
-				draw_line(data, 225, 225, 225 - y, 225 + x);
-				data->rc_dist_offset = (int)((WIDTH / 2) / data->rc_max_angle) / 2;
-
-				float	y3;
-				float	x3;
-				y3 = data->player.y - dy;
-				x3 = data->player.x - dx;
-
-				//printf("P(%i, %i) W(%f, %f) D(%f, %f)\n", data->player.y, data->player.x, dy, dx, -y3, -x3);
-				
-				if (y3 >= 0.0 && fabs(y3) - (int)fabs(y3) < fabs(x3) - (int)fabs(x3))
-				{
-					if (i < 0)
-						draw_square_N(data, 225 - (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
-					else
-						draw_square_N(data, 225 - (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
-				}
-				else if (y3 < 0.0 && (fabs(y3) - (int)fabs(y3)) < (fabs(x3) - (int)fabs(x3)))
-				{
-					if (i < 0)
-						draw_square_S(data, 225 - (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
-					else
-						draw_square_S(data, 225 - (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
-				}
-				else if (x3 >= 0.0 && (fabs(y3) - (int)fabs(y3)) > (fabs(x3) - (int)fabs(x3)))
-				{
-					if (i < 0)
-						draw_square_E(data, 225 - (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
-					else
-						draw_square_E(data, 225 - (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
-				}
-				else if (x3 < 0.0 && (fabs(y3) - (int)fabs(y3)) > (fabs(x3) - (int)fabs(x3)))
-				{
-					if (i < 0)
-						draw_square_W(data, 225 - (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos((-i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
-					else
-						draw_square_W(data, 225 - (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset - data->rc_dist_offset, 225 + (50 * (HEIGHT - 50) / (offset * cos(( i * M_PI) / 180))), 675 - i * data->rc_dist_offset + data->rc_dist_offset);
-				}
-				//draw_square2(data, 225 - 225 * 50 / (49 + offset), 675 - i * 9 - 9, 225 + 225 * 50 / (49 + offset), 675 - i * 9);
-				break;
+				tmp.dist = data->r3d[j].dist;
+				tmp.y_init = data->r3d[j].y_init;
+				tmp.x_init = data->r3d[j].x_init;
+				tmp.y_end = data->r3d[j].y_end;
+				tmp.x_end = data->r3d[j].x_end;
+				tmp.wall = data->r3d[j].wall;
+				data->r3d[j].dist = data->r3d[j + 1].dist;
+				data->r3d[j].y_init = data->r3d[j + 1].y_init;
+				data->r3d[j].x_init = data->r3d[j + 1].x_init;
+				data->r3d[j].y_end = data->r3d[j + 1].y_end;
+				data->r3d[j].x_end = data->r3d[j + 1].x_end;
+				data->r3d[j].wall = data->r3d[j + 1].wall;
+				data->r3d[j + 1].dist = tmp.dist;
+				data->r3d[j + 1].y_init = tmp.y_init;
+				data->r3d[j + 1].x_init = tmp.x_init;
+				data->r3d[j + 1].y_end = tmp.y_end;
+				data->r3d[j + 1].x_end = tmp.x_end;
+				data->r3d[j + 1].wall = tmp.wall;
 			}
-			offset++;
+			j++;
 		}
-		i -= 0.25;
+		i++;
 	}
 }
 
-void	draw_player(t_data *data)
+void	draw_map_3D(t_data *data)
 {
-	draw_square(data, 220, 220, 10, 0x0000FF);
-	put_img_to_img(&data->canvas, &(data->map.C_image), 450, 0);
-	put_img_to_img(&data->canvas, &(data->map.F_image), 450, 225);
-	draw_rays2D_v1(data);
-	draw_rays2D_v2(data);
-	calculate_vector_player(data);
+	int	index;
+
+	index = 0;
+	while (index <= RAYS)
+	{
+		draw_wall(data, index);
+		index++;
+	}
 }
 
-void	draw_map(t_data *data)
+void	draw_map_2D(t_data *data)
 {
 	int y;
 	int x;
@@ -311,8 +272,9 @@ void	draw_map(t_data *data)
 	int	y_offset;
 	int	x_offset;
 
-	y_offset = 50 * ((data->player.yy - (double)data->player.y) + 0.5);
-	x_offset = 50 * ((data->player.xx - (double)data->player.x) + 0.5);
+	draw_square(data, 0, 0, MINIMAP / data->ratio, 0x00000000);
+	y_offset = MINIMAP / data->ratio / 9 * ((data->player.yy - (double)data->player.y) + 0.5);
+	x_offset = MINIMAP / data->ratio / 9 * ((data->player.xx - (double)data->player.x) + 0.5);
 	y = data->player.y - 5;
 	yy = 0;
 	while (y <= data->player.y + 5)
@@ -324,21 +286,42 @@ void	draw_map(t_data *data)
 			if (y >= 0 && y < data->map.h && x >= 0 && x < data->map.w)
 			{
 				if (data->map.matrix[y][x] == ' ')
-					draw_square(data, yy * 50 - y_offset, xx * 50 - x_offset, 49, 0x0000FF00);
+					draw_square(data, yy * MINIMAP / data->ratio / 9 - y_offset, xx * MINIMAP / data->ratio / 9 - x_offset, MINIMAP / data->ratio / 9 - 1, 0x0000FF00);
 				else if (data->map.matrix[y][x] == '0')
-					draw_square(data, yy * 50 - y_offset, xx * 50 - x_offset, 49, 0x00FFFF00);
+					draw_square(data, yy * MINIMAP / data->ratio / 9 - y_offset, xx * MINIMAP / data->ratio / 9 - x_offset, MINIMAP / data->ratio / 9 - 1, 0x00FFFF00);
 				else if (data->map.matrix[y][x] == '1')
-					draw_square(data, yy * 50 - y_offset, xx * 50 - x_offset, 49, 0x00BB00FF);
+					draw_square(data, yy * MINIMAP / data->ratio / 9 - y_offset, xx * MINIMAP / data->ratio / 9 - x_offset, MINIMAP / data->ratio / 9 - 1, 0x00BB00FF);
 			}
 			else
-				draw_square(data, yy * 50 - y_offset, xx * 50 - x_offset, 49, 0x0000FF00);
+				draw_square(data, yy * MINIMAP / data->ratio / 9 - y_offset, xx * MINIMAP / data->ratio / 9 - x_offset, MINIMAP / data->ratio / 9 - 1, 0xFF00FF00);
 			x++;
 			xx++;
 		}
 		y++;
 		yy++;
 	}
+}
+
+void	draw_background(t_data *data)
+{
+	put_img_to_img(&data->canvas, &(data->map.C_image), 0, 0);
+	put_img_to_img(&data->canvas, &(data->map.F_image), 0, HEIGHT / 2);
+}
+
+void	update(t_data *data)
+{
+	data->canvas = new_img(WIDTH, HEIGHT, data);
+	draw_background(data);
+	draw_map_2D(data);
+	draw_rays(data);
+	//fix_map_3D(data);
+	//sort_map_3D(data);
+	//draw_map_3D(data);
 	draw_player(data);
+	calculate_vector_player(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->canvas.ptr, 0, 0);
+	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->map.NO_texture.ptr, 0, 0);
+	mlx_destroy_image(data->mlx_ptr, data->canvas.ptr);
 }
 
 int	render(t_data *data)
@@ -349,11 +332,6 @@ int	render(t_data *data)
 		free_variables(data);
 		exit(0);
 	}
-	data->canvas = new_img(WIDTH, HEIGHT, data);
 	check_movement_keys(data);
-	calculate_vector_player(data);
-	draw_map(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->canvas.ptr, 0, 0);
-	mlx_destroy_image(data->mlx_ptr, data->canvas.ptr);
 	return (0);
 }

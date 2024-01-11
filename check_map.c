@@ -75,8 +75,8 @@ int	check_map(t_data *data)
 					printf(BLUEB "  " NC);
 					data->player.x = x;
 					data->player.y = y;
-					data->player.xx = (double)x + 0.5;
-					data->player.yy = (double)y + 0.5;
+					data->player.xx = x + 0.5;
+					data->player.yy = y + 0.5;
 					data->player.angle = 90;
 					data->player.nbr = 1;
 					data->map.matrix[y][x] = '0';
@@ -94,8 +94,8 @@ int	check_map(t_data *data)
 					printf(BLUEB "  " NC);
 					data->player.x = x;
 					data->player.y = y;
-					data->player.xx = (double)x + 0.5;
-					data->player.yy = (double)y + 0.5;
+					data->player.xx = x + 0.5;
+					data->player.yy = y + 0.5;
 					data->player.angle = 270;
 					data->player.nbr = 1;
 					data->map.matrix[y][x] = '0';
@@ -113,8 +113,8 @@ int	check_map(t_data *data)
 					printf(BLUEB "  " NC);
 					data->player.x = x;
 					data->player.y = y;
-					data->player.xx = (double)x + 0.5;
-					data->player.yy = (double)y + 0.5;
+					data->player.xx = x + 0.5;
+					data->player.yy = y + 0.5;
 					data->player.angle = 0;
 					data->player.nbr = 1;
 					data->map.matrix[y][x] = '0';
@@ -132,8 +132,8 @@ int	check_map(t_data *data)
 					printf(BLUEB "  " NC);
 					data->player.x = x;
 					data->player.y = y;
-					data->player.xx = (double)x + 0.5;
-					data->player.yy = (double)y + 0.5;
+					data->player.xx = x + 0.5;
+					data->player.yy = y + 0.5;
 					data->player.angle = 180;
 					data->player.nbr = 1;
 					data->map.matrix[y][x] = '0';

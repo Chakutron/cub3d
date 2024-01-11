@@ -29,8 +29,9 @@ void	init_variables(t_data *data)
 	data->key.a = 0;
 	data->key.d = 0;
 	data->endgame = 0;
-	data->rc_max_angle = 15;
-	data->player.speed = 0.01;
+	data->rc_dist_offset = (WIDTH / 2) / 30;
+	data->player.speed = 0.03;
+	data->ratio = 5;
 }
 
 void	make_floor_and_cell(t_data *data)
@@ -55,6 +56,11 @@ void	make_floor_and_cell(t_data *data)
 void	load_images(t_data *data)
 {
 	printf("\n");
+	data->map.NO_texture = new_file_img("textures/N_wall.xpm", data);
+	data->map.SO_texture = new_file_img("textures/S_wall.xpm", data);
+	data->map.EA_texture = new_file_img("textures/E_wall.xpm", data);
+	data->map.WE_texture = new_file_img("textures/W_wall.xpm", data);
+	printf("- Texture loaded: (%s) (ptr=%p) (%ix%i pixels)\n", "textures/test.xpm", data->map.NO_texture.ptr, data->map.NO_texture.w, data->map.NO_texture.h);
 	/*data->map.NO_texture = load_image(data->map.NO_file, data);
 	data->map.SO_texture = load_image(data->map.SO_file, data);
 	data->map.WE_texture = load_image(data->map.WE_file, data);

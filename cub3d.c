@@ -32,6 +32,7 @@ void	start_game(t_data *data)
 		//mlx_mouse_hide(data->mlx_ptr, data->win_ptr);
 		load_images(data);
 		printf("\n--- GAME STARTED ---\n");
+		update(data);
 		mlx_loop(data->mlx_ptr);
 	}
 }

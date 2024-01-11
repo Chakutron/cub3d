@@ -29,6 +29,10 @@ t_image	new_file_img(char *path, t_data *window)
 	t_image	img;
 
 	img.ptr = mlx_xpm_file_to_image(window->mlx_ptr, path, &img.w, &img.h);
+	if (!img.ptr)
+	{
+		printf("Error loading image file..\n");
+	}
 	img.addr = mlx_get_data_addr(img.ptr, &(img.bpp),
 			&(img.line_len), &(img.endian));
 	return (img);
@@ -50,8 +54,8 @@ void	put_pixel_img(t_image *img, int x, int y, int color)
 
 unsigned int	get_pixel_img(t_image *img, int x, int y)
 {
-	return (*(unsigned int *)((img->addr + (y * img->line_len)
-			+ (x * img->bpp / 8))));
+	return (*(unsigned int *)((img->addr + (abs(y) * img->line_len)
+			+ (abs(x) * img->bpp / 8))));
 }
 
 void	put_img_to_img(t_image *dst, t_image *src, int x, int y)

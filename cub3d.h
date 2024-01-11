@@ -39,8 +39,11 @@
 # define VIOLETB "\e[45m"
 # define NC "\e[0m"
 
-# define WIDTH 900
 # define HEIGHT 450
+# define WIDTH 900
+# define MINIMAP 450
+# define RATIO 5
+# define RAYS 128
 
 typedef struct	s_rc
 {
@@ -55,6 +58,17 @@ typedef struct	s_rc
 	float	xo;
 	float	yo;
 }			t_rc;
+
+typedef struct	s_r3d
+{
+	float	dist;
+	float	y_init;
+	float	x_init;
+	float	y_end;
+	float	x_end;
+	char	wall;
+	int		texture_init;
+}			t_r3d;
 
 typedef struct s_image
 {
@@ -115,7 +129,7 @@ typedef struct s_player
 	double	yy;
 	double	x_temp;
 	double	y_temp;
-	int		angle;
+	float	angle;
 	float	radians;
 	int		nbr;
 	float	speed;
@@ -133,18 +147,18 @@ typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	void		*win_ptr2;
 	t_map		map;
 	t_player	player;
 	t_image		canvas;
 	t_rc		rc;
+	t_r3d		r3d[RAYS + 1];
 	int			fd;
 	char		*line;
 	int			endgame;
 	t_keys		key;
 	int			i;
-	int			rc_max_angle;
 	float		rc_dist_offset;
+	int			ratio;
 }				t_data;
 
 char	*ft_strcat2(char *s, char c);
@@ -160,6 +174,7 @@ void	put_pixel_img(t_image *img, int x, int y, int color);
 void	put_img_to_img(t_image *dst, t_image *src, int x, int y);
 int		create_trgb(int t, int r, int g, int b);
 void	ft_draw_vertical_line(t_data *data, int x, int color);
+unsigned int	get_pixel_img(t_image *img, int x, int y);
 
 void	open_map(t_data *data);
 void	init_variables(t_data *data);
@@ -177,6 +192,7 @@ int		render(t_data *data);
 int		handle_keypress(int keysym, t_data *data);
 int		handle_keyrelease(int keysym, t_data *data);
 void	check_movement_keys(t_data *data);
+void	update(t_data *data);
 int		handle_mouse_move(int x, int y, t_data *data);
 int		handle_mouse_click(int button, int x, int y, t_data *data);
 void	update_player(t_data *data, int x, int y);

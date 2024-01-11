@@ -23,37 +23,41 @@ void	check_movement_keys(t_data *data)
 	{
 		data->player.yy -= data->player.y_temp;
 		data->player.xx += data->player.x_temp;
-		if (data->map.matrix[(int)data->player.yy][(int)data->player.xx] != '0')
+		if (data->map.matrix[(int)(data->player.yy - 10 * data->player.y_temp)][(int)(data->player.xx + 10 * data->player.x_temp)] == '1')
 		{
 			data->player.yy = y_old;
 			data->player.xx = x_old;
 		}
 		data->player.y = data->player.yy;
 		data->player.x = data->player.xx;
+		update(data);
 	}
 	if (data->key.s)
 	{
 		data->player.yy += data->player.y_temp;
 		data->player.xx -= data->player.x_temp;
-		if (data->map.matrix[(int)data->player.yy][(int)data->player.xx] != '0')
+		if (data->map.matrix[(int)(data->player.yy + 10 * data->player.y_temp)][(int)(data->player.xx - 10 * data->player.x_temp)] == '1')
 		{
 			data->player.yy = y_old;
 			data->player.xx = x_old;
 		}
 		data->player.y = data->player.yy;
 		data->player.x = data->player.xx;
+		update(data);
 	}
 	if (data->key.a)
 	{
 		data->player.angle += 1;
 		if (data->player.angle > 360)
 			data->player.angle -= 360;
+		update(data);
 	}
 	if (data->key.d)
 	{
 		data->player.angle -= 1;
 		if (data->player.angle < 0)
 			data->player.angle += 360;
+		update(data);
 	}
 }
 
@@ -101,13 +105,13 @@ int	handle_keypress(int keysym, t_data *data)
 	if (keysym == XK_Escape)
 		data->endgame = 1;
 	if (keysym == 119 || keysym == 65362)
-		data->key.w = 1;
+		data->key.w = -1 + data->key.s;
 	if (keysym == 115 || keysym == 65364)
-		data->key.s = 1;
+		data->key.s = 1 + data->key.w;
 	if (keysym == 97 || keysym == 65361)
-		data->key.a = 1;
+		data->key.a = -1 + data->key.d;
 	if (keysym == 100 || keysym == 65363)
-		data->key.d = 1;	
+		data->key.d = 1 + data->key.a;	
 	return (0);
 }
 
@@ -123,15 +127,17 @@ int	handle_keyrelease(int keysym, t_data *data)
 		data->key.d = 0;
 	if (keysym ==  65451)
 	{
-		data->player.speed += 0.01;
-		if (data->player.speed > 0.1)
-			data->player.speed = 0.1;
+		data->ratio -= 1;
+		if (data->ratio < 1)
+			data->ratio = 1;
+		update(data);
 	}
 	if (keysym ==  65453)
 	{
-		data->player.speed -= 0.01;
-		if (data->player.speed < 0.01)
-			data->player.speed = 0.01;
+		data->ratio += 1;
+		if (data->ratio > 5)
+			data->ratio = 5;
+		update(data);
 	}
 	return (0);
 }

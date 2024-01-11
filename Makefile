@@ -55,8 +55,11 @@ all: ${NAME}
 		@${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -lm -Lmlx -lmlx -Imlx -lX11 -lXext
 
 ${NAME}: ${OBJS}
-		@echo "Generating ${GREEN}${NAME}${NC} executable.."
-		@${CC} -o ${NAME} ${OBJS} ${MLX}/${MLX_LIB} -lm -Lmlx -lmlx -Imlx -lX11 -lXext
+		@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${MLX}/${MLX_LIB} -lm -Lmlx -lmlx -Imlx -lX11 -lXext
+		$(call put_loading)
+		@echo
+		@echo "Generated ${GREEN}${NAME}${NC} executable.."
+		@echo
 
 clean:
 		@echo "Deleting object files.."
@@ -67,3 +70,16 @@ fclean: clean
 		@rm -f ${NAME}
 
 re: fclean all
+
+define put_loading
+@progress=0;\
+prog_bar="🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩";\
+unprog_bar="🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥";\
+while [ $$progress -le 36 ]; do\
+    printf "[%.*s%.*s]" $$progress $$prog_bar $$(( 36 - progress )) $$unprog_bar;\
+    sleep 0.1;\
+    echo -n "\e[20D";\
+    progress=$$(( progress + 4 ));\
+done;\
+echo
+endef

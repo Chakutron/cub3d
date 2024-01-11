@@ -130,8 +130,6 @@ void	draw_rays(t_data *data)
 	int		index;
 	float	angle;
 
-	//index = 64;
-	//i = 0;
 	index = 0;
 	i = -16;
 	while (i <= 16)
@@ -159,7 +157,6 @@ void	draw_rays(t_data *data)
 				float	x3;
 				y3 = data->player.y - dy;
 				x3 = data->player.x - dx;
-				//data->r3d[index].dist = (fabs(y3) + fabs(x3)) / 2;
 				data->r3d[index].y_init = 225 - ((MINIMAP / 9) * (HEIGHT - (MINIMAP / 9)) / (offset * cos((fabs(-i) * M_PI) / 180)));
 				data->r3d[index].x_init = 900 - (index + 1) * (WIDTH / RAYS);
 				data->r3d[index].y_end = 225 + ((MINIMAP / 9) * (HEIGHT - (MINIMAP / 9)) / (offset * cos((fabs(-i) * M_PI) / 180)));
@@ -168,26 +165,21 @@ void	draw_rays(t_data *data)
 				{
 					data->r3d[index].wall = 'N';
 					data->r3d[index].texture_init = (int)((1 - (dx - (int)dx)) * 49);
-					//printf("N Texture position: %ipx\n", data->r3d[index].texture_init);
-					//printf("  Wall height: %i\n", (int)(data->r3d[index].y_end - data->r3d[index].y_init));
 				}
 				else if (y3 >= 0.0 && fabs(y3) - (int)fabs(y3) < fabs(x3) - (int)fabs(x3) && data->map.matrix[(int)dy + 1][(int)dx] == '0' && data->player.yy > dy)
 				{
 					data->r3d[index].wall = 'S';
 					data->r3d[index].texture_init = (int)((dx - (int)dx) * 49);
-					//printf("S Texture position: %ipx\n", data->r3d[index].texture_init);
 				}
 				else if (x3 >= 0.0 && fabs(y3) - (int)fabs(y3) > fabs(x3) - (int)fabs(x3) && data->map.matrix[(int)dy][(int)dx + 1] == '0' && data->player.xx > dx)
 				{
 					data->r3d[index].wall = 'E';
 					data->r3d[index].texture_init = (int)((1 - (dy - (int)dy)) * 49);
-					//printf("E Texture position: %ipx\n", data->r3d[index].texture_init);
 				}
 				else if (x3 <= 0.0 && fabs(y3) - (int)fabs(y3) > fabs(x3) - (int)fabs(x3) && data->map.matrix[(int)dy][(int)dx - 1] == '0' && data->player.xx < dx)
 				{
 					data->r3d[index].wall = 'W';
 					data->r3d[index].texture_init = (int)((dy - (int)dy) * 49);
-					//printf("W Texture position: %ipx\n", data->r3d[index].texture_init);
 				}
 				draw_wall(data, index);
 				break;
@@ -199,71 +191,7 @@ void	draw_rays(t_data *data)
 	}
 }
 
-void	fix_map_3D(t_data *data)
-{
-	int	index;
-
-	index = 1;
-	while (index < RAYS)
-	{
-		if (data->r3d[index - 1].wall == data->r3d[index + 1].wall)
-			data->r3d[index].wall = data->r3d[index - 1].wall;
-		index++;
-	}	
-}
-
-void	sort_map_3D(t_data *data)
-{
-	int		i;
-	int		j;
-	t_r3d	tmp;
-
-	i = 0;
-	while (i < RAYS)
-	{
-		j = 0;
-		while (j < RAYS)
-		{
-			if (data->r3d[j].dist < data->r3d[j + 1].dist)
-			{
-				tmp.dist = data->r3d[j].dist;
-				tmp.y_init = data->r3d[j].y_init;
-				tmp.x_init = data->r3d[j].x_init;
-				tmp.y_end = data->r3d[j].y_end;
-				tmp.x_end = data->r3d[j].x_end;
-				tmp.wall = data->r3d[j].wall;
-				data->r3d[j].dist = data->r3d[j + 1].dist;
-				data->r3d[j].y_init = data->r3d[j + 1].y_init;
-				data->r3d[j].x_init = data->r3d[j + 1].x_init;
-				data->r3d[j].y_end = data->r3d[j + 1].y_end;
-				data->r3d[j].x_end = data->r3d[j + 1].x_end;
-				data->r3d[j].wall = data->r3d[j + 1].wall;
-				data->r3d[j + 1].dist = tmp.dist;
-				data->r3d[j + 1].y_init = tmp.y_init;
-				data->r3d[j + 1].x_init = tmp.x_init;
-				data->r3d[j + 1].y_end = tmp.y_end;
-				data->r3d[j + 1].x_end = tmp.x_end;
-				data->r3d[j + 1].wall = tmp.wall;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-void	draw_map_3D(t_data *data)
-{
-	int	index;
-
-	index = 0;
-	while (index <= RAYS)
-	{
-		draw_wall(data, index);
-		index++;
-	}
-}
-
-void	draw_map_2D(t_data *data)
+void	draw_minimap(t_data *data)
 {
 	int y;
 	int x;
@@ -312,15 +240,11 @@ void	update(t_data *data)
 {
 	data->canvas = new_img(WIDTH, HEIGHT, data);
 	draw_background(data);
-	draw_map_2D(data);
+	draw_minimap(data);
 	draw_rays(data);
-	//fix_map_3D(data);
-	//sort_map_3D(data);
-	//draw_map_3D(data);
 	draw_player(data);
 	calculate_vector_player(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->canvas.ptr, 0, 0);
-	//mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->map.NO_texture.ptr, 0, 0);
 	mlx_destroy_image(data->mlx_ptr, data->canvas.ptr);
 }
 

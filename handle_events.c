@@ -6,7 +6,7 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2023/05/02 13:13:22 by mchiboub         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:15:03 by mchiboub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void	check_movement_keys(t_data *data)
 	}
 	if (data->key.a)
 	{
-		data->player.angle += 1;
+		data->player.angle += 1 + data->cursor_x;
 		if (data->player.angle > 360)
 			data->player.angle -= 360;
 		update(data);
 	}
 	if (data->key.d)
 	{
-		data->player.angle -= 1;
+		data->player.angle -= 1 + data->cursor_x;
 		if (data->player.angle < 0)
 			data->player.angle += 360;
 		update(data);
@@ -93,11 +93,35 @@ int	x_press(t_data *data)
 
 void	close_game(t_data *data)
 {
-	//mlx_mouse_show(data->mlx_ptr, data->win_ptr);
+	mlx_mouse_show(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	unload_images(data);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
+}
+
+int	handle_mouse_move(int x, int y, t_data *data)
+{
+	(void)y;
+	if (x < WIDTH / 2)
+	{
+		data->key.a = 1 + data->key.d;
+		data->cursor_x = abs(WIDTH / 2 - x) / 10;
+		mlx_mouse_move(data->mlx_ptr, data->win_ptr, WIDTH / 2, HEIGHT / 2);
+	}
+	else
+		data->key.a = 0;
+	if (x > WIDTH / 2)
+	{
+		data->key.d = 1 + data->key.a;
+		data->cursor_x = abs(WIDTH / 2 - x) / 10;
+		mlx_mouse_move(data->mlx_ptr, data->win_ptr, WIDTH / 2, HEIGHT / 2);
+	}
+	else
+		data->key.d = 0;
+	if (data->key.a == 0 && data->key.d == 0)
+		data->cursor_x = 0;
+	return (0);
 }
 
 int	handle_keypress(int keysym, t_data *data)

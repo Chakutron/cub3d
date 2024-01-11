@@ -61,7 +61,6 @@ typedef struct	s_rc
 
 typedef struct	s_r3d
 {
-	float	dist;
 	float	y_init;
 	float	x_init;
 	float	y_end;
@@ -153,12 +152,14 @@ typedef struct s_data
 	t_rc		rc;
 	t_r3d		r3d[RAYS + 1];
 	int			fd;
+	int			fd2;
 	char		*line;
 	int			endgame;
 	t_keys		key;
 	int			i;
 	float		rc_dist_offset;
 	int			ratio;
+	int			cursor_x;
 }				t_data;
 
 char	*ft_strcat2(char *s, char c);

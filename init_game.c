@@ -6,7 +6,7 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2023/05/05 10:15:11 by mchiboub         ###   ########.fr       */
+/*   Updated: 2024/01/11 20:55:49 by mchiboub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ void	init_variables(t_data *data)
 	data->key.d = 0;
 	data->endgame = 0;
 	data->rc_dist_offset = (WIDTH / 2) / 30;
-	data->player.speed = 0.03;
+	data->player.speed = 0.05;
 	data->ratio = 5;
+	data->cursor_x = 450;
 }
 
 void	make_floor_and_cell(t_data *data)
@@ -55,19 +56,13 @@ void	make_floor_and_cell(t_data *data)
 
 void	load_images(t_data *data)
 {
-	printf("\n");
-	data->map.NO_texture = new_file_img("textures/N_wall.xpm", data);
-	data->map.SO_texture = new_file_img("textures/S_wall.xpm", data);
-	data->map.EA_texture = new_file_img("textures/E_wall.xpm", data);
-	data->map.WE_texture = new_file_img("textures/W_wall.xpm", data);
-	printf("- Texture loaded: (%s) (ptr=%p) (%ix%i pixels)\n", "textures/test.xpm", data->map.NO_texture.ptr, data->map.NO_texture.w, data->map.NO_texture.h);
-	/*data->map.NO_texture = load_image(data->map.NO_file, data);
+	data->map.NO_texture = load_image(data->map.NO_file, data);
 	data->map.SO_texture = load_image(data->map.SO_file, data);
 	data->map.WE_texture = load_image(data->map.WE_file, data);
-	data->map.EA_texture = load_image(data->map.EA_file, data);*/
+	data->map.EA_texture = load_image(data->map.EA_file, data);
 	data->map.F_image = new_img(WIDTH, HEIGHT / 2, data);
-	printf("- Floor image created: (ptr=%p) (%ix%i pixels)\n", data->map.F_image.ptr, data->map.F_image.w, data->map.F_image.h);
+	printf("- Image created: (floor texture) (ptr=%p) (%ix%i pixels)\n", data->map.F_image.ptr, data->map.F_image.w, data->map.F_image.h);
 	data->map.C_image = new_img(WIDTH, HEIGHT / 2, data);
-	printf("- Cell image created: (ptr=%p) (%ix%i pixels)\n", data->map.C_image.ptr, data->map.C_image.w, data->map.C_image.h);
+	printf("- Image created: (ceilling texture) (ptr=%p) (%ix%i pixels)\n", data->map.C_image.ptr, data->map.C_image.w, data->map.C_image.h);
 	make_floor_and_cell(data);
 }

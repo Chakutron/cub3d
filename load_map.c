@@ -109,12 +109,11 @@ void	read_variables(t_data *data, char *line)
 			data->map.NO_file = ft_strdup2(&line[3]);
 			if (ft_strlen(data->map.NO_file) > 0)
 				clean_return_line(data->map.NO_file);
-				//data->map.NO_file[ft_strlen(data->map.NO_file) - 1] = '\0';
 			data->map.info.n = 1;
-			/*data->fd = open(data->map.NO_file, O_RDONLY);
-			if (data->fd == -1)
+			data->fd2 = open(data->map.NO_file, O_RDONLY);
+			if (data->fd2 == -1)
 				print_error(data, 5);
-			close(data->fd);*/
+			close(data->fd2);
 			check_variables(data);
 		}
 		else
@@ -127,12 +126,11 @@ void	read_variables(t_data *data, char *line)
 			data->map.SO_file = ft_strdup2(&line[3]);
 			if (ft_strlen(data->map.SO_file) > 0)
 				clean_return_line(data->map.SO_file);
-				//data->map.SO_file[ft_strlen(data->map.SO_file) - 1] = '\0';
 			data->map.info.s = 1;
-			/*data->fd = open(data->map.SO_file, O_RDONLY);
-			if (data->fd == -1)
+			data->fd2 = open(data->map.SO_file, O_RDONLY);
+			if (data->fd2 == -1)
 				print_error(data, 5);
-			close(data->fd);*/
+			close(data->fd2);
 			check_variables(data);
 		}
 		else
@@ -145,12 +143,11 @@ void	read_variables(t_data *data, char *line)
 			data->map.WE_file = ft_strdup2(&line[3]);
 			if (ft_strlen(data->map.WE_file) > 0)
 				clean_return_line(data->map.WE_file);
-				//data->map.WE_file[ft_strlen(data->map.WE_file) - 1] = '\0';
 			data->map.info.w = 1;
-			/*data->fd = open(data->map.WE_file, O_RDONLY);
-			if (data->fd == -1)
+			data->fd2 = open(data->map.WE_file, O_RDONLY);
+			if (data->fd2 == -1)
 				print_error(data, 5);
-			close(data->fd);*/
+			close(data->fd2);
 			check_variables(data);
 		}
 		else
@@ -163,12 +160,11 @@ void	read_variables(t_data *data, char *line)
 			data->map.EA_file = ft_strdup2(&line[3]);
 			if (ft_strlen(data->map.EA_file) > 0)
 				clean_return_line(data->map.EA_file);
-				//data->map.EA_file[ft_strlen(data->map.EA_file) - 1] = '\0';
 			data->map.info.e = 1;
-			/*data->fd = open(data->map.EA_file, O_RDONLY);
-			if (data->fd == -1)
+			data->fd2 = open(data->map.EA_file, O_RDONLY);
+			if (data->fd2 == -1)
 				print_error(data, 5);
-			close(data->fd);*/
+			close(data->fd2);
 			check_variables(data);
 		}
 		else

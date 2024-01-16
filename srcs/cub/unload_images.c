@@ -18,10 +18,6 @@ void	unload_images(t_data *data)
 	mlx_destroy_image(data->mlx_ptr, data->map.SO_texture.ptr);
 	mlx_destroy_image(data->mlx_ptr, data->map.EA_texture.ptr);
 	mlx_destroy_image(data->mlx_ptr, data->map.WE_texture.ptr);
-	/*mlx_destroy_image(data->mlx_ptr, data->map.NO_texture.ptr);
-	mlx_destroy_image(data->mlx_ptr, data->map.SO_texture.ptr);
-	mlx_destroy_image(data->mlx_ptr, data->map.WE_texture.ptr);
-	mlx_destroy_image(data->mlx_ptr, data->map.EA_texture.ptr);*/
 	mlx_destroy_image(data->mlx_ptr, data->map.F_image.ptr);
 	mlx_destroy_image(data->mlx_ptr, data->map.C_image.ptr);
 }

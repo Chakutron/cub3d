@@ -12,17 +12,20 @@
 
 #include "cub3d.h"
 
-char	*ft_itoa(int n)
+int	check_size(long int n)
 {
-	long int	num;
-	int			size;
-	char		*str;
+	int	size;
 
-	num = n;
-	size = check_size(num);
-	str = malloc(size + 1);
-	if (!str)
-		return (NULL);
-	worker(str, size, num);
-	return (str);
+	size = 1;
+	if (n < 0)
+	{
+		size++;
+		n *= -1;
+	}
+	while (n > 9)
+	{
+		size++;
+		n /= 10;
+	}
+	return (size);
 }

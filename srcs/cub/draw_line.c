@@ -16,7 +16,7 @@ void	draw_line(t_data *data, int y0, int x0, int y1, int x1)
 {
 	int dx;
 	int dy;
-	int sx1;
+	int sx;
 	int sy;
 	int err;
 	int e2;
@@ -26,7 +26,7 @@ void	draw_line(t_data *data, int y0, int x0, int y1, int x1)
 	sx = (x0 < x1) ? 1 : -1;
 	sy = (y0 < y1) ? 1 : -1;
 	err = dx - dy;
-	e2;
+
     while (!(x0 == x1 && y0 == y1))
 	{
 		if (x0 >= 0 && x0 <= MINIMAP / data->ratio && y0 >= 0 && y0 <= MINIMAP / data->ratio)

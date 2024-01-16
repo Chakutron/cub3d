@@ -135,7 +135,7 @@ void	read_variables(t_data *data, char *line)
 			}
 			data->map.floor.b = nbr;
 			free(tmp);
-			data->map.info.data = 1;
+			data->map.info.f = 1;
 			data->map.floor.color = create_trgb(0, data->map.floor.r,
 					data->map.floor.g, data->map.floor.b);
 			check_variables(data);

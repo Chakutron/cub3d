@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   check_variables.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 19:02:51 by mchiboub          #+#    #+#             */
-/*   Updated: 2023/11/05 15:32:53 by ocassany         ###   ########.fr       */
+/*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
+/*   Updated: 2024/01/14 19:16:41 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	check_variables(t_data *data)
 {
-	void	*tab;
-	size_t	len;
+	int	info;
 
-	if (nmemb == 0 || size == 0)
-		return (malloc(0));
-	len = nmemb * size;
-	if ((len / size) != nmemb)
-		return (NULL);
-	tab = malloc(len);
-	if (!tab)
-		return (NULL);
-	ft_bzero(tab, len);
-	return (tab);
+	info = 0;
+	info += data->map.info.n;
+	info += data->map.info.s;
+	info += data->map.info.w;
+	info += data->map.info.e;
+	info += data->map.info.f;
+	info += data->map.info.c;
+	if (info == 6)
+		data->map.complete_info = 1;
+	else
+		data->map.complete_info = 0;
 }

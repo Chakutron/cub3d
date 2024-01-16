@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   write_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 19:02:51 by mchiboub          #+#    #+#             */
-/*   Updated: 2023/11/05 15:35:23 by ocassany         ###   ########.fr       */
+/*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
+/*   Updated: 2024/01/14 19:14:46 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_bzero(void *s, size_t n)
+void	write_error(char *str)
 {
-	size_t	i;
-	char	*temp;
-
-	i = 0;
-	temp = s;
-	while (i < n)
-	{
-		temp[i] = 0;
-		i++;
-	}
+	write(2, str, ft_strlen(str));
 }

@@ -6,51 +6,17 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2023/12/07 13:40:47 by mchiboub         ###   ########.fr       */
+/*   Updated: 2024/01/14 19:43:28 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_nearly_elems(t_data *data, int x, int y)
-{
-	if (data->map.matrix[y][x] != '0' && data->map.matrix[y][x] != '1'
-		&& data->map.matrix[y][x] != 'N' && data->map.matrix[y][x] != 'S'
-		&& data->map.matrix[y][x] != 'E' && data->map.matrix[y][x] != 'W')
-		return (1);
-	return (0);
-}
-
-int	check_surround(t_data *data, int x, int y)
-{
-	if (x == 0 || y == 0)
-		return (1);
-	else if (x == data->map.w - 1 || y == data->map.h - 1)
-		return (1);
-	if (check_nearly_elems(data, x - 1, y - 1))
-		return (1);
-	if (check_nearly_elems(data, x, y - 1))
-		return (1);
-	if (check_nearly_elems(data, x + 1, y - 1))
-		return (1);
-	if (check_nearly_elems(data, x - 1, y))
-		return (1);
-	if (check_nearly_elems(data, x + 1, y))
-		return (1);
-	if (check_nearly_elems(data, x - 1, y + 1))
-		return (1);
-	if (check_nearly_elems(data, x, y + 1))
-		return (1);
-	if (check_nearly_elems(data, x + 1, y + 1))
-		return (1);
-	return (0);
-}
-
 int	check_map(t_data *data)
 {
 	int	x;
 	int	y;
-	int error_found;
+	int	error_found;
 
 	error_found = 0;
 	y = 0;
@@ -150,7 +116,7 @@ int	check_map(t_data *data)
 					printf(YELLOWB "  " NC);
 			}
 			else if (data->map.matrix[y][x] == '\0')
-				break;
+				break ;
 			else
 			{
 				printf(BLACK REDB "%c " NC, data->map.matrix[y][x]);

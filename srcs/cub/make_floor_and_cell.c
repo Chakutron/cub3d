@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat2.c                                       :+:      :+:    :+:   */
+/*   make_floor_and_cell.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 19:02:51 by mchiboub          #+#    #+#             */
-/*   Updated: 2023/11/05 15:36:06 by ocassany         ###   ########.fr       */
+/*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
+/*   Updated: 2024/01/14 20:00:07 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*ft_strcat2(char *s, char c)
+void	make_floor_and_cell(t_data *data)
 {
-	int		i;
-	int		len;
-	char	*str;
+	int	x;
+	int	y;
 
-	len = ft_strlen(s);
-	str = malloc(len + 2);
-	i = 0;
-	while (s[i])
+	y = 0;
+	while (y < (HEIGHT / 2))
 	{
-		str[i] = s[i];
-		i++;
+		x = 0;
+		while (x < WIDTH)
+		{
+			put_pixel_img(&(data->map.F_image), x, y, data->map.floor.color);
+			put_pixel_img(&(data->map.C_image), x, y, data->map.cell.color);
+			x++;
+		}
+		y++;
 	}
-	str[i] = c;
-	str[i + 1] = '\0';
-	free(s);
-	return (str);
 }

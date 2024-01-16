@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchiboub <mchiboub@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:30:45 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/11 21:15:14 by mchiboub         ###   ########.fr       */
+/*   Updated: 2024/01/14 19:03:12 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 void	start_game(t_data *data)
 {
@@ -26,8 +25,10 @@ void	start_game(t_data *data)
 	{
 		mlx_loop_hook(data->mlx_ptr, &render, data);
 		mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
-		mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, data);
-		mlx_hook(data->win_ptr, MotionNotify, PointerMotionMask, &handle_mouse_move, data);
+		mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask,
+			&handle_keyrelease, data);
+		mlx_hook(data->win_ptr, MotionNotify, PointerMotionMask,
+			&handle_mouse_move, data);
 		mlx_mouse_move(data->mlx_ptr, data->win_ptr, WIDTH / 2, HEIGHT / 2);
 		mlx_hook(data->win_ptr, 17, 1L << 0, &x_press, data);
 		mlx_do_key_autorepeaton(data->mlx_ptr);
@@ -37,22 +38,4 @@ void	start_game(t_data *data)
 		update(data);
 		mlx_loop(data->mlx_ptr);
 	}
-}
-
-int	main(int argc, char *argv[])
-{
-	t_data	data;
-
-	printf(GREEN "\n*** Cub3D by Chaku & Oriol ***\n\n" NC);
-	if (argc == 2)
-	{
-		data.map.filename = argv[1];
-		if (check_extension(&data))
-			print_error(&data, 3);
-		init_variables(&data);
-		open_map(&data);
-		start_game(&data);
-	}
-	else
-		printf("Usage: ./cub3d <map filename>\n");
 }

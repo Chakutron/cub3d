@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   x_press.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchiboub <mchiboub@student.42perpignan.fr  +#+  +:+       +#+        */
+/*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 17:24:53 by mchiboub          #+#    #+#             */
-/*   Updated: 2023/12/12 17:24:59 by mchiboub         ###   ########.fr       */
+/*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
+/*   Updated: 2024/01/14 19:49:43 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	create_trgb(int t, int r, int g, int b)
+int	x_press(t_data *data)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	data->endgame = 1;
+	return (0);
 }

@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils4.c                                           :+:      :+:    :+:   */
+/*   image_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocassany <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/05 15:25:17 by ocassany          #+#    #+#             */
-/*   Updated: 2023/11/05 15:28:19 by ocassany         ###   ########.fr       */
+/*   Created: 2023/04/17 18:41:11 by mchiboub          #+#    #+#             */
+/*   Updated: 2024/01/14 19:56:33 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_atoi(char *str)
+void	put_img_to_img(t_image *dst, t_image *src, int x, int y)
 {
-	int			i;
-	long long	res;
+	int	i;
+	int	j;
 
 	i = 0;
-	res = 0;
-	if (str[i] == '-')
-		return (-42);
-	while (str[i])
+	while (i < src->w)
 	{
-		res = res * 10 + (str[i] - 48);
+		j = 0;
+		while (j < src->h)
+		{
+			put_pixel_img(dst, x + i, y + j, get_pixel_img(src, i, j));
+			j++;
+		}
 		i++;
 	}
-	if (res < 0 || res > 255)
-		return (-42);
-	return ((int)res);
 }

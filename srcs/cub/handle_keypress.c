@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup2.c                                       :+:      :+:    :+:   */
+/*   handle_keypress.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 19:02:51 by mchiboub          #+#    #+#             */
-/*   Updated: 2023/11/05 15:36:41 by ocassany         ###   ########.fr       */
+/*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
+/*   Updated: 2024/01/14 19:52:45 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*ft_strdup2(char *s)
+int	handle_keypress(int keysym, t_data *data)
 {
-	int		i;
-	int		len;
-	char	*str;
-
-	len = ft_strlen(s);
-	str = malloc(len + 1);
-	i = 0;
-	while (s[i])
-	{
-		str[i] = s[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	if (keysym == XK_Escape)
+		data->endgame = 1;
+	if (keysym == 119 || keysym == 65362)
+		data->key.w = -1 + data->key.s;
+	if (keysym == 115 || keysym == 65364)
+		data->key.s = 1 + data->key.w;
+	if (keysym == 97 || keysym == 65361)
+		data->key.a = -1 + data->key.d;
+	if (keysym == 100 || keysym == 65363)
+		data->key.d = 1 + data->key.a;
+	return (0);
 }

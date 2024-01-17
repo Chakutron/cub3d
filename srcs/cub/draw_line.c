@@ -6,7 +6,7 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/16 17:48:44 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:04:18 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,28 @@
 
 void	draw_line(t_data *data, int y0, int x0, int y1, int x1)
 {
-	int dx;
-	int dy;
-	int sx;
-	int sy;
-	int err;
-	int e2;
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	e2;
 
 	dx = abs(x1 - x0);
 	dy = abs(y1 - y0);
-	sx = (x0 < x1) ? 1 : -1;
-	sy = (y0 < y1) ? 1 : -1;
+	if (x0 < x1)
+		sx = 1;
+	else
+		sx = -1;
+	if (y0 < y1)
+		sy = 1;
+	else
+		sy = -1;
 	err = dx - dy;
-
-    while (!(x0 == x1 && y0 == y1))
+	while (!(x0 == x1 && y0 == y1))
 	{
-		if (x0 >= 0 && x0 <= MINIMAP / data->ratio && y0 >= 0 && y0 <= MINIMAP / data->ratio)
+		if (x0 >= 0 && x0 <= MINIMAP / data->ratio && y0 >= 0
+			&& y0 <= MINIMAP / data->ratio)
 		{
 			if (data->ratio <= 2)
 			{

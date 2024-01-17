@@ -6,7 +6,7 @@
 /*   By: mchiboub <mchiboub@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:30:57 by mchiboub          #+#    #+#             */
-/*   Updated: 2023/12/19 17:19:01 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:40:54 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ typedef struct s_data
 }				t_data;
 
 void	add_spaces2map(t_data *data);
+void	add_spaces2map_2(t_data *data, int y, char **minimap);
 void	calculate_vector_player(t_data *data);
 int		check_extension(t_data *data);
 int		check_map(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/16 17:50:25 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:49:10 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,19 @@ void	draw_wall(t_data *data, int index)
 								* (49 / (data->r3d[index].y_end
 										- data->r3d[index].y_init))));
 					else if (data->r3d[index].wall == 'E')
-						put_pixel_img(&(data->canvas),
-							x, y, get_pixel_img(&data->map.EA_texture,
+						put_pixel_img(&(data->canvas), x, y,
+							get_pixel_img(&data->map.EA_texture,
 								data->r3d[index].texture_init,
 								(y - data->r3d[index].y_init)
 								* (49 / (data->r3d[index].y_end
 										- data->r3d[index].y_init))));
 					else if (data->r3d[index].wall == 'W')
-						put_pixel_img(&(data->canvas), x, y, get_pixel_img(&data->map.WE_texture, data->r3d[index].texture_init, (y - data->r3d[index].y_init) * (49 / (data->r3d[index].y_end - data->r3d[index].y_init))));
+						put_pixel_img(&(data->canvas), x, y,
+							get_pixel_img(&data->map.WE_texture,
+								data->r3d[index].texture_init,
+								(y - data->r3d[index].y_init)
+								* (49 / (data->r3d[index].y_end
+										- data->r3d[index].y_init))));
 				}
 			}
 			x++;

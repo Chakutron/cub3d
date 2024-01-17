@@ -6,7 +6,7 @@
 #    By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 15:15:55 by mchiboub          #+#    #+#              #
-#    Updated: 2023/12/19 17:20:13 by ocassany         ###   ########.fr        #
+#    Updated: 2024/01/17 16:13:14 by ocassany         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ MLX = srcs/mlx
 MLX_LIB = libmlx.a
 
 SRCS =	${SRC}/add_spaces2map.c		\
+		${SRC}/add_spaces2map_2.c		\
 		${SRC}/calculate_vector_player.c		\
 ${SRC}/check_extension.c		\
 ${SRC}/check_map.c		\

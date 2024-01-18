@@ -18,6 +18,8 @@ void	identifiers(int x, int y, t_data *data)
 		printf(GREENB "  " NC);
 	else if (data->map.matrix[y][x] == '1')
 		printf(VIOLETB "  " NC);
+	else if (data->map.matrix[y][x] == '2')
+		printf(GRAYB "  " NC);
 	else if (data->map.matrix[y][x] == 'N')
 		north(x, y, data);
 	else if (data->map.matrix[y][x] == 'S')

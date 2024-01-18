@@ -24,5 +24,41 @@ int	handle_keypress(int keysym, t_data *data)
 		data->key.a = -1 + data->key.d;
 	if (keysym == 100 || keysym == 65363)
 		data->key.d = 1 + data->key.a;
+	if (keysym == 32)
+	{
+		if (data->map.matrix[data->player.y - 1][data->player.x] == '2')
+			data->map.matrix[data->player.y - 1][data->player.x] = '3';
+		else if (data->map.matrix[data->player.y - 1][data->player.x] == '3')
+			data->map.matrix[data->player.y - 1][data->player.x] = '2';
+		if (data->map.matrix[data->player.y + 1][data->player.x] == '2')
+			data->map.matrix[data->player.y + 1][data->player.x] = '3';
+		else if (data->map.matrix[data->player.y + 1][data->player.x] == '3')
+			data->map.matrix[data->player.y + 1][data->player.x] = '2';
+		if (data->map.matrix[data->player.y][data->player.x - 1] == '2')
+			data->map.matrix[data->player.y][data->player.x - 1] = '3';
+		else if (data->map.matrix[data->player.y][data->player.x - 1] == '3')
+			data->map.matrix[data->player.y][data->player.x - 1] = '2';
+		if (data->map.matrix[data->player.y][data->player.x + 1] == '2')
+			data->map.matrix[data->player.y][data->player.x + 1] = '3';
+		else if (data->map.matrix[data->player.y][data->player.x + 1] == '3')
+			data->map.matrix[data->player.y][data->player.x + 1] = '2';
+		if (data->map.matrix[data->player.y - 2][data->player.x] == '2' && data->map.matrix[data->player.y - 1][data->player.x] == '0')
+			data->map.matrix[data->player.y - 2][data->player.x] = '3';
+		else if (data->map.matrix[data->player.y - 2][data->player.x] == '3' && data->map.matrix[data->player.y - 1][data->player.x] == '0')
+			data->map.matrix[data->player.y - 2][data->player.x] = '2';
+		if (data->map.matrix[data->player.y + 2][data->player.x] == '2' && data->map.matrix[data->player.y + 1][data->player.x] == '0')
+			data->map.matrix[data->player.y + 2][data->player.x] = '3';
+		else if (data->map.matrix[data->player.y + 2][data->player.x] == '3' && data->map.matrix[data->player.y + 1][data->player.x] == '0')
+			data->map.matrix[data->player.y + 2][data->player.x] = '2';
+		if (data->map.matrix[data->player.y][data->player.x - 2] == '2' && data->map.matrix[data->player.y][data->player.x - 1] == '0')
+			data->map.matrix[data->player.y][data->player.x - 2] = '3';
+		else if (data->map.matrix[data->player.y][data->player.x - 2] == '3' && data->map.matrix[data->player.y][data->player.x - 1] == '0')
+			data->map.matrix[data->player.y][data->player.x - 2] = '2';
+		if (data->map.matrix[data->player.y][data->player.x + 2] == '2' && data->map.matrix[data->player.y][data->player.x + 1] == '0')
+			data->map.matrix[data->player.y][data->player.x + 2] = '3';
+		else if (data->map.matrix[data->player.y][data->player.x + 2] == '3' && data->map.matrix[data->player.y][data->player.x + 1] == '0')
+			data->map.matrix[data->player.y][data->player.x + 2] = '2';
+		update(data);
+	}
 	return (0);
 }

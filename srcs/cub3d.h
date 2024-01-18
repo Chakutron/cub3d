@@ -37,6 +37,8 @@
 # define BLUEB "\e[44m"
 # define VIOLET "\e[35m"
 # define VIOLETB "\e[45m"
+# define GRAY "\e[90m"
+# define GRAYB "\e[100m"
 # define NC "\e[0m"
 
 # define HEIGHT 450
@@ -86,7 +88,7 @@ typedef struct s_color
 	int	g;
 	int	b;
 	int	color;
-}					t_color;
+}		t_color;
 
 typedef struct s_info
 {
@@ -109,6 +111,7 @@ typedef struct s_map
 	t_image	WE_texture;
 	char	*EA_file;
 	t_image	EA_texture;
+	t_image	D_texture;
 	t_color	floor;
 	t_image	F_image;
 	t_color	cell;
@@ -128,6 +131,8 @@ typedef struct s_player
 	int		y;
 	double	xx;
 	double	yy;
+	double	x_old;
+	double	y_old;
 	double	x_temp;
 	double	y_temp;
 	float	angle;
@@ -177,6 +182,7 @@ void	clean_return_line(char *str);
 void	close_game(t_data *data);
 int		create_trgb(int t, int r, int g, int b);
 void	draw_background(t_data *data);
+void	draw_door(t_data *data, int index);
 void	draw_line(t_data *data, int y0, int x0, int y1, int x1);
 void	draw_minimap(t_data *data);
 void	draw_player(t_data *data);

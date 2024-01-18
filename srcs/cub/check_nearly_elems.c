@@ -14,7 +14,7 @@
 
 int	check_nearly_elems(t_data *data, int x, int y)
 {
-	if (data->map.matrix[y][x] != '0' && data->map.matrix[y][x] != '1'
+	if (data->map.matrix[y][x] != '0' && data->map.matrix[y][x] != '1' && data->map.matrix[y][x] != '2'
 		&& data->map.matrix[y][x] != 'N' && data->map.matrix[y][x] != 'S'
 		&& data->map.matrix[y][x] != 'E' && data->map.matrix[y][x] != 'W')
 		return (1);

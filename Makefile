@@ -25,66 +25,67 @@ MLX_LIB = libmlx.a
 SRCS =	${SRC}/add_spaces2map.c		\
 		${SRC}/add_spaces2map_2.c		\
 		${SRC}/calculate_vector_player.c		\
-${SRC}/check_extension.c		\
-${SRC}/check_map.c		\
-${SRC}/check_movement_keys.c		\
-${SRC}/check_nearly_elems.c		\
-${SRC}/check_surround.c		\
-${SRC}/check_variables.c		\
-${SRC}/clean_return_line.c		\
-${SRC}/close_game.c		\
-${SRC}/create_trgb.c		\
-${SRC}/cub3d.c		\
-${SRC}/draw_background.c		\
-${SRC}/draw_line.c		\
-${SRC}/draw_minimap.c		\
-${SRC}/draw_player.c		\
-${SRC}/draw_rays.c		\
-${SRC}/draw_square.c		\
-${SRC}/draw_wall.c		\
-${SRC}/east.c		\
-${SRC}/empty_space.c		\
-${SRC}/finish_gnl.c		\
-${SRC}/free_variables.c		\
-${SRC}/free_elements_store_map.c		\
-${SRC}/get_pixel_img.c		\
-${SRC}/handle_keypress.c		\
-${SRC}/handle_keyrelease.c		\
-${SRC}/handle_mouse_move.c		\
-${SRC}/identifiers.c		\
-${SRC}/init_variables.c		\
-${SRC}/load_image.c		\
-${SRC}/load_images.c		\
-${SRC}/load_map.c		\
-${SRC}/make_floor_and_cell.c		\
-${SRC}/new_file_img.c		\
-${SRC}/new_img.c		\
-${SRC}/north.c		\
-${SRC}/open_map.c		\
-${SRC}/print_error.c		\
-${SRC}/print_variables.c		\
-${SRC}/put_img_to_img.c		\
-${SRC}/put_pixel_img.c		\
-${SRC}/read_line_by_line.c		\
-${SRC}/read_variables.c		\
-${SRC}/render.c		\
-${SRC}/south.c		\
-${SRC}/start_game.c		\
-${SRC}/unload_images.c		\
-${SRC}/update_player.c		\
-${SRC}/update.c		\
-${SRC}/west.c		\
+		${SRC}/check_extension.c		\
+		${SRC}/check_map.c		\
+		${SRC}/check_movement_keys.c		\
+		${SRC}/check_nearly_elems.c		\
+		${SRC}/check_surround.c		\
+		${SRC}/check_variables.c		\
+		${SRC}/clean_return_line.c		\
+		${SRC}/close_game.c		\
+		${SRC}/create_trgb.c		\
+		${SRC}/cub3d.c		\
+		${SRC}/draw_background.c		\
+		${SRC}/draw_door.c		\
+		${SRC}/draw_line.c		\
+		${SRC}/draw_minimap.c		\
+		${SRC}/draw_player.c		\
+		${SRC}/draw_rays.c		\
+		${SRC}/draw_square.c		\
+		${SRC}/draw_wall.c		\
+		${SRC}/east.c		\
+		${SRC}/empty_space.c		\
+		${SRC}/finish_gnl.c		\
+		${SRC}/free_variables.c		\
+		${SRC}/free_elements_store_map.c		\
+		${SRC}/get_pixel_img.c		\
+		${SRC}/handle_keypress.c		\
+		${SRC}/handle_keyrelease.c		\
+		${SRC}/handle_mouse_move.c		\
+		${SRC}/identifiers.c		\
+		${SRC}/init_variables.c		\
+		${SRC}/load_image.c		\
+		${SRC}/load_images.c		\
+		${SRC}/load_map.c		\
+		${SRC}/make_floor_and_cell.c		\
+		${SRC}/new_file_img.c		\
+		${SRC}/new_img.c		\
+		${SRC}/north.c		\
+		${SRC}/open_map.c		\
+		${SRC}/print_error.c		\
+		${SRC}/print_variables.c		\
+		${SRC}/put_img_to_img.c		\
+		${SRC}/put_pixel_img.c		\
+		${SRC}/read_line_by_line.c		\
+		${SRC}/read_variables.c		\
+		${SRC}/render.c		\
+		${SRC}/south.c		\
+		${SRC}/start_game.c		\
+		${SRC}/unload_images.c		\
+		${SRC}/update_player.c		\
+		${SRC}/update.c		\
+		${SRC}/west.c		\
 		${SRC}/write_error.c		\
 		${SRC}/x_press.c		\
-${UTIL}/check_size.c		\
-${UTIL}/ft_atoi.c		\
-${UTIL}/ft_bzero.c		\
-${UTIL}/*ft_calloc.c		\
-${UTIL}/*ft_itoa.c		\
-${UTIL}/*ft_strcat2.c		\
-${UTIL}/*ft_strdup2.c		\
-${UTIL}/*ft_strjoin3.c		\
-${UTIL}/worker.c		\
+		${UTIL}/check_size.c		\
+		${UTIL}/ft_atoi.c		\
+		${UTIL}/ft_bzero.c		\
+		${UTIL}/*ft_calloc.c		\
+		${UTIL}/*ft_itoa.c		\
+		${UTIL}/*ft_strcat2.c		\
+		${UTIL}/*ft_strdup2.c		\
+		${UTIL}/*ft_strjoin3.c		\
+		${UTIL}/worker.c		\
 		${GNL}/get_next_line.c		\
 		${GNL}/get_next_line_utils.c
 

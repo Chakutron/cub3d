@@ -6,7 +6,7 @@
 #    By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 15:15:55 by mchiboub          #+#    #+#              #
-#    Updated: 2024/01/17 16:13:14 by ocassany         ###   ########.fr        #
+#    Updated: 2024/01/18 18:13:18 by ocassany         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,12 +42,16 @@ ${SRC}/draw_player.c		\
 ${SRC}/draw_rays.c		\
 ${SRC}/draw_square.c		\
 ${SRC}/draw_wall.c		\
+${SRC}/east.c		\
+${SRC}/empty_space.c		\
 ${SRC}/finish_gnl.c		\
 ${SRC}/free_variables.c		\
+${SRC}/free_elements_store_map.c		\
 ${SRC}/get_pixel_img.c		\
 ${SRC}/handle_keypress.c		\
 ${SRC}/handle_keyrelease.c		\
 ${SRC}/handle_mouse_move.c		\
+${SRC}/identifiers.c		\
 ${SRC}/init_variables.c		\
 ${SRC}/load_image.c		\
 ${SRC}/load_images.c		\
@@ -55,17 +59,21 @@ ${SRC}/load_map.c		\
 ${SRC}/make_floor_and_cell.c		\
 ${SRC}/new_file_img.c		\
 ${SRC}/new_img.c		\
+${SRC}/north.c		\
 ${SRC}/open_map.c		\
 ${SRC}/print_error.c		\
 ${SRC}/print_variables.c		\
 ${SRC}/put_img_to_img.c		\
 ${SRC}/put_pixel_img.c		\
+${SRC}/read_line_by_line.c		\
 ${SRC}/read_variables.c		\
 ${SRC}/render.c		\
+${SRC}/south.c		\
 ${SRC}/start_game.c		\
 ${SRC}/unload_images.c		\
 ${SRC}/update_player.c		\
 ${SRC}/update.c		\
+${SRC}/west.c		\
 		${SRC}/write_error.c		\
 		${SRC}/x_press.c		\
 ${UTIL}/check_size.c		\

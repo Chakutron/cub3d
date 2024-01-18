@@ -6,7 +6,7 @@
 /*   By: mchiboub <mchiboub@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:30:57 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/17 16:40:54 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:37:13 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ typedef struct s_map
 	char	**matrix;
 	t_info	info;
 	int		complete_info;
+	int		mapstart;	
+	int		error_found;
 }			t_map;
 
 typedef struct s_player
@@ -181,12 +183,16 @@ void	draw_player(t_data *data);
 void	draw_rays(t_data *data);
 void	draw_square(t_data *data, int y_init, int x_init, int extra, int color);
 void	draw_wall(t_data *data, int index);
+void	east(int x, int y, t_data *data);
+void	empty_space(int x, int y, t_data *data);
 void	finish_gnl(t_data *data);
+void	free_elements_store_map(t_data *data);
 void	free_variables(t_data *data);
 uint	get_pixel_img(t_image *img, int x, int y);
 int		handle_keypress(int keysym, t_data *data);
 int		handle_keyrelease(int keysym, t_data *data);
 int		handle_mouse_move(int x, int y, t_data *data);
+void	identifiers(int x, int y, t_data *data);
 void	init_variables(t_data *data);
 t_image	load_image(char *file, t_data *data);
 void	load_images(t_data *data);
@@ -194,17 +200,21 @@ void	load_map(t_data *data);
 void	make_floor_and_cell(t_data *data);
 t_image	new_file_img(char *path, t_data *window);
 t_image	new_img(int w, int h, t_data *window);
+void	north(int x, int y, t_data *data);
 void	open_map(t_data *data);
 void	print_error(t_data *data, int error);
 void	print_variables(t_data *data);
 void	put_img_to_img(t_image *dst, t_image *src, int x, int y);
 void	put_pixel_img(t_image *img, int x, int y, int color);
+void	read_line_by_line(t_data *data);
 void	read_variables(t_data *data, char *line);
 int		render(t_data *data);
+void	south(int x, int y, t_data *data);
 void	start_game(t_data *data);
 void	unload_images(t_data *data);
 void	update_player(t_data *data, int x, int y);
 void	update(t_data *data);
+void	west(int x, int y, t_data *data);
 void	write_error(char *str);
 int		x_press(t_data *data);
 

@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   identifiers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/18 18:08:05 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:37:52 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_map(t_data *data)
+void	identifiers(int x, int y, t_data *data)
 {
-	int	x;
-	int	y;
-
-	data->map.error_found = 0;
-	y = 0;
-	while (y < data->map.h)
+	if (data->map.matrix[y][x] == ' ')
+		printf(GREENB "  " NC);
+	else if (data->map.matrix[y][x] == '1')
+		printf(VIOLETB "  " NC);
+	else if (data->map.matrix[y][x] == 'N')
+		north(x, y, data);
+	else if (data->map.matrix[y][x] == 'S')
+		south(x, y, data);
+	else if (data->map.matrix[y][x] == 'E')
+		east(x, y, data);
+	else if (data->map.matrix[y][x] == 'W')
+		west(x, y, data);
+	else if (data->map.matrix[y][x] == '0')
+		empty_space(x, y, data);
+	else if (data->map.matrix[y][x] == '\0')
+		return ;
+	else
 	{
-		x = 0;
-		while (x < data->map.w)
-		{
-			identifiers(x, y, data);
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
-	printf("\n");
-	if (!data->player.nbr)
+		printf(BLACK REDB "%c " NC, data->map.matrix[y][x]);
 		data->map.error_found = 1;
-	return (data->map.error_found);
+	}
 }

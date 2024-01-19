@@ -44,7 +44,7 @@ void	check_movement_keys(t_data *data)
 			undo_movement(data);
 		data->player.y = data->player.yy;
 		data->player.x = data->player.xx;
-		//update(data);
+		update(data);
 	}
 	if (data->key.s)
 	{
@@ -68,20 +68,20 @@ void	check_movement_keys(t_data *data)
 			undo_movement(data);
 		data->player.y = data->player.yy;
 		data->player.x = data->player.xx;
-		//update(data);
+		update(data);
 	}
 	if (data->key.a)
 	{
 		data->player.angle += 1 + data->cursor_x;
 		if (data->player.angle > 360)
 			data->player.angle -= 360;
-		//update(data);
+		update(data);
 	}
 	if (data->key.d)
 	{
 		data->player.angle -= 1 + data->cursor_x;
 		if (data->player.angle < 0)
 			data->player.angle += 360;
-		//update(data);
+		update(data);
 	}
 }

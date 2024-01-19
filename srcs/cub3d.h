@@ -125,6 +125,18 @@ typedef struct s_map
 	int		error_found;
 }			t_map;
 
+typedef struct s_rick
+{
+	t_image	texture[27];
+	int		index;
+}			t_rick;
+
+typedef struct s_walk
+{
+	t_image texture[21];
+	int		index;
+}			t_walk;
+
 typedef struct s_player
 {
 	int		x;
@@ -139,6 +151,7 @@ typedef struct s_player
 	float	radians;
 	int		nbr;
 	float	speed;
+	t_walk	walk;
 }		t_player;
 
 typedef	struct s_keys
@@ -148,13 +161,6 @@ typedef	struct s_keys
 	int	a;
 	int	d;
 }		t_keys;
-
-typedef struct s_rick
-{
-	t_image	texture[27];
-	int		index;
-}			t_rick;
-
 
 typedef struct s_data
 {
@@ -198,6 +204,7 @@ void	draw_player(t_data *data);
 void	draw_rays(t_data *data);
 void	draw_rick(t_data *data);
 void	draw_square(t_data *data, int y_init, int x_init, int extra, int color);
+void	draw_walk(t_data *data);
 void	draw_wall(t_data *data, int index);
 void	east(int x, int y, t_data *data);
 void	empty_space(int x, int y, t_data *data);

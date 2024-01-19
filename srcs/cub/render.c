@@ -25,6 +25,19 @@ void	draw_rick(t_data *data)
 	}
 }
 
+void	draw_walk(t_data *data)
+{
+	put_img_to_img(&data->canvas, &(data->player.walk.texture[data->player.walk.index]), WIDTH / 2 - 225, HEIGHT - 245);
+	data->timer += 0.075;
+	if (data->timer > 1)
+	{
+		data->player.walk.index++;
+		if (data->player.walk.index > 20)
+			data->player.walk.index = 0;
+		data->timer = 0.0;
+	}
+}
+
 int	render(t_data *data)
 {
 	if (data->endgame)
@@ -34,6 +47,6 @@ int	render(t_data *data)
 		exit(0);
 	}
 	check_movement_keys(data);
-	update(data);
+	//update(data);
 	return (0);
 }

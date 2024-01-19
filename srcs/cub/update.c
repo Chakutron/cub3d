@@ -20,7 +20,8 @@ void	update(t_data *data)
 	draw_rays(data);
 	draw_player(data);
 	calculate_vector_player(data);
-	draw_rick(data);
+	//draw_rick(data);
+	draw_walk(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->canvas.ptr, 0, 0);
 	mlx_destroy_image(data->mlx_ptr, data->canvas.ptr);

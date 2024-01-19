@@ -12,6 +12,37 @@
 
 #include "cub3d.h"
 
+void	load_rick(t_data *data)
+{
+	data->rick.texture[0] = load_image("textures/special/rick_00.xpm", data);
+	data->rick.texture[1] = load_image("textures/special/rick_01.xpm", data);
+	data->rick.texture[2] = load_image("textures/special/rick_02.xpm", data);
+	data->rick.texture[3] = load_image("textures/special/rick_03.xpm", data);
+	data->rick.texture[4] = load_image("textures/special/rick_04.xpm", data);
+	data->rick.texture[5] = load_image("textures/special/rick_05.xpm", data);
+	data->rick.texture[6] = load_image("textures/special/rick_06.xpm", data);
+	data->rick.texture[7] = load_image("textures/special/rick_07.xpm", data);
+	data->rick.texture[8] = load_image("textures/special/rick_08.xpm", data);
+	data->rick.texture[9] = load_image("textures/special/rick_09.xpm", data);
+	data->rick.texture[10] = load_image("textures/special/rick_10.xpm", data);
+	data->rick.texture[11] = load_image("textures/special/rick_11.xpm", data);
+	data->rick.texture[12] = load_image("textures/special/rick_12.xpm", data);
+	data->rick.texture[13] = load_image("textures/special/rick_13.xpm", data);
+	data->rick.texture[14] = load_image("textures/special/rick_14.xpm", data);
+	data->rick.texture[15] = load_image("textures/special/rick_15.xpm", data);
+	data->rick.texture[16] = load_image("textures/special/rick_16.xpm", data);
+	data->rick.texture[17] = load_image("textures/special/rick_17.xpm", data);
+	data->rick.texture[18] = load_image("textures/special/rick_18.xpm", data);
+	data->rick.texture[19] = load_image("textures/special/rick_19.xpm", data);
+	data->rick.texture[20] = load_image("textures/special/rick_20.xpm", data);
+	data->rick.texture[21] = load_image("textures/special/rick_21.xpm", data);
+	data->rick.texture[22] = load_image("textures/special/rick_22.xpm", data);
+	data->rick.texture[23] = load_image("textures/special/rick_23.xpm", data);
+	data->rick.texture[24] = load_image("textures/special/rick_24.xpm", data);
+	data->rick.texture[25] = load_image("textures/special/rick_25.xpm", data);
+	data->rick.texture[26] = load_image("textures/special/rick_26.xpm", data);
+}
+
 void	load_images(t_data *data)
 {
 	data->map.NO_texture = load_image(data->map.NO_file, data);
@@ -19,6 +50,7 @@ void	load_images(t_data *data)
 	data->map.WE_texture = load_image(data->map.WE_file, data);
 	data->map.EA_texture = load_image(data->map.EA_file, data);
 	data->map.D_texture = load_image("textures/door.xpm", data);
+	load_rick(data);
 	data->map.F_image = new_img(WIDTH, HEIGHT / 2, data);
 	printf("- Image created: (floor texture) (ptr=%p) (%ix%i pixels)\n",
 		data->map.F_image.ptr, data->map.F_image.w, data->map.F_image.h);

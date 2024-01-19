@@ -33,4 +33,6 @@ void	init_variables(t_data *data)
 	data->player.speed = 0.05;
 	data->ratio = 5;
 	data->cursor_x = 450;
+	data->rick.index = 0;
+	data->timer = 0.0;
 }

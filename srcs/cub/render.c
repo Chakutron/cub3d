@@ -12,6 +12,19 @@
 
 #include "cub3d.h"
 
+void	draw_rick(t_data *data)
+{
+	put_img_to_img(&data->canvas, &(data->rick.texture[data->rick.index]), WIDTH - 50, HEIGHT - 80);
+	data->timer += 0.075;
+	if (data->timer > 1)
+	{
+		data->rick.index++;
+		if (data->rick.index > 26)
+			data->rick.index = 0;
+		data->timer = 0.0;
+	}
+}
+
 int	render(t_data *data)
 {
 	if (data->endgame)
@@ -21,5 +34,6 @@ int	render(t_data *data)
 		exit(0);
 	}
 	check_movement_keys(data);
+	update(data);
 	return (0);
 }

@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+/*
+ * The `check_map` function iterates through each position in the map, calling 
+ * the `identifiers` function for validation. It prints the map for debugging
+ * and sets an error flag if the player's position is not found, returning the 
+ * error status.
+ */
 int	check_map(t_data *data)
 {
 	int	x;

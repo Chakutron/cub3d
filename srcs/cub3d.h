@@ -149,6 +149,13 @@ typedef	struct s_keys
 	int	d;
 }		t_keys;
 
+typedef struct s_rick
+{
+	t_image	texture[27];
+	int		index;
+}			t_rick;
+
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
@@ -167,6 +174,8 @@ typedef struct s_data
 	float		rc_dist_offset;
 	int			ratio;
 	int			cursor_x;
+	t_rick		rick;
+	float		timer;
 }				t_data;
 
 void	add_spaces2map(t_data *data);
@@ -187,6 +196,7 @@ void	draw_line(t_data *data, int y0, int x0, int y1, int x1);
 void	draw_minimap(t_data *data);
 void	draw_player(t_data *data);
 void	draw_rays(t_data *data);
+void	draw_rick(t_data *data);
 void	draw_square(t_data *data, int y_init, int x_init, int extra, int color);
 void	draw_wall(t_data *data, int index);
 void	east(int x, int y, t_data *data);

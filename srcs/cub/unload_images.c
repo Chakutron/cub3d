@@ -12,6 +12,18 @@
 
 #include "cub3d.h"
 
+void	unload_rick(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i <= 26)
+	{
+		mlx_destroy_image(data->mlx_ptr, data->rick.texture[i].ptr);
+		i++;
+	}
+}
+
 void	unload_images(t_data *data)
 {
 	mlx_destroy_image(data->mlx_ptr, data->map.NO_texture.ptr);
@@ -21,4 +33,5 @@ void	unload_images(t_data *data)
 	mlx_destroy_image(data->mlx_ptr, data->map.D_texture.ptr);
 	mlx_destroy_image(data->mlx_ptr, data->map.F_image.ptr);
 	mlx_destroy_image(data->mlx_ptr, data->map.C_image.ptr);
+	unload_rick(data);
 }

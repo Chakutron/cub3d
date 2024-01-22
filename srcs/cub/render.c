@@ -27,7 +27,9 @@ void	draw_rick(t_data *data)
 
 void	draw_walk(t_data *data)
 {
-	put_img_to_img(&data->canvas, &(data->player.walk.texture[data->player.walk.index]), WIDTH / 2 - 225, HEIGHT - 245);
+	put_img_to_img(&data->canvas, &(data->player.walk.texture[data->player.walk.index]), WIDTH / 2 - 225, HEIGHT - data->player.walk_offset);
+	if (data->player.walk_offset == 300)
+		data->player.walk_offset = 245;
 	data->timer += 0.075;
 	if (data->timer > 1)
 	{

@@ -14,7 +14,7 @@
 
 void	close_game(t_data *data)
 {
-//	mlx_mouse_show(data->mlx_ptr, data->win_ptr);
+	mlx_mouse_show(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	unload_images(data);
 	mlx_destroy_display(data->mlx_ptr);

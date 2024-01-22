@@ -6,7 +6,7 @@
 /*   By: mchiboub <mchiboub@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:30:57 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/18 18:37:13 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:59:07 by mchiboub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ typedef struct s_player
 	int		nbr;
 	float	speed;
 	t_walk	walk;
+	int		walk_offset;
 }		t_player;
 
 typedef	struct s_keys
@@ -207,6 +208,7 @@ void	draw_square(t_data *data, int y_init, int x_init, int extra, int color);
 void	draw_walk(t_data *data);
 void	draw_wall(t_data *data, int index);
 void	east(int x, int y, t_data *data);
+void	east_wall(t_data *data, int index, int y, int x);
 void	empty_space(int x, int y, t_data *data);
 void	finish_gnl(t_data *data);
 void	free_elements_store_map(t_data *data);
@@ -224,6 +226,7 @@ void	make_floor_and_cell(t_data *data);
 t_image	new_file_img(char *path, t_data *window);
 t_image	new_img(int w, int h, t_data *window);
 void	north(int x, int y, t_data *data);
+void	north_wall(t_data *data, int index, int y, int x);
 void	open_map(t_data *data);
 void	print_error(t_data *data, int error);
 void	print_variables(t_data *data);
@@ -233,11 +236,13 @@ void	read_line_by_line(t_data *data);
 void	read_variables(t_data *data, char *line);
 int		render(t_data *data);
 void	south(int x, int y, t_data *data);
+void	south_wall(t_data *data, int index, int y, int x);
 void	start_game(t_data *data);
 void	unload_images(t_data *data);
 void	update_player(t_data *data, int x, int y);
 void	update(t_data *data);
 void	west(int x, int y, t_data *data);
+void	west_wall(t_data *data, int index, int y, int x);
 void	write_error(char *str);
 int		x_press(t_data *data);
 

@@ -44,7 +44,6 @@ void	load_images(t_data *data)
 	data->map.WE_texture = load_image(data->map.WE_file, data);
 	data->map.EA_texture = load_image(data->map.EA_file, data);
 	data->map.D_texture = load_image("textures/door.xpm", data);
-	load_rick(data);
 	load_walk(data);
 	data->map.F_image = new_img(WIDTH, HEIGHT / 2, data);
 	printf("- Image created: (floor texture) (ptr=%p) (%ix%i pixels)\n",

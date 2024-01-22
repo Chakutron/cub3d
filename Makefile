@@ -6,7 +6,7 @@
 #    By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 15:15:55 by mchiboub          #+#    #+#              #
-#    Updated: 2024/01/18 18:13:18 by ocassany         ###   ########.fr        #
+#    Updated: 2024/01/22 17:57:06 by mchiboub         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS =	${SRC}/add_spaces2map.c		\
 		${SRC}/draw_square.c		\
 		${SRC}/draw_wall.c		\
 		${SRC}/east.c		\
+		${SRC}/east_wall.c		\
 		${SRC}/empty_space.c		\
 		${SRC}/finish_gnl.c		\
 		${SRC}/free_variables.c		\
@@ -61,6 +62,7 @@ SRCS =	${SRC}/add_spaces2map.c		\
 		${SRC}/new_file_img.c		\
 		${SRC}/new_img.c		\
 		${SRC}/north.c		\
+		${SRC}/north_wall.c		\
 		${SRC}/open_map.c		\
 		${SRC}/print_error.c		\
 		${SRC}/print_variables.c		\
@@ -70,11 +72,13 @@ SRCS =	${SRC}/add_spaces2map.c		\
 		${SRC}/read_variables.c		\
 		${SRC}/render.c		\
 		${SRC}/south.c		\
+		${SRC}/south_wall.c		\
 		${SRC}/start_game.c		\
 		${SRC}/unload_images.c		\
 		${SRC}/update_player.c		\
 		${SRC}/update.c		\
 		${SRC}/west.c		\
+		${SRC}/west_wall.c		\
 		${SRC}/write_error.c		\
 		${SRC}/x_press.c		\
 		${UTIL}/check_size.c		\

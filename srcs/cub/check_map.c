@@ -6,7 +6,7 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/18 18:08:05 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:22:30 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
  * and sets an error flag if the player's position is not found, returning the 
  * error status.
  */
+
 int	check_map(t_data *data)
 {
 	int	x;

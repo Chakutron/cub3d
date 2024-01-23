@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ceiling_variable.c                                 :+:      :+:    :+:   */
+/*   floor_variable.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/23 14:41:28 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/23 14:28:23 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	blue_ceiling(t_data *data, char *tmp, int nbr)
+void	blue_floor(t_data *data, char *tmp, int nbr)
 {
 	tmp = ft_calloc(1, 1);
 	while (line[i + 2] != '\r')
@@ -26,15 +26,11 @@ void	blue_ceiling(t_data *data, char *tmp, int nbr)
 		free(tmp);
 		print_error(data, 2);
 	}
-	data->map.cell.b = nbr;
+	data->map.floor.b = nbr;
 	free(tmp);
-	data->map.info.c = 1;
-	data->map.cell.color = create_trgb(0, data->map.cell.r,
-			data->map.cell.g, data->map.cell.b);
-	check_variables(data);
 }
 
-void	green_ceiling(t_data *data, char *tmp, int nbr)
+void	green_floor(t_data *data, char *tmp, int nbr)
 {
 	tmp = ft_calloc(1, 1);
 	while (line[i + 2] != ',')
@@ -48,12 +44,12 @@ void	green_ceiling(t_data *data, char *tmp, int nbr)
 		free(tmp);
 		print_error(data, 2);
 	}
-	data->map.cell.g = nbr;
+	data->map.floor.g = nbr;
 	i++;
 	free(tmp);
 }
 
-void	red_ceiling(t_data *data, char *tmp, int nbr)
+void	red_floor(t_data *data, char *tmp, int nbr)
 {
 	tmp = ft_calloc(1, 1);
 	i = 0;
@@ -68,21 +64,22 @@ void	red_ceiling(t_data *data, char *tmp, int nbr)
 		free(tmp);
 		print_error(data, 2);
 	}
-	data->map.cell.r = nbr;
+	data->map.floor.r = nbr;
 	i++;
 	free(tmp);
 }
 
-void	ceiling_variable(t_data *data, char *line, char *tmp, int nbr)
+void	floor_variable(t_data *data, char *line, char *tmp, int nbr)
 {
-	if (!data->map.info.c)
+	if (!data->map.info.f)
 	{
-		red_ceiling(data, tmp, nbr);
-		green_ceiling(data, tmp, nbr);
-		blue_ceiling(data, tmp, nbr);
-		data->map.info.c = 1;
-		data->map.cell.color = create_trgb(0, data->map.cell.r,
-				data->map.cell.g, data->map.cell.b);
+		red_floor(data, tmp, nbr);
+		green_floor(data, tmp, nbr);
+		blue_floor(data, tmp, nbr);
+		data->map.info.f = 1;
+		data->map.floor.color = create_trgb(0, data->map.floor.r,
+				data->map.floor.g, data->map.floor.b);
+		check_variables(data);
 	}
 	else
 		print_error(data, 2);

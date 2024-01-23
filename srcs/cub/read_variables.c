@@ -6,127 +6,11 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/22 21:20:45 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/23 14:21:32 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	ceiling_variable(t_data *data)
-{
-	if (!data->map.info.c)
-	{
-		tmp = ft_calloc(1, 1);
-		i = 0;
-		while (line[i + 2] != ',')
-		{
-			tmp = ft_strcat2(tmp, line[i + 2]);
-			i++;
-		}
-		nbr = ft_atoi(tmp);
-		if (nbr == -42)
-		{
-			free(tmp);
-			print_error(data, 2);
-		}
-		data->map.cell.r = nbr;
-		i++;
-		free(tmp);
-		tmp = ft_calloc(1, 1);
-		while (line[i + 2] != ',')
-		{
-			tmp = ft_strcat2(tmp, line[i + 2]);
-			i++;
-		}
-		nbr = ft_atoi(tmp);
-		if (nbr == -42)
-		{
-			free(tmp);
-			print_error(data, 2);
-		}
-		data->map.cell.g = nbr;
-		i++;
-		free(tmp);
-		tmp = ft_calloc(1, 1);
-		while (line[i + 2] != '\r')
-		{
-			tmp = ft_strcat2(tmp, line[i + 2]);
-			i++;
-		}
-		nbr = ft_atoi(tmp);
-		if (nbr == -42)
-		{
-			free(tmp);
-			print_error(data, 2);
-		}
-		data->map.cell.b = nbr;
-		free(tmp);
-		data->map.info.c = 1;
-		data->map.cell.color = create_trgb(0, data->map.cell.r,
-				data->map.cell.g, data->map.cell.b);
-		check_variables(data);
-	}
-	else
-		print_error(data, 2);
-}
-
-void	floor_variable(t_data *data)
-{
-	if (!data->map.info.f)
-	{
-		tmp = ft_calloc(1, 1);
-		i = 0;
-		while (line[i + 2] != ',')
-		{
-			tmp = ft_strcat2(tmp, line[i + 2]);
-			i++;
-		}
-		nbr = ft_atoi(tmp);
-		if (nbr == -42)
-		{
-			free(tmp);
-			print_error(data, 2);
-		}
-		data->map.floor.r = nbr;
-		i++;
-		free(tmp);
-		tmp = ft_calloc(1, 1);
-		while (line[i + 2] != ',')
-		{
-			tmp = ft_strcat2(tmp, line[i + 2]);
-			i++;
-		}
-		nbr = ft_atoi(tmp);
-		if (nbr == -42)
-		{
-			free(tmp);
-			print_error(data, 2);
-		}
-		data->map.floor.g = nbr;
-		i++;
-		free(tmp);
-		tmp = ft_calloc(1, 1);
-		while (line[i + 2] != '\r')
-		{
-			tmp = ft_strcat2(tmp, line[i + 2]);
-			i++;
-		}
-		nbr = ft_atoi(tmp);
-		if (nbr == -42)
-		{
-			free(tmp);
-			print_error(data, 2);
-		}
-		data->map.floor.b = nbr;
-		free(tmp);
-		data->map.info.f = 1;
-		data->map.floor.color = create_trgb(0, data->map.floor.r,
-				data->map.floor.g, data->map.floor.b);
-		check_variables(data);
-	}
-	else
-		print_error(data, 2);
-}
 
 void	east_variable(t_data *data)
 {
@@ -203,19 +87,18 @@ void	north_variable(t__data *data)
 void	read_variables(t_data *data, char *line)
 {
 	char	*tmp;
-	int		i;
 	int		nbr;
 
 	if (strncmp(line, "NO ", 3) == 0)
-		north_variable(data);
+		north_variable(data, line);
 	else if (strncmp(line, "SO ", 3) == 0)
-		south_variable(data);
+		south_variable(data, line);
 	else if (strncmp(line, "WE ", 3) == 0)
-		west_variable(data);
+		west_variable(data, line);
 	else if (strncmp(line, "EA ", 3) == 0)
-		east_variable(data);
+		east_variable(data, line);
 	else if (strncmp(line, "F ", 2) == 0)
-		floor_variable(data);
+		floor_variable(data, line, tmp, nbr);
 	else if (strncmp(line, "C ", 2) == 0)
-		ceiling_variable(data);
+		ceiling_variable(data, line, tmp, nbr);
 }

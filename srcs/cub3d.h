@@ -6,7 +6,7 @@
 /*   By: mchiboub <mchiboub@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:30:57 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/22 17:59:07 by mchiboub         ###   ########.fr       */
+/*   Updated: 2024/01/23 09:47:53 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_color
 
 typedef struct s_info
 {
+	int	i;
 	int	n;
 	int	s;
 	int	w;
@@ -203,7 +204,6 @@ void	draw_line(t_data *data, int y0, int x0, int y1, int x1);
 void	draw_minimap(t_data *data);
 void	draw_player(t_data *data);
 void	draw_rays(t_data *data);
-void	draw_rick(t_data *data);
 void	draw_square(t_data *data, int y_init, int x_init, int extra, int color);
 void	draw_walk(t_data *data);
 void	draw_wall(t_data *data, int index);
@@ -238,6 +238,7 @@ int		render(t_data *data);
 void	south(int x, int y, t_data *data);
 void	south_wall(t_data *data, int index, int y, int x);
 void	start_game(t_data *data);
+void	undo_movement(t_data *data);
 void	unload_images(t_data *data);
 void	update_player(t_data *data, int x, int y);
 void	update(t_data *data);

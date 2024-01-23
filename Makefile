@@ -6,7 +6,7 @@
 #    By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 15:15:55 by mchiboub          #+#    #+#              #
-#    Updated: 2024/01/22 17:57:06 by mchiboub         ###   ########.fr        #
+#    Updated: 2024/01/22 19:10:16 by ocassany         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,7 @@ SRCS =	${SRC}/add_spaces2map.c		\
 		${SRC}/south.c		\
 		${SRC}/south_wall.c		\
 		${SRC}/start_game.c		\
+		${SRC}/undo_movement.c		\
 		${SRC}/unload_images.c		\
 		${SRC}/update_player.c		\
 		${SRC}/update.c		\

@@ -6,7 +6,7 @@
 /*   By: mchiboub <mchiboub@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:30:57 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/23 16:06:52 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/23 18:36:40 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@
 # define RATIO 5
 # define RAYS 128
 
-typedef struct	s_rc
+
+
+typedef struct s_rc
 {
 	int		r;
 	int		mx;

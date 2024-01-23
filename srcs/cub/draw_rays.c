@@ -6,7 +6,7 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/23 16:39:47 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/23 18:11:27 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ void	draw_rays(t_data *data)
 					data->r3d[index].texture_init = (int)((dy - (int)dy) * 49);
 				}
 				draw_door(data, index);
-				break ;	
+				break ;
 			}
 			offset += 0.1;
 		}

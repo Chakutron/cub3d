@@ -6,7 +6,7 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/17 17:26:21 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:39:47 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,9 @@ void	draw_rays(t_data *data)
 					+ (WIDTH / RAYS);
 				if (y3 <= 0.0
 					&& fabs(y3) - (int)fabs(y3) < fabs(x3) - (int)fabs(x3)
-					&& (data->map.matrix[(int)dy - 1][(int)dx] == '0' 
-					|| data->map.matrix[(int)dy - 1][(int)dx] == '2' || data->map.matrix[(int)dy - 1][(int)dx] == '3')
+					&& (data->map.matrix[(int)dy - 1][(int)dx] == '0'
+					|| data->map.matrix[(int)dy - 1][(int)dx] == '2'
+					|| data->map.matrix[(int)dy - 1][(int)dx] == '3')
 					&& data->player.yy < dy)
 				{
 					data->r3d[index].wall = 'N';
@@ -86,7 +87,8 @@ void	draw_rays(t_data *data)
 				else if (y3 >= 0.0
 					&& fabs(y3) - (int)fabs(y3) < fabs(x3) - (int)fabs(x3)
 					&& (data->map.matrix[(int)dy + 1][(int)dx] == '0'
-					|| data->map.matrix[(int)dy + 1][(int)dx] == '2' || data->map.matrix[(int)dy + 1][(int)dx] == '3')
+					|| data->map.matrix[(int)dy + 1][(int)dx] == '2'
+					|| data->map.matrix[(int)dy + 1][(int)dx] == '3')
 					&& data->player.yy > dy)
 				{
 					data->r3d[index].wall = 'S';
@@ -95,7 +97,8 @@ void	draw_rays(t_data *data)
 				else if (x3 >= 0.0
 					&& fabs(y3) - (int)fabs(y3) > fabs(x3) - (int)fabs(x3)
 					&& (data->map.matrix[(int)dy][(int)dx + 1] == '0'
-					|| data->map.matrix[(int)dy][(int)dx + 1] == '2' || data->map.matrix[(int)dy][(int)dx + 1] == '3')
+					|| data->map.matrix[(int)dy][(int)dx + 1] == '2'
+					|| data->map.matrix[(int)dy][(int)dx + 1] == '3')
 					&& data->player.xx > dx)
 				{
 					data->r3d[index].wall = 'E';
@@ -105,7 +108,8 @@ void	draw_rays(t_data *data)
 				else if (x3 <= 0.0
 					&& fabs(y3) - (int)fabs(y3) > fabs(x3) - (int)fabs(x3)
 					&& (data->map.matrix[(int)dy][(int)dx - 1] == '0'
-					|| data->map.matrix[(int)dy][(int)dx - 1] == '2' || data->map.matrix[(int)dy][(int)dx - 1] == '3')
+					|| data->map.matrix[(int)dy][(int)dx - 1] == '2'
+					|| data->map.matrix[(int)dy][(int)dx - 1] == '3')
 					&& data->player.xx < dx)
 				{
 					data->r3d[index].wall = 'W';

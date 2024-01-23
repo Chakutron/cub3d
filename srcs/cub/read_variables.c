@@ -6,13 +6,13 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/23 14:21:32 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:08:04 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	east_variable(t_data *data)
+void	east_variable(t_data *data, char *line)
 {
 	if (!data->map.info.e)
 	{
@@ -30,7 +30,7 @@ void	east_variable(t_data *data)
 		print_error(data, 2);
 }
 
-void	west_variable(t_data *data)
+void	west_variable(t_data *data, char *line)
 {
 	if (!data->map.info.w)
 	{
@@ -48,7 +48,7 @@ void	west_variable(t_data *data)
 		print_error(data, 2);
 }
 
-void	south_variable(t_data *data)
+void	south_variable(t_data *data, char *line)
 {
 	if (!data->map.info.s)
 	{
@@ -66,7 +66,7 @@ void	south_variable(t_data *data)
 		print_error(data, 2);
 }
 
-void	north_variable(t__data *data)
+void	north_variable(t_data *data, char *line)
 {
 	if (!data->map.info.n)
 	{
@@ -86,9 +86,11 @@ void	north_variable(t__data *data)
 
 void	read_variables(t_data *data, char *line)
 {
-	char	*tmp;
 	int		nbr;
+	char	*tmp;
 
+	tmp = ft_calloc(1, 1);
+	nbr = 0;
 	if (strncmp(line, "NO ", 3) == 0)
 		north_variable(data, line);
 	else if (strncmp(line, "SO ", 3) == 0)

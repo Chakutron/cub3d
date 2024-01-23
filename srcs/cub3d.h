@@ -6,7 +6,7 @@
 /*   By: mchiboub <mchiboub@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:30:57 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/23 14:52:25 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:06:52 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_map
 	int		complete_info;
 	int		mapstart;	
 	int		error_found;
+	int		i;
 }			t_map;
 
 typedef struct s_rick
@@ -215,7 +216,7 @@ void	finish_gnl(t_data *data);
 void	floor_variable(t_data *data, char *line, char *tmp, int nbr);
 void	free_elements_store_map(t_data *data);
 void	free_variables(t_data *data);
-int	get_pixel_img(t_image *img, int x, int y);
+uint	get_pixel_img(t_image *img, int x, int y);
 int		handle_keypress(int keysym, t_data *data);
 int		handle_keyrelease(int keysym, t_data *data);
 int		handle_mouse_move(int x, int y, t_data *data);

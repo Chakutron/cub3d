@@ -47,7 +47,19 @@
 # define RATIO 5
 # define RAYS 128
 
+typedef struct s_dm
+{
+	int	y_offset;
+	int	x_offset;
+}		t_dm;
 
+typedef struct s_ds
+{
+	int	y_init;
+	int	x_init;
+	int	extra;
+	int	color;	
+}		t_ds;
 
 typedef struct s_rc
 {
@@ -129,12 +141,6 @@ typedef struct s_map
 	int		i;
 }			t_map;
 
-typedef struct s_rick
-{
-	t_image	texture[27];
-	int		index;
-}			t_rick;
-
 typedef struct s_walk
 {
 	t_image texture[21];
@@ -176,6 +182,8 @@ typedef struct s_data
 	t_image		canvas;
 	t_rc		rc;
 	t_r3d		r3d[RAYS + 1];
+	t_ds		ds;
+	t_dm		dm;
 	int			fd;
 	int			fd2;
 	char		*line;
@@ -185,7 +193,6 @@ typedef struct s_data
 	float		rc_dist_offset;
 	int			ratio;
 	int			cursor_x;
-	t_rick		rick;
 	float		timer;
 }				t_data;
 

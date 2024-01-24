@@ -12,16 +12,16 @@
 
 #include "cub3d.h"
 
-void	draw_square(t_data *data, int y_init, int x_init, int extra)
+void	draw_square(t_data *data)
 {
 	int	y;
 	int	x;
 
-	y = y_init;
-	while (y < y_init + extra)
+	y = data->ds.y_init;
+	while (y < data->ds.y_init + data->ds.extra)
 	{
-		x = x_init;
-		while (x < x_init + extra)
+		x = data->ds.x_init;
+		while (x < data->ds.x_init + data->ds.extra)
 		{
 			if (y >= 0 && y <= MINIMAP / data->ratio && x >= 0
 				&& x <= MINIMAP / data->ratio)
@@ -29,10 +29,10 @@ void	draw_square(t_data *data, int y_init, int x_init, int extra)
 				if (data->ratio <= 2)
 				{
 					if ((y + x) % 2 == 0)
-						put_pixel_img(&(data->canvas), x, y, color);
+						put_pixel_img(&(data->canvas), x, y, data->ds.color);
 				}
 				else
-					put_pixel_img(&(data->canvas), x, y, color);
+					put_pixel_img(&(data->canvas), x, y, data->ds.color);
 			}
 			x++;
 		}

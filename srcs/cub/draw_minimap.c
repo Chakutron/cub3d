@@ -14,17 +14,15 @@
 
 void	draw_minimap(t_data *data)
 {
-	int	y;
 	int	x;
-	int	yy;
+	int	y;
 	int	xx;
-	int	y_offset;
-	int	x_offset;
+	int	yy;
 
 	draw_square(data, 0, 0, MINIMAP / data->ratio, 0x00000000);
-	y_offset = MINIMAP / data->ratio / 9
+	data->dm.y_offset = MINIMAP / data->ratio / 9
 		* ((data->player.yy - (double)data->player.y) + 0.5);
-	x_offset = MINIMAP / data->ratio / 9
+	data->dm.x_offset = MINIMAP / data->ratio / 9
 		* ((data->player.xx - (double)data->player.x) + 0.5);
 	y = data->player.y - 5;
 	yy = 0;
@@ -37,22 +35,26 @@ void	draw_minimap(t_data *data)
 			if (y >= 0 && y < data->map.h && x >= 0 && x < data->map.w)
 			{
 				if (data->map.matrix[y][x] == ' ')
-					draw_square(data, yy * MINIMAP / data->ratio / 9 - y_offset,
-						xx * MINIMAP / data->ratio / 9 - x_offset, MINIMAP
-						/ data->ratio / 9 - 1, 0x0000FF00);
+					draw_square(data,
+						yy * MINIMAP / data->ratio / 9 - data->dm.y_offset,
+						xx * MINIMAP / data->ratio / 9 - data->dm.x_offset,
+						MINIMAP / data->ratio / 9 - 1, 0x0000FF00);
 				else if (data->map.matrix[y][x] == '0')
-					draw_square(data, yy * MINIMAP / data->ratio / 9 - y_offset,
-						xx * MINIMAP / data->ratio / 9 - x_offset, MINIMAP
-						/ data->ratio / 9 - 1, 0x00FFFF00);
+					draw_square(data,
+						yy * MINIMAP / data->ratio / 9 - data->dm.y_offset,
+						xx * MINIMAP / data->ratio / 9 - data->dm.x_offset,
+						MINIMAP / data->ratio / 9 - 1, 0x00FFFF00);
 				else if (data->map.matrix[y][x] == '1')
-					draw_square(data, yy * MINIMAP / data->ratio / 9 - y_offset,
-						xx * MINIMAP / data->ratio / 9 - x_offset, MINIMAP
-						/ data->ratio / 9 - 1, 0x00BB00FF);
+					draw_square(data,
+						yy * MINIMAP / data->ratio / 9 - data->dm.y_offset,
+						xx * MINIMAP / data->ratio / 9 - data->dm.x_offset,
+						MINIMAP / data->ratio / 9 - 1, 0x00BB00FF);
 			}
 			else
-				draw_square(data, yy * MINIMAP / data->ratio / 9 - y_offset,
-					xx * MINIMAP / data->ratio / 9 - x_offset, MINIMAP
-					/ data->ratio / 9 - 1, 0xFF00FF00);
+				draw_square(data,
+					yy * MINIMAP / data->ratio / 9 - data->dm.y_offset,
+					xx * MINIMAP / data->ratio / 9 - data->dm.x_offset,
+					MINIMAP / data->ratio / 9 - 1, 0xFF00FF00);
 			x++;
 			xx++;
 		}

@@ -103,4 +103,5 @@ void	read_variables(t_data *data, char *line)
 		floor_variable(data, line, tmp, nbr);
 	else if (strncmp(line, "C ", 2) == 0)
 		ceiling_variable(data, line, tmp, nbr);
+	free(tmp);
 }

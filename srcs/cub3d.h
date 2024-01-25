@@ -230,6 +230,7 @@ typedef struct s_data
 	float		timer;
 	t_rays		rays;
 	t_tmp		tmp;
+	int			bonus;
 }				t_data;
 
 void	add_spaces2map(t_data *data);
@@ -279,6 +280,7 @@ t_image	new_file_img(char *path, t_data *window);
 t_image	new_img(int w, int h, t_data *window);
 void	north(int x, int y, t_data *data);
 void	north_wall(t_data *data, int index, int y, int x);
+void	open_doors(t_data *data);
 void	open_map(t_data *data);
 void	print_error(t_data *data, int error);
 void	print_variables(t_data *data);
@@ -290,6 +292,7 @@ int		render(t_data *data);
 void	south(int x, int y, t_data *data);
 void	south_wall(t_data *data, int index, int y, int x);
 void	start_game(t_data *data);
+void	toogle_bonus(t_data *data);
 void	undo_movement(t_data *data);
 void	unload_images(t_data *data);
 void	update_player(t_data *data, int x, int y);

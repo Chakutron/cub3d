@@ -39,7 +39,7 @@ void	start_game(t_data *data)
 		mlx_do_key_autorepeaton(data->mlx_ptr);
 		mlx_mouse_hide(data->mlx_ptr, data->win_ptr);
 		load_images(data);
-		printf("\n--- GAME STARTED ---\n");
+		printf("\n--- GAME STARTED ---\n\n");
 		update(data);
 		mlx_loop(data->mlx_ptr);
 	}

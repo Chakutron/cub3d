@@ -34,12 +34,14 @@ void	draw_rays4(t_data *data, int color)
 		* (MINIMAP / data->ratio / 9);
 	data->ds.extra = (MINIMAP / data->ratio / 9) - 1;
 	data->ds.color = color;
-	draw_square(data);
+	if (data->bonus)
+		draw_square(data);
 	data->tmp.y0 = MINIMAP / data->ratio / 2;
 	data->tmp.x0 = MINIMAP / data->ratio / 2;
 	data->tmp.y1 = (MINIMAP / 2 - data->rays.y) / data->ratio;
 	data->tmp.x1 = (MINIMAP / 2 + data->rays.x) / data->ratio;
-	draw_line(data);
+	if (data->bonus)
+		draw_line(data);
 	data->rays.y3 = data->player.y - data->rays.dy;
 	data->rays.x3 = data->player.x - data->rays.dx;
 	data->r3d[data->rays.index].y_init = 225 - ((MINIMAP / 9)

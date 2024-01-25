@@ -32,6 +32,7 @@ int	main(int argc, char *argv[])
 			print_error(&data, 3);
 		init_variables(&data);
 		open_map(&data);
+		open_doors(&data);
 		start_game(&data);
 	}
 	else

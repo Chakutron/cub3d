@@ -132,7 +132,7 @@ int	handle_keypress(int keysym, t_data *data)
 		data->key.a = -1 + data->key.d;
 	if (keysym == 100 || keysym == 65363)
 		data->key.d = 1 + data->key.a;
-	if (keysym == 32)
+	if (keysym == 32 && data->bonus)
 	{
 		north_door_management(data);
 		south_door_management(data);
@@ -140,5 +140,7 @@ int	handle_keypress(int keysym, t_data *data)
 		west_door_management(data);
 		update(data);
 	}
+	if (keysym == 98)
+		toogle_bonus(data);
 	return (0);
 }

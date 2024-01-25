@@ -23,11 +23,14 @@ void	update(t_data *data)
 {
 	data->canvas = new_img(WIDTH, HEIGHT, data);
 	draw_background(data);
-	draw_minimap(data);
+	if (data->bonus)
+		draw_minimap(data);
 	draw_rays(data);
-	draw_player(data);
+	if (data->bonus)
+		draw_player(data);
 	calculate_vector_player(data);
-	draw_walk(data);
+	if (data->bonus)
+		draw_walk(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->canvas.ptr, 0, 0);
 	mlx_destroy_image(data->mlx_ptr, data->canvas.ptr);

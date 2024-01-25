@@ -173,6 +173,25 @@ typedef	struct s_keys
 	int	d;
 }		t_keys;
 
+typedef struct s_tmp
+{
+	int	y;
+	int x;
+	int yy;
+	int xx;
+	int	y0;
+	int	x0;
+	int	y1;
+	int	x1;
+	int	dx;
+	int	dy;
+	int sx;
+	int sy;
+	int err;
+	int e2;
+}		t_tmp;
+
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
@@ -194,6 +213,7 @@ typedef struct s_data
 	int			ratio;
 	int			cursor_x;
 	float		timer;
+	t_tmp		tmp;
 }				t_data;
 
 void	add_spaces2map(t_data *data);
@@ -211,7 +231,7 @@ void	close_game(t_data *data);
 int		create_trgb(int t, int r, int g, int b);
 void	draw_background(t_data *data);
 void	draw_door(t_data *data, int index);
-void	draw_line(t_data *data, int y0, int x0, int y1, int x1);
+void	draw_line(t_data *data);
 void	draw_minimap(t_data *data);
 void	draw_player(t_data *data);
 void	draw_rays(t_data *data);

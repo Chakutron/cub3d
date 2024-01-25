@@ -53,10 +53,11 @@ void	draw_rays(t_data *data)
 				data->ds.extra = (MINIMAP / data->ratio / 9) - 1;
 				data->ds.color = 0x00FF0000;
 				draw_square(data);
-				draw_line(data,
-					MINIMAP / data->ratio / 2, MINIMAP / data->ratio / 2,
-					(MINIMAP / 2 - y) / data->ratio,
-					(MINIMAP / 2 + x) / data->ratio);
+				data->tmp.y0 = MINIMAP / data->ratio / 2;
+				data->tmp.x0 = MINIMAP / data->ratio / 2;
+				data->tmp.y1 = (MINIMAP / 2 - y) / data->ratio;
+				data->tmp.x1 = (MINIMAP / 2 + x) / data->ratio;
+				draw_line(data);
 				y3 = data->player.y - dy;
 				x3 = data->player.x - dx;
 				data->r3d[index].y_init = 225 - ((MINIMAP / 9)
@@ -120,10 +121,11 @@ void	draw_rays(t_data *data)
 				data->ds.extra = (MINIMAP / data->ratio / 9) - 1;
 				data->ds.color = 0x00FFFFFF;
 				draw_square(data);
-				draw_line(data,
-					MINIMAP / data->ratio / 2, MINIMAP / data->ratio / 2,
-					(MINIMAP / 2 - y) / data->ratio,
-					(MINIMAP / 2 + x) / data->ratio);
+				data->tmp.y0 = MINIMAP / data->ratio / 2;
+				data->tmp.x0 = MINIMAP / data->ratio / 2;
+				data->tmp.y1 = (MINIMAP / 2 - y) / data->ratio;
+				data->tmp.x1 = (MINIMAP / 2 + x) / data->ratio;
+				draw_line(data);
 				y3 = data->player.y - dy;
 				x3 = data->player.x - dx;
 				data->r3d[index].y_init = 225 - ((MINIMAP / 9)

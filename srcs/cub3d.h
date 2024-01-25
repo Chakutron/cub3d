@@ -215,7 +215,7 @@ void	draw_line(t_data *data, int y0, int x0, int y1, int x1);
 void	draw_minimap(t_data *data);
 void	draw_player(t_data *data);
 void	draw_rays(t_data *data);
-void	draw_square(t_data *data, int y_init, int x_init, int extra, int color);
+void	draw_square(t_data *data);
 void	draw_walk(t_data *data);
 void	draw_wall(t_data *data, int index);
 void	east(int x, int y, t_data *data);

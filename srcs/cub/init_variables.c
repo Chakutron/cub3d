@@ -35,6 +35,5 @@ void	init_variables(t_data *data)
 	data->cursor_x = 450;
 	data->player.walk.index = 0;
 	data->player.walk_offset = 300;
-	data->rick.index = 0;
 	data->timer = 0.0;
 }

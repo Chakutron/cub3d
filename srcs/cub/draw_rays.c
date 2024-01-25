@@ -48,16 +48,11 @@ void	draw_rays(t_data *data)
 				+ data->player.xx;
 			if (data->map.matrix[(int)dy][(int)dx] == '1')
 			{
-				draw_square(data,
-					MINIMAP / data->ratio / 2 - (data->player.y - (int)dy)
-					* (MINIMAP / data->ratio / 9)
-					- (data->player.yy - data->player.y)
-					* (MINIMAP / data->ratio / 9),
-					MINIMAP / data->ratio / 2 - (data->player.x - (int)dx)
-					* (MINIMAP / data->ratio / 9)
-					- (data->player.xx - data->player.x)
-					* (MINIMAP / data->ratio / 9),
-					(MINIMAP / data->ratio / 9) - 1, 0x00FF0000);
+				data->ds.y_init = MINIMAP / data->ratio / 2 - (data->player.y - (int)dy) * (MINIMAP / data->ratio / 9) - (data->player.yy - data->player.y) * (MINIMAP / data->ratio / 9);
+				data->ds.x_init = MINIMAP / data->ratio / 2 - (data->player.x - (int)dx) * (MINIMAP / data->ratio / 9) - (data->player.xx - data->player.x) * (MINIMAP / data->ratio / 9);
+				data->ds.extra = (MINIMAP / data->ratio / 9) - 1;
+				data->ds.color = 0x00FF0000;
+				draw_square(data);
 				draw_line(data,
 					MINIMAP / data->ratio / 2, MINIMAP / data->ratio / 2,
 					(MINIMAP / 2 - y) / data->ratio,
@@ -120,16 +115,11 @@ void	draw_rays(t_data *data)
 			}
 			else if (data->map.matrix[(int)dy][(int)dx] == '2')
 			{
-				draw_square(data,
-					MINIMAP / data->ratio / 2 - (data->player.y - (int)dy)
-					* (MINIMAP / data->ratio / 9)
-					- (data->player.yy - data->player.y)
-					* (MINIMAP / data->ratio / 9),
-					MINIMAP / data->ratio / 2 - (data->player.x - (int)dx)
-					* (MINIMAP / data->ratio / 9)
-					- (data->player.xx - data->player.x)
-					* (MINIMAP / data->ratio / 9),
-					(MINIMAP / data->ratio / 9) - 1, 0x00FFFFFF);
+				data->ds.y_init = MINIMAP / data->ratio / 2 - (data->player.y - (int)dy) * (MINIMAP / data->ratio / 9) - (data->player.yy - data->player.y) * (MINIMAP / data->ratio / 9);
+				data->ds.x_init = MINIMAP / data->ratio / 2 - (data->player.x - (int)dx) * (MINIMAP / data->ratio / 9) - (data->player.xx - data->player.x) * (MINIMAP / data->ratio / 9);
+				data->ds.extra = (MINIMAP / data->ratio / 9) - 1;
+				data->ds.color = 0x00FFFFFF;
+				draw_square(data);
 				draw_line(data,
 					MINIMAP / data->ratio / 2, MINIMAP / data->ratio / 2,
 					(MINIMAP / 2 - y) / data->ratio,

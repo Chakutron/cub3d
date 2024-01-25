@@ -42,6 +42,7 @@ SRCS =	${SRC}/add_spaces2map.c		\
 		${SRC}/draw_minimap.c		\
 		${SRC}/draw_player.c		\
 		${SRC}/draw_rays.c		\
+		${SRC}/draw_rays_bis.c		\
 		${SRC}/draw_square.c		\
 		${SRC}/draw_wall.c		\
 		${SRC}/east.c		\

@@ -12,171 +12,92 @@
 
 #include "cub3d.h"
 
+void	draw_rays4(t_data *data, int color)
+{
+	data->ds.y_init = MINIMAP / data->ratio / 2 - (data->player.y
+			- (int)data->rays.dy) * (MINIMAP / data->ratio / 9)
+		- (data->player.yy - data->player.y)
+		* (MINIMAP / data->ratio / 9);
+	data->ds.x_init = MINIMAP / data->ratio / 2 - (data->player.x
+			- (int)data->rays.dx) * (MINIMAP / data->ratio / 9)
+		- (data->player.xx - data->player.x)
+		* (MINIMAP / data->ratio / 9);
+	data->ds.extra = (MINIMAP / data->ratio / 9) - 1;
+	data->ds.color = color;
+	draw_square(data);
+	data->tmp.y0 = MINIMAP / data->ratio / 2;
+	data->tmp.x0 = MINIMAP / data->ratio / 2;
+	data->tmp.y1 = (MINIMAP / 2 - data->rays.y) / data->ratio;
+	data->tmp.x1 = (MINIMAP / 2 + data->rays.x) / data->ratio;
+	draw_line(data);
+	data->rays.y3 = data->player.y - data->rays.dy;
+	data->rays.x3 = data->player.x - data->rays.dx;
+	data->r3d[data->rays.index].y_init = 225 - ((MINIMAP / 9)
+			* (HEIGHT - (MINIMAP / 9))
+			/ (data->rays.offset * cos((fabs(-data->rays.i) * M_PI) / 180)));
+	data->r3d[data->rays.index].x_init = 900 - (data->rays.index + 1)
+		* (WIDTH / RAYS);
+}
+
+void	draw_rays2(t_data *data, int color)
+{
+	draw_rays4(data, color);
+	data->r3d[data->rays.index].y_end = 225 + ((MINIMAP / 9)
+			* (HEIGHT - (MINIMAP / 9))
+			/ (data->rays.offset * cos((fabs(-data->rays.i) * M_PI) / 180)));
+	data->r3d[data->rays.index].x_end = data->r3d[data->rays.index].x_init
+		+ (WIDTH / RAYS);
+	draw_rays_n(data);
+	draw_rays_s(data);
+	draw_rays_e(data);
+	draw_rays_w(data);
+}
+
+int	draw_rays3(t_data *data)
+{
+	data->rays.y = data->player.y_temp * data->rays.offset * 100;
+	data->rays.x = data->player.x_temp * data->rays.offset * 100;
+	data->rays.dy = ((MINIMAP / 2 - data->rays.y) - 4.5
+			* (MINIMAP / 9)) / (MINIMAP / 9) + data->player.yy;
+	data->rays.dx = ((MINIMAP / 2 + data->rays.x) - 4.5
+			* (MINIMAP / 9)) / (MINIMAP / 9) + data->player.xx;
+	if (data->map.matrix[(int)data->rays.dy][(int)data->rays.dx] == '1')
+	{
+		draw_rays2(data, 0x00FF0000);
+		draw_wall(data, data->rays.index);
+		return (1);
+	}
+	else if (data->map.matrix[(int)data->rays.dy][(int)data->rays.dx] == '2')
+	{
+		draw_rays2(data, 0x00FFFFFF);
+		draw_door(data, data->rays.index);
+		return (1);
+	}
+	data->rays.offset += 0.1;
+	return (0);
+}
+
 void	draw_rays(t_data *data)
 {
-	float	offset;
-	double	y;
-	double	x;
-	double	dy;
-	double	dx;
-	float	i;
-	int		index;
-	float	angle;
-	float	y3;
-	float	x3;
-
-	index = 0;
-	i = -16;
-	while (i <= 16)
+	data->rays.index = 0;
+	data->rays.i = -16;
+	while (data->rays.i <= 16)
 	{
-		angle = data->player.angle + i;
-		if (angle < 0)
-			angle += 360;
-		if (angle > 360)
-			angle -= 360;
-		data->player.radians = (angle * M_PI) / 180.0;
+		data->rays.angle = data->player.angle + data->rays.i;
+		if (data->rays.angle < 0)
+			data->rays.angle += 360;
+		if (data->rays.angle > 360)
+			data->rays.angle -= 360;
+		data->player.radians = (data->rays.angle * M_PI) / 180.0;
 		data->player.y_temp = 0.01 * sin(data->player.radians);
 		data->player.x_temp = 0.01 * cos(data->player.radians);
-		offset = 1;
+		data->rays.offset = 1;
 		while (1)
 		{
-			y = data->player.y_temp * offset * 100;
-			x = data->player.x_temp * offset * 100;
-			dy = ((MINIMAP / 2 - y) - 4.5 * (MINIMAP / 9)) / (MINIMAP / 9)
-				+ data->player.yy;
-			dx = ((MINIMAP / 2 + x) - 4.5 * (MINIMAP / 9)) / (MINIMAP / 9)
-				+ data->player.xx;
-			if (data->map.matrix[(int)dy][(int)dx] == '1')
-			{
-				data->ds.y_init = MINIMAP / data->ratio / 2 - (data->player.y - (int)dy) * (MINIMAP / data->ratio / 9) - (data->player.yy - data->player.y) * (MINIMAP / data->ratio / 9);
-				data->ds.x_init = MINIMAP / data->ratio / 2 - (data->player.x - (int)dx) * (MINIMAP / data->ratio / 9) - (data->player.xx - data->player.x) * (MINIMAP / data->ratio / 9);
-				data->ds.extra = (MINIMAP / data->ratio / 9) - 1;
-				data->ds.color = 0x00FF0000;
-				draw_square(data);
-				data->tmp.y0 = MINIMAP / data->ratio / 2;
-				data->tmp.x0 = MINIMAP / data->ratio / 2;
-				data->tmp.y1 = (MINIMAP / 2 - y) / data->ratio;
-				data->tmp.x1 = (MINIMAP / 2 + x) / data->ratio;
-				draw_line(data);
-				y3 = data->player.y - dy;
-				x3 = data->player.x - dx;
-				data->r3d[index].y_init = 225 - ((MINIMAP / 9)
-						* (HEIGHT - (MINIMAP / 9))
-						/ (offset * cos((fabs(-i) * M_PI) / 180)));
-				data->r3d[index].x_init = 900 - (index + 1) * (WIDTH / RAYS);
-				data->r3d[index].y_end = 225 + ((MINIMAP / 9)
-						* (HEIGHT - (MINIMAP / 9))
-						/ (offset * cos((fabs(-i) * M_PI) / 180)));
-				data->r3d[index].x_end = data->r3d[index].x_init
-					+ (WIDTH / RAYS);
-				if (y3 <= 0.0
-					&& fabs(y3) - (int)fabs(y3) < fabs(x3) - (int)fabs(x3)
-					&& (data->map.matrix[(int)dy - 1][(int)dx] == '0'
-					|| data->map.matrix[(int)dy - 1][(int)dx] == '2'
-					|| data->map.matrix[(int)dy - 1][(int)dx] == '3')
-					&& data->player.yy < dy)
-				{
-					data->r3d[index].wall = 'N';
-					data->r3d[index].texture_init
-						= (int)((1 - (dx - (int)dx)) * 49);
-				}
-				else if (y3 >= 0.0
-					&& fabs(y3) - (int)fabs(y3) < fabs(x3) - (int)fabs(x3)
-					&& (data->map.matrix[(int)dy + 1][(int)dx] == '0'
-					|| data->map.matrix[(int)dy + 1][(int)dx] == '2'
-					|| data->map.matrix[(int)dy + 1][(int)dx] == '3')
-					&& data->player.yy > dy)
-				{
-					data->r3d[index].wall = 'S';
-					data->r3d[index].texture_init = (int)((dx - (int)dx) * 49);
-				}
-				else if (x3 >= 0.0
-					&& fabs(y3) - (int)fabs(y3) > fabs(x3) - (int)fabs(x3)
-					&& (data->map.matrix[(int)dy][(int)dx + 1] == '0'
-					|| data->map.matrix[(int)dy][(int)dx + 1] == '2'
-					|| data->map.matrix[(int)dy][(int)dx + 1] == '3')
-					&& data->player.xx > dx)
-				{
-					data->r3d[index].wall = 'E';
-					data->r3d[index].texture_init
-						= (int)((1 - (dy - (int)dy)) * 49);
-				}
-				else if (x3 <= 0.0
-					&& fabs(y3) - (int)fabs(y3) > fabs(x3) - (int)fabs(x3)
-					&& (data->map.matrix[(int)dy][(int)dx - 1] == '0'
-					|| data->map.matrix[(int)dy][(int)dx - 1] == '2'
-					|| data->map.matrix[(int)dy][(int)dx - 1] == '3')
-					&& data->player.xx < dx)
-				{
-					data->r3d[index].wall = 'W';
-					data->r3d[index].texture_init = (int)((dy - (int)dy) * 49);
-				}
-				draw_wall(data, index);
+			if (draw_rays3(data))
 				break ;
-			}
-			else if (data->map.matrix[(int)dy][(int)dx] == '2')
-			{
-				data->ds.y_init = MINIMAP / data->ratio / 2 - (data->player.y - (int)dy) * (MINIMAP / data->ratio / 9) - (data->player.yy - data->player.y) * (MINIMAP / data->ratio / 9);
-				data->ds.x_init = MINIMAP / data->ratio / 2 - (data->player.x - (int)dx) * (MINIMAP / data->ratio / 9) - (data->player.xx - data->player.x) * (MINIMAP / data->ratio / 9);
-				data->ds.extra = (MINIMAP / data->ratio / 9) - 1;
-				data->ds.color = 0x00FFFFFF;
-				draw_square(data);
-				data->tmp.y0 = MINIMAP / data->ratio / 2;
-				data->tmp.x0 = MINIMAP / data->ratio / 2;
-				data->tmp.y1 = (MINIMAP / 2 - y) / data->ratio;
-				data->tmp.x1 = (MINIMAP / 2 + x) / data->ratio;
-				draw_line(data);
-				y3 = data->player.y - dy;
-				x3 = data->player.x - dx;
-				data->r3d[index].y_init = 225 - ((MINIMAP / 9)
-						* (HEIGHT - (MINIMAP / 9))
-						/ (offset * cos((fabs(-i) * M_PI) / 180)));
-				data->r3d[index].x_init = 900 - (index + 1) * (WIDTH / RAYS);
-				data->r3d[index].y_end = 225 + ((MINIMAP / 9)
-						* (HEIGHT - (MINIMAP / 9))
-						/ (offset * cos((fabs(-i) * M_PI) / 180)));
-				data->r3d[index].x_end = data->r3d[index].x_init
-					+ (WIDTH / RAYS);
-				if (y3 <= 0.0
-					&& fabs(y3) - (int)fabs(y3) < fabs(x3) - (int)fabs(x3)
-					&& data->map.matrix[(int)dy - 1][(int)dx]
-					== '0' && data->player.yy < dy)
-				{
-					data->r3d[index].wall = 'D';
-					data->r3d[index].texture_init
-						= (int)((1 - (dx - (int)dx)) * 49);
-				}
-				else if (y3 >= 0.0
-					&& fabs(y3) - (int)fabs(y3) < fabs(x3) - (int)fabs(x3)
-					&& data->map.matrix[(int)dy + 1][(int)dx]
-					== '0' && data->player.yy > dy)
-				{
-					data->r3d[index].wall = 'D';
-					data->r3d[index].texture_init = (int)((dx - (int)dx) * 49);
-				}
-				else if (x3 >= 0.0
-					&& fabs(y3) - (int)fabs(y3) > fabs(x3) - (int)fabs(x3)
-					&& data->map.matrix[(int)dy][(int)dx + 1]
-					== '0' && data->player.xx > dx)
-				{
-					data->r3d[index].wall = 'D';
-					data->r3d[index].texture_init
-						= (int)((1 - (dy - (int)dy)) * 49);
-				}
-				else if (x3 <= 0.0
-					&& fabs(y3) - (int)fabs(y3) > fabs(x3) - (int)fabs(x3)
-					&& data->map.matrix[(int)dy][(int)dx - 1]
-					== '0' && data->player.xx < dx)
-				{
-					data->r3d[index].wall = 'D';
-					data->r3d[index].texture_init = (int)((dy - (int)dy) * 49);
-				}
-				draw_door(data, index);
-				break ;
-			}
-			offset += 0.1;
 		}
-		i += 0.25;
-		index++;
+		data->rays.i += 0.25;
+		data->rays.index++;
 	}
 }

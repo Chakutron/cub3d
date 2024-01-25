@@ -173,6 +173,20 @@ typedef	struct s_keys
 	int	d;
 }		t_keys;
 
+typedef struct s_rays
+{
+	float	offset;
+	double	y;
+	double	x;
+	double	dy;
+	double	dx;
+	float	i;
+	int		index;
+	float	angle;
+	float	y3;
+	float	x3;
+}			t_rays;
+
 typedef struct s_tmp
 {
 	int	y;
@@ -213,6 +227,7 @@ typedef struct s_data
 	int			ratio;
 	int			cursor_x;
 	float		timer;
+	t_rays		rays;
 	t_tmp		tmp;
 }				t_data;
 
@@ -235,6 +250,10 @@ void	draw_line(t_data *data);
 void	draw_minimap(t_data *data);
 void	draw_player(t_data *data);
 void	draw_rays(t_data *data);
+void	draw_rays_n(t_data *data);
+void	draw_rays_s(t_data *data);
+void	draw_rays_e(t_data *data);
+void	draw_rays_w(t_data *data);
 void	draw_square(t_data *data);
 void	draw_walk(t_data *data);
 void	draw_wall(t_data *data, int index);

@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+/*
+ * The `free_variables` function deallocates memory for map elements and texture
+ * files stored in the `data` structure. It iterates through the map matrix and
+ * frees memory for each row and then for the matrix itself. Additionally, it
+ * frees memory for loaded texture files if they exist.
+ */
+
 void	free_variables(t_data *data)
 {
 	int	i;

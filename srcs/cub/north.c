@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+/*
+ * The `north` function verifies the player's position on the map matrix and its
+ * surroundings. It updates the player's coordinates and angle if the position
+ * is valid, setting an error flag otherwise.
+ */
+
 void	north(int x, int y, t_data *data)
 {
 	if (data->player.nbr)

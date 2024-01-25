@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+/*
+ * The `identifiers` function identifies different elements on the map based on
+ * their characters. It prints different colors for different elements: green
+ * for empty space, violet for walls, gray for doors, and specific actions are
+ * triggered for player orientation ('N', 'S', 'E', 'W'). If an unknown
+ * character is encountered, it prints it in red and sets an error flag.
+ */
+
 void	identifiers(int x, int y, t_data *data)
 {
 	if (data->map.matrix[y][x] == ' ')

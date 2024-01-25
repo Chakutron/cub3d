@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+/*
+ * The `east` function validates the player's position based on the map matrix
+ * and surrounding cells. It updates the player's coordinates and angle if the
+ * position is valid, otherwise, it sets an error flag.
+ */
+
 void	east(int x, int y, t_data *data)
 {
 	if (data->player.nbr)

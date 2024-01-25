@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+/*
+ * The `load_walk` function loads a series of images representing frames of a
+ * walking animation. It loads these images into an array of textures stored in
+ * the `data` structure, each corresponding to a different frame of the
+ * walking animation.
+ */
+
 void	load_walk(t_data *data)
 {
 	data->player.walk.texture[0] = load_image("textures/walk/f_00.xpm", data);
@@ -37,6 +44,14 @@ void	load_walk(t_data *data)
 	data->player.walk.texture[20] = load_image("textures/walk/f_20.xpm", data);
 }
 
+/*
+ * The `load_images` function loads various textures and images required for the
+ * game, such as wall textures, door texture, floor texture, and ceiling texture.
+ * It also creates images for floor and ceiling textures, printing messages
+ * indicating the creation of these images along with their dimensions. Finally,
+ * it initializes other necessary components related to textures and images.
+ */
+
 void	load_images(t_data *data)
 {
 	data->map.NO_texture = load_image(data->map.NO_file, data);
@@ -49,7 +64,7 @@ void	load_images(t_data *data)
 	printf("- Image created: (floor texture) (ptr=%p) (%ix%i pixels)\n",
 		data->map.F_image.ptr, data->map.F_image.w, data->map.F_image.h);
 	data->map.C_image = new_img(WIDTH, HEIGHT / 2, data);
-	printf("- Image created: (ceilling texture) (ptr=%p) (%ix%i pixels)\n",
+	printf("- Image created: (ceiling texture) (ptr=%p) (%ix%i pixels)\n",
 		data->map.C_image.ptr, data->map.C_image.w, data->map.C_image.h);
 	make_floor_and_cell(data);
 }

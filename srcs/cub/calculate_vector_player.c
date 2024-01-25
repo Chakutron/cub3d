@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+/*
+ * The `calculate_vector_player` function computes the player's movement vector
+ * based on their current angle and speed. It converts the angle from degrees to
+ * radians, then calculates the movement components along the x and y axes using
+ * trigonometric functions.
+ */
+
 void	calculate_vector_player(t_data *data)
 {
 	data->player.radians = (data->player.angle * M_PI) / 180.0;

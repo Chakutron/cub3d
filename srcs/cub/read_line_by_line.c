@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+/*
+ * The function `read_line_by_line` iterates through each line, processing it to
+ * determine the map's dimensions or read variables, terminating upon reaching
+ * the end of the file or encountering an error.
+ */
+
 void	read_line_by_line(t_data *data)
 {
 	while (1)

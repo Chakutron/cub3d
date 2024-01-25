@@ -12,6 +12,11 @@
 
 #include "cub3d.h"
 
+/*
+ * The `draw_walk` function overlays the walking animation onto the canvas,
+ * updating the texture index and timer for animation frame control.
+ */
+
 void	draw_walk(t_data *data)
 {
 	put_img_to_img(&data->canvas,
@@ -28,6 +33,12 @@ void	draw_walk(t_data *data)
 		data->timer = 0.0;
 	}
 }
+
+/*
+ * The `render` function checks if the game should end, and if so, it closes
+ * the game, frees variables, and exits. Then, it checks for movement keys
+ * and returns 0.
+ */
 
 int	render(t_data *data)
 {

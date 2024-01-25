@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+/*
+ * The `load_map` function reads the map file line by line, extracts relevant
+ * information such as map size and matrix, and stores it in the `data`
+ * structure. It then prints out the variables loaded from the map file.
+ */
+
 void	load_map(t_data *data)
 {
 	data->fd = open(data->map.filename, O_RDONLY);

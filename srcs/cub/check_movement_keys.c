@@ -12,7 +12,15 @@
 
 #include "cub3d.h"
 
-void	check_undo_s_movement(t_data *data)
+/*
+ * The `check_undo_movement` function checks for collision with walls ('1') or 
+ * door objects ('2') after the player's movement and triggers an undo if
+ * necessary. It checks for collisions in multiple directions and calls the 
+ * `undo_movement` function to revert the player's position if a 
+ * collision occurs.
+ */
+
+void	check_undo_movement(t_data *data)
 {
 	if (data->map.matrix[(int)(data->player.yy - 1.0)][(int)(data->player.xx)]
 		== '1' && fabs(data->player.yy - (int)data->player.yy) < 0.15)
@@ -39,54 +47,50 @@ void	check_undo_s_movement(t_data *data)
 		== '2' && fabs(data->player.xx - (int)data->player.xx) > 0.85)
 		undo_movement(data);
 }
+
+/*
+ * The `s_key_movement` function handles the player's backward movement when
+ * the S key is pressed. It adjusts the player's position by adding the
+ * calculated y-component and subtracting the calculated x-component of the
+ * movement vector. It then checks for undoing movement, updates the player's
+ * position, and triggers an update of the view.
+ */
 
 void	s_key_movement(t_data *data)
 {
 	data->player.yy += data->player.y_temp;
 	data->player.xx -= data->player.x_temp;
-	check_undo_s_movement(data);
+	check_undo_movement(data);
 	data->player.y = data->player.yy;
 	data->player.x = data->player.xx;
 	update(data);
 }
 
-void	check_undo_w_movement(t_data *data)
-{
-	if (data->map.matrix[(int)(data->player.yy - 1.0)][(int)(data->player.xx)]
-		== '1' && fabs(data->player.yy - (int)data->player.yy) < 0.15)
-		undo_movement(data);
-	if (data->map.matrix[(int)(data->player.yy + 1.0)][(int)(data->player.xx)]
-		== '1' && fabs(data->player.yy - (int)data->player.yy) > 0.85)
-		undo_movement(data);
-	if (data->map.matrix[(int)data->player.yy][(int)(data->player.xx - 1.0)]
-		== '1' && fabs(data->player.xx - (int)data->player.xx) < 0.15)
-		undo_movement(data);
-	if (data->map.matrix[(int)data->player.yy][(int)(data->player.xx + 1.0)]
-		== '1' && fabs(data->player.xx - (int)data->player.xx) > 0.85)
-		undo_movement(data);
-	if (data->map.matrix[(int)(data->player.yy - 1.0)][(int)(data->player.xx)]
-		== '2' && fabs(data->player.yy - (int)data->player.yy) < 0.15)
-		undo_movement(data);
-	if (data->map.matrix[(int)(data->player.yy + 1.0)][(int)(data->player.xx)]
-		== '2' && fabs(data->player.yy - (int)data->player.yy) > 0.85)
-		undo_movement(data);
-	if (data->map.matrix[(int)data->player.yy][(int)(data->player.xx - 1.0)]
-		== '2' && fabs(data->player.xx - (int)data->player.xx) < 0.15)
-		undo_movement(data);
-	if (data->map.matrix[(int)data->player.yy][(int)(data->player.xx + 1.0)]
-		== '2' && fabs(data->player.xx - (int)data->player.xx) > 0.85)
-		undo_movement(data);
-}
+/*
+ * The `w_key_movement` function handles the player's forward movement when the
+ * W key is pressed. It adjusts the player's position by subtracting the
+ * calculated y-component and adding the calculated x-component of the movement
+ * vector. It then checks for undoing movement, updates the player's position,
+ * and triggers an update of the view.
+ */
 
 void	w_key_movement(t_data *data)
 {
 	data->player.yy -= data->player.y_temp;
 	data->player.xx += data->player.x_temp;
-	check_undo_w_movement(data);
+	check_undo_movement(data);
 	data->player.y = data->player.yy;
 	data->player.x = data->player.xx;
 	update(data);
 }
+
+/*
+ * The `check_movement_keys` function updates the player's position based on
+ * the pressed movement keys. It stores the previous position, then adjusts the
+ * player's angle if the A or D keys are pressed, updating the view
+ * accordingly. Additionally, it triggers movement functions for forward (W)
+ * and backward (S) motions.
+ */
 
 void	check_movement_keys(t_data *data)
 {

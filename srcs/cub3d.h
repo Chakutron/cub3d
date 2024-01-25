@@ -189,21 +189,22 @@ typedef struct s_rays
 
 typedef struct s_tmp
 {
-	int	y;
-	int x;
-	int yy;
-	int xx;
-	int	y0;
-	int	x0;
-	int	y1;
-	int	x1;
-	int	dx;
-	int	dy;
-	int sx;
-	int sy;
-	int err;
-	int e2;
-}		t_tmp;
+	int		y;
+	int 	x;
+	int 	yy;
+	int 	xx;
+	int		y0;
+	int		x0;
+	int		y1;
+	int		x1;
+	int		dx;
+	int		dy;
+	int 	sx;
+	int 	sy;
+	int 	err;
+	int 	e2;
+	char	*tmp;
+}			t_tmp;
 
 
 typedef struct s_data
@@ -234,7 +235,7 @@ typedef struct s_data
 void	add_spaces2map(t_data *data);
 void	add_spaces2map_2(t_data *data, int y, char **minimap);
 void	calculate_vector_player(t_data *data);
-void	ceiling_variable(t_data *data, char *line, char *tmp, int nbr);
+void	ceiling_variable(t_data *data, char *line, int nbr);
 int		check_extension(t_data *data);
 int		check_map(t_data *data);
 void	check_movement_keys(t_data *data);
@@ -261,7 +262,7 @@ void	east(int x, int y, t_data *data);
 void	east_wall(t_data *data, int index, int y, int x);
 void	empty_space(int x, int y, t_data *data);
 void	finish_gnl(t_data *data);
-void	floor_variable(t_data *data, char *line, char *tmp, int nbr);
+void	floor_variable(t_data *data, char *line, int nbr);
 void	free_elements_store_map(t_data *data);
 void	free_variables(t_data *data);
 uint	get_pixel_img(t_image *img, int x, int y);
@@ -299,13 +300,13 @@ void	write_error(char *str);
 int		x_press(t_data *data);
 
 int		check_size(long int n);
-int			ft_atoi(char *str);
-void		ft_bzero(void *s, size_t n);
-void		*ft_calloc(size_t nmemb, size_t size);
-char		*ft_itoa(int n);
-char		*ft_strcat2(char *s, char c);
-char		*ft_strdup2(char *s);
-char		*ft_strjoin3(char *s1, char *s2);
+int		ft_atoi(char *str);
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_itoa(int n);
+char	*ft_strcat2(char *s, char c);
+char	*ft_strdup2(char *s);
+char	*ft_strjoin3(char *s1, char *s2);
 void	worker(char *str, int size, long int num);
 
 #endif

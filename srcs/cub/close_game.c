@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+/* 
+ * The `close_game` function cleans up and closes the game window. It shows the
+ * mouse cursor, destroys the window, unloads images, and frees memory
+ * associated with the mlx library.
+ */
+
 void	close_game(t_data *data)
 {
 	mlx_mouse_show(data->mlx_ptr, data->win_ptr);

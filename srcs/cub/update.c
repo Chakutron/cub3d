@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+/*
+ * The `update` function refreshes the game display by creating a new canvas
+ * image, drawing various elements such as the background, minimap, rays,
+ * player, and walk animation, and then putting the updated canvas onto the game
+ * window. Finally, it destroys the temporary canvas image to avoid memory leaks.
+ */
+
 void	update(t_data *data)
 {
 	data->canvas = new_img(WIDTH, HEIGHT, data);

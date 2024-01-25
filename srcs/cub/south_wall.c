@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+/*
+ * The `south_wall` function is responsible for drawing the texture of an
+ * south-facing wall onto the canvas at the specified `(x, y)` coordinates. It
+ * retrieves the pixel color from the south-facing wall texture stored in
+ * `data->map.SO_texture` and applies it to the canvas. The texture offset is
+ * calculated based on the difference in `y` coordinates within the wall segment.
+ */
+
 void	south_wall(t_data *data, int index, int y, int x)
 {
 	put_pixel_img(&(data->canvas), x, y, get_pixel_img(&data->map.SO_texture,

@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+/*
+ * The `check_nearly_elems` function verifies if the element at the specified
+ * position (x, y) in the map matrix is neither a wall ('1'), a door object
+ * ('2'), nor a player ('N', 'S', 'E', 'W'). It returns 1 if the element is
+ * none of these, indicating it's not a valid map element, otherwise,
+ * it returns 0.
+ */
+
 int	check_nearly_elems(t_data *data, int x, int y)
 {
 	if (data->map.matrix[y][x] != '0' && data->map.matrix[y][x] != '1'

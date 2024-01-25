@@ -12,6 +12,16 @@
 
 #include "cub3d.h"
 
+/*
+ * The `draw_rays4` function is responsible for drawing a single ray onto the
+ * canvas with a specified color. It calculates the initial coordinates for 
+ * drawing the ray based on the player's position and the intersection point of
+ * the ray with the map grid. It then specifies the size of the ray and its
+ * color before calling the `draw_square` function to draw it on the canvas.
+ * Additionally, it calculates the coordinates for drawing a line representing
+ * the ray's path and updates the ray's initial coordinates for 3D rendering.
+ */
+
 void	draw_rays4(t_data *data, int color)
 {
 	data->ds.y_init = MINIMAP / data->ratio / 2 - (data->player.y
@@ -39,6 +49,15 @@ void	draw_rays4(t_data *data, int color)
 		* (WIDTH / RAYS);
 }
 
+/*
+ * The `draw_rays2` function is responsible for drawing the rays cast by the
+ * player onto the canvas. It calculates the endpoint of the ray based on the
+ * intersection with the walls or sprites. It then draws additional elements
+ * such as north, south, east, and west sides of the walls affected by the ray.
+ * Finally, it calls the `draw_rays4` function to draw the ray itself with
+ * the specified color.
+ */
+
 void	draw_rays2(t_data *data, int color)
 {
 	draw_rays4(data, color);
@@ -52,6 +71,16 @@ void	draw_rays2(t_data *data, int color)
 	draw_rays_e(data);
 	draw_rays_w(data);
 }
+
+/*
+ * The `draw_rays3` function calculates the coordinates of the intersection
+ * point of the ray with the map grid. It then checks if the intersection
+ * point corresponds to a wall ('1') or a door ('2') in the map matrix. If a
+ * collision with a wall is detected, it draws the ray and the wall. If a
+ * collision with a door is detected, it draws the ray and the door. Finally,
+ * it increments the ray's offset and returns 0 to indicate that
+ * no collision occurred.
+ */
 
 int	draw_rays3(t_data *data)
 {
@@ -76,6 +105,16 @@ int	draw_rays3(t_data *data)
 	data->rays.offset += 0.1;
 	return (0);
 }
+
+/*
+ * The `draw_rays` function is responsible for casting rays from the player's
+ * position to render the scene. It iterates over a range of angles representing
+ * each ray's direction relative to the player's angle. For each angle, it
+ * calculates the ray's direction vector, iterates over the ray's path, and
+ * checks for collisions with walls or doors. The function breaks when a
+ * collision occurs, updating the ray's endpoint. Finally, it increments the
+ * ray's index and repeats the process for the next angle.
+ */
 
 void	draw_rays(t_data *data)
 {

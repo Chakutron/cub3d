@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+/*
+ * The `new_file_img` function loads an image file located at the specified
+ * `path` using the mlx library, retrieves its width and height, and returns a
+ * `t_image` structure containing information about the loaded image.
+ * If the image loading fails, an error message is printed.
+ */
+
 t_image	new_file_img(char *path, t_data *window)
 {
 	t_image	img;

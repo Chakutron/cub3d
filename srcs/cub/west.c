@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+/*
+ * The `west` function updates the player's position and angle when facing
+ * westward. It validates the position and its surroundings before updating the
+ * player's coordinates and angle. If the position is invalid,
+ * it sets an error flag.
+ */
+
 void	west(int x, int y, t_data *data)
 {
 	if (data->player.nbr)

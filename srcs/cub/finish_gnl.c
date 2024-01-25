@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+/*
+ * The `finish_gnl` function reads and discards all remaining lines from the
+ * file descriptor until reaching the end of the file. Finally, it closes
+ * the file descriptor.
+ */
+
 void	finish_gnl(t_data *data)
 {
 	while (data->line != NULL)

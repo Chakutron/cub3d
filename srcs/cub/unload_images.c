@@ -12,6 +12,11 @@
 
 #include "cub3d.h"
 
+/*
+ * The `unload_walk` function deallocates the memory used by the textures of
+ * the walking animation in the game.
+ */
+
 void	unload_walk(t_data *data)
 {
 	int	i;
@@ -23,6 +28,11 @@ void	unload_walk(t_data *data)
 		i++;
 	}
 }
+
+/*
+ * The `unload_images` function deallocates the memory used by the loaded 
+ * images in the game.
+ */
 
 void	unload_images(t_data *data)
 {

@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+/*
+ * The `new_img` function creates a new image with the specified width `w` and
+ * height `h` using the mlx library. It returns a `t_image` structure containing
+ * information about the newly created image, including its pointer, address,
+ * width, and height.
+ */
+
 t_image	new_img(int w, int h, t_data *window)
 {
 	t_image	image;

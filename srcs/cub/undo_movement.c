@@ -12,6 +12,11 @@
 
 #include "cub3d.h"
 
+/*
+ * The `undo_movement` function reverts the player's position to the previous
+ * coordinates, effectively undoing their movement.
+ */
+
 void	undo_movement(t_data *data)
 {
 	data->player.yy = data->player.y_old;

@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+/*
+ * The `add_spaces2map` function expands the map's width by two columns,
+ * adding spaces to each existing row and creating additional rows with spaces.
+ * It ensures each row starts and ends with a space, updates the map's
+ * dimensions, and calls `add_spaces2map_2` to finalize the process.
+ */
+
 void	add_spaces2map(t_data *data)
 {
 	int		y;

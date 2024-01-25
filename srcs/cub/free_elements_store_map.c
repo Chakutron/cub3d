@@ -12,6 +12,15 @@
 
 #include "cub3d.h"
 
+/*
+ * The `free_elements_store_map` function reads the map data from the file
+ * descriptor `data->fd`, storing it in `data->map.matrix`, and then frees memory
+ * allocated during the process. It first skips lines before the actual map data
+ * (`mapstart` lines), reads each line of the map, removes any trailing newline
+ * characters, and stores them in `data->map.matrix`. Finally, it iterates
+ * through `data->map.matrix` and frees each line.
+ */
+
 void	free_elements_store_map(t_data *data)
 {
 	int	i;

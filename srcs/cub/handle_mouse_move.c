@@ -12,6 +12,15 @@
 
 #include "cub3d.h"
 
+/*
+ * The `handle_mouse_move` function tracks mouse movement within the window.
+ * When the mouse moves left (`x < WIDTH / 2`), it sets the 'A' key state and
+ * adjusts the cursor's horizontal position accordingly. Conversely, when the
+ * mouse moves right (`x > WIDTH / 2`), it sets the 'D' key state and adjusts
+ * the cursor's horizontal position. If neither condition is met, it resets the
+ * cursor's horizontal position to 0.
+ */
+
 int	handle_mouse_move(int x, int y, t_data *data)
 {
 	(void)y;

@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+/*
+ * The `load_image` function loads an image from a file and returns a `t_image`
+ * structure containing information about the loaded image. It prints a message
+ * indicating the successful loading of the image along with its file name,
+ * pointer address, and dimensions.
+ */
+
 t_image	load_image(char *file, t_data *data)
 {
 	t_image	image;

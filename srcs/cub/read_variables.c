@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+/*
+ * The `east_variable` function sets the east texture file path and checks if
+ * it's already been set. If not, it duplicates the path, validates it, and
+ * updates the variable. Otherwise, it triggers an error due to a duplicate
+ * variable assignment.
+ */
+
 void	east_variable(t_data *data, char *line)
 {
 	if (!data->map.info.e)
@@ -29,6 +36,13 @@ void	east_variable(t_data *data, char *line)
 	else
 		print_error(data, 2);
 }
+
+/*
+ * The `west_variable` function sets the west texture file path and checks if
+ * it's already been set. If not, it duplicates the path, validates it, and
+ * updates the variable. Otherwise, it triggers an error due to a duplicate
+ * variable assignment.
+ */
 
 void	west_variable(t_data *data, char *line)
 {
@@ -48,6 +62,13 @@ void	west_variable(t_data *data, char *line)
 		print_error(data, 2);
 }
 
+/*
+ * The `south_variable` function sets the south texture file path and checks if
+ * it's already been set. If not, it duplicates the path, validates it, and
+ * updates the variable. Otherwise, it triggers an error due to a duplicate
+ * variable assignment.
+ */
+
 void	south_variable(t_data *data, char *line)
 {
 	if (!data->map.info.s)
@@ -65,6 +86,13 @@ void	south_variable(t_data *data, char *line)
 	else
 		print_error(data, 2);
 }
+
+/*
+ * The `north_variable` function sets the north texture file path and checks if
+ * it's already been set. If not, it duplicates the path, validates it, and
+ * updates the variable. Otherwise, it triggers an error due to a duplicate
+ * variable assignment.
+ */
 
 void	north_variable(t_data *data, char *line)
 {
@@ -84,12 +112,16 @@ void	north_variable(t_data *data, char *line)
 		print_error(data, 2);
 }
 
+/*
+ * The `read_variables` function processes the given line to extract and set
+ * various map-related variables, such as textures, floor color,
+ * and ceiling color.
+ */
+
 void	read_variables(t_data *data, char *line)
 {
 	int		nbr;
-	char	*tmp;
 
-	tmp = ft_calloc(1, 1);
 	nbr = 0;
 	if (strncmp(line, "NO ", 3) == 0)
 		north_variable(data, line);
@@ -100,8 +132,7 @@ void	read_variables(t_data *data, char *line)
 	else if (strncmp(line, "EA ", 3) == 0)
 		east_variable(data, line);
 	else if (strncmp(line, "F ", 2) == 0)
-		floor_variable(data, line, tmp, nbr);
+		floor_variable(data, line, nbr);
 	else if (strncmp(line, "C ", 2) == 0)
-		ceiling_variable(data, line, tmp, nbr);
-	free(tmp);
+		ceiling_variable(data, line, nbr);
 }

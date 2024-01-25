@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+/*
+ * The `get_pixel_img` function retrieves the color of a pixel at coordinates
+ * (x, y) from the given image `img`. It calculates the memory address of the
+ * pixel using the image's address, line length, and bits per pixel (bpp), then
+ * dereferences the address to obtain the color value as an unsigned integer.
+ */
+
 unsigned int	get_pixel_img(t_image *img, int x, int y)
 {
 	return (*(unsigned int *)((img->addr + (abs(y) * img->line_len)

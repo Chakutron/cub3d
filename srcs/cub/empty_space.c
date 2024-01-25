@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+/*
+ * The `empty_space` function checks if the surrounding area of a given position
+ * is empty. If the area is not empty, it sets an error flag.
+ * Otherwise, it prints an empty space.
+ */
+
 void	empty_space(int x, int y, t_data *data)
 {
 	if (check_surround(data, x, y))

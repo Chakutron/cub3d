@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+/*
+ * The `east_wall` function is responsible for drawing the texture of an
+ * east-facing wall onto the canvas at the specified `(x, y)` coordinates. It
+ * retrieves the pixel color from the east-facing wall texture stored in
+ * `data->map.EA_texture` and applies it to the canvas. The texture offset is
+ * calculated based on the difference in `y` coordinates within the wall segment.
+ */
+
 void	east_wall(t_data *data, int index, int y, int x)
 {
 	put_pixel_img(&(data->canvas), x, y, get_pixel_img(&data->map.EA_texture,

@@ -12,69 +12,98 @@
 
 #include "cub3d.h"
 
-void	blue_floor(t_data *data, char *line, char *tmp, int nbr)
+/*
+ * The `blue_floor` function extracts the blue component of the floor color from
+ * the configuration file. It parses the value until encountering a comma,
+ * converts it to an integer, and assigns it to `data->map.floor.b`. If the
+ * conversion fails or encounters an invalid value, it triggers an error message.
+ */
+
+void	blue_floor(t_data *data, char *line, int nbr)
 {
-	tmp = ft_calloc(1, 1);
+	data->tmp.tmp = ft_calloc(1, 1);
 	while (line[data->map.i + 2] != '\r')
 	{
-		tmp = ft_strcat2(tmp, line[data->map.i + 2]);
+		data->tmp.tmp = ft_strcat2(data->tmp.tmp, line[data->map.i + 2]);
 		data->map.i++;
 	}
-	nbr = ft_atoi(tmp);
+	nbr = ft_atoi(data->tmp.tmp);
 	if (nbr == -42)
 	{
-		free(tmp);
+		free(data->tmp.tmp);
 		print_error(data, 2);
 	}
 	data->map.floor.b = nbr;
-	free(tmp);
+	free(data->tmp.tmp);
 }
 
-void	green_floor(t_data *data, char *line, char *tmp, int nbr)
+/*
+ * The `green_floor` function extracts the green component of the floor color
+ * from the configuration file. It parses the value until encountering a comma,
+ * converts it to an integer, and assigns it to `data->map.floor.g`. If the
+ * conversion fails or encounters an invalid value, it triggers an error message.
+ */
+
+void	green_floor(t_data *data, char *line, int nbr)
 {
-	tmp = ft_calloc(1, 1);
+	data->tmp.tmp = ft_calloc(1, 1);
 	while (line[data->map.i + 2] != ',')
 	{
-		tmp = ft_strcat2(tmp, line[data->map.i + 2]);
+		data->tmp.tmp = ft_strcat2(data->tmp.tmp, line[data->map.i + 2]);
 		data->map.i++;
 	}
-	nbr = ft_atoi(tmp);
+	nbr = ft_atoi(data->tmp.tmp);
 	if (nbr == -42)
 	{
-		free(tmp);
+		free(data->tmp.tmp);
 		print_error(data, 2);
 	}
 	data->map.floor.g = nbr;
 	data->map.i++;
-	free(tmp);
+	free(data->tmp.tmp);
 }
 
-void	red_floor(t_data *data, char *line, char *tmp, int nbr)
+/*
+ * The `red_floor` function extracts the red component of the floor color from
+ * the configuration file. It parses the value until encountering a comma,
+ * converts it to an integer, and assigns it to `data->map.floor.r`. If the
+ * conversion fails or encounters an invalid value, it triggers an error message.
+ */
+
+void	red_floor(t_data *data, char *line, int nbr)
 {
+	data->tmp.tmp = ft_calloc(1, 1);
 	data->map.i = 0;
 	while (line[data->map.i + 2] != ',')
 	{
-		tmp = ft_strcat2(tmp, line[data->map.i + 2]);
+		data->tmp.tmp = ft_strcat2(data->tmp.tmp, line[data->map.i + 2]);
 		data->map.i++;
 	}
-	nbr = ft_atoi(tmp);
+	nbr = ft_atoi(data->tmp.tmp);
 	if (nbr == -42)
 	{
-		free(tmp);
+		free(data->tmp.tmp);
 		print_error(data, 2);
 	}
 	data->map.floor.r = nbr;
 	data->map.i++;
-	free(tmp);
+	free(data->tmp.tmp);
 }
 
-void	floor_variable(t_data *data, char *line, char *tmp, int nbr)
+/*
+ * The `floor_variable` function parses and sets the floor color components
+ * from the configuration file. It extracts the RGB values from the line,
+ * calculates the final color using `create_trgb`, and updates the `data`
+ * structure. If the floor color info is already set, it prints an error.
+ */
+
+void	floor_variable(t_data *data, char *line, int nbr)
 {
 	if (!data->map.info.f)
 	{
-		red_floor(data, line, tmp, nbr);
-		green_floor(data, line, tmp, nbr);
-		blue_floor(data, line, tmp, nbr);
+		red_floor(data, line, nbr);
+		green_floor(data, line, nbr);
+		blue_floor(data, line, nbr);
 		data->map.info.f = 1;
 		data->map.floor.color = create_trgb(0, data->map.floor.r,
 				data->map.floor.g, data->map.floor.b);

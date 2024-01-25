@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+/*
+ * The `clean_return_line` function removes trailing newline characters from a
+ * string. It checks if the last character is a newline (`\n`) and removes it.
+ * Additionally, it checks if the character before the newline is a carriage
+ * return (`\r`) and removes it as well, if present. This ensures consistent
+ * line ending handling.
+ */
+
 void	clean_return_line(char *str)
 {
 	if (str[ft_strlen(str) - 1] == '\n')

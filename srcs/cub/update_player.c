@@ -12,6 +12,11 @@
 
 #include "cub3d.h"
 
+/*
+ * The `update_player` function updates the position of the player in the game
+ * map by changing the corresponding character in the map matrix to '0'.
+ */
+
 void	update_player(t_data *data, int x, int y)
 {
 	data->map.matrix[data->player.x][data->player.y] = '0';

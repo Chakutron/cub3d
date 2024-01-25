@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+/*
+ * The `draw_wall_2` function determines which side of the wall is being
+ * rendered based on the wall direction stored in `data->r3d[index].wall`. It
+ * then calls the corresponding wall-drawing function (`north_wall`,
+ * `south_wall`, `east_wall`, or `west_wall`) to apply the appropriate texture
+ * to the canvas at the given coordinates `(x, y)`.
+ */
+
 void	draw_wall_2(t_data *data, int index, int y, int x)
 {
 	if (data->r3d[index].wall == 'N')
@@ -23,6 +31,13 @@ void	draw_wall_2(t_data *data, int index, int y, int x)
 	else if (data->r3d[index].wall == 'W')
 		west_wall(data, index, y, x);
 }
+
+/*
+ * The `draw_wall` function renders the wall textures onto the canvas within the
+ * specified index range. It iterates over the area defined by the index's
+ * starting and ending coordinates, checks if the pixel belongs to the wall or
+ * floor area, and if so, applies the wall texture accordingly.
+ */
 
 void	draw_wall(t_data *data, int index)
 {

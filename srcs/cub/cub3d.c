@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+/* 
+ * The `main` function is the entry point of the program. It checks if the
+ * correct number of command-line arguments is provided. If so, it initializes
+ * the `data` structure, sets the map filename, checks the extension,
+ * initializes variables, opens the map, and starts the game. Otherwise, it
+ * prints the correct usage of the program.
+ */
+
 int	main(int argc, char *argv[])
 {
 	t_data	data;

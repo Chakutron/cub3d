@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+/*
+ * The `print_error` function displays error messages related to different types
+ * of errors encountered during map parsing and rendering. It terminates the
+ * program after printing the error message.
+ */
+
 void	print_error(t_data *data, int error)
 {
 	write_error("\e[0;31m* ERROR found in map: ");

@@ -12,6 +12,11 @@
 
 #include "cub3d.h"
 
+/*
+ * The `start_game` function initializes the game window, sets up event hooks
+ * for keyboard and mouse input, loads images, and starts the game loop.
+ */
+
 void	start_game(t_data *data)
 {
 	data->mlx_ptr = mlx_init();

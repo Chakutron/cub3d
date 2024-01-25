@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+/*
+ * The `check_variables` function verifies if all required variables for the
+ * map are set. It increments a counter for each required variable found. If
+ * all required variables are set (indicated by the counter reaching 6), it
+ * marks the map's information as complete; otherwise, it marks it
+ * as incomplete.
+ */
+
 void	check_variables(t_data *data)
 {
 	int	info;

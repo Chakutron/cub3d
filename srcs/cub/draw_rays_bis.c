@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+/*
+ * The `draw_rays_n` function determines the wall type and texture
+ * initialization for rays intersecting towards the north direction, considering
+ * the ray's position and the presence of walls, doors, or sprites.
+ */
+
 void	draw_rays_n(t_data *data)
 {
 	if (data->rays.y3 <= 0.0 && fabs(data->rays.y3) - (int)fabs(data->rays.y3)
@@ -26,6 +32,12 @@ void	draw_rays_n(t_data *data)
 			= (int)((1 - (data->rays.dx - (int)data->rays.dx)) * 49);
 	}
 }
+
+/*
+ * The `draw_rays_s` function determines the wall type and texture
+ * initialization for rays intersecting towards the south direction, considering
+ * the ray's position and the presence of walls, doors, or sprites.
+ */
 
 void	draw_rays_s(t_data *data)
 {
@@ -43,6 +55,12 @@ void	draw_rays_s(t_data *data)
 	}
 }
 
+/*
+ * The `draw_rays_e` function determines the wall type and texture
+ * initialization for rays intersecting towards the east direction, considering
+ * the ray's position and the presence of walls, doors, or sprites.
+ */
+
 void	draw_rays_e(t_data *data)
 {
 	if (data->rays.x3 >= 0.0 && fabs(data->rays.y3)
@@ -58,6 +76,12 @@ void	draw_rays_e(t_data *data)
 			= (int)((1 - (data->rays.dy - (int)data->rays.dy)) * 49);
 	}
 }
+
+/*
+ * The `draw_rays_w` function determines the wall type and texture
+ * initialization for rays intersecting towards the west direction, considering
+ * the ray's position and the presence of walls, doors, or sprites.
+ */
 
 void	draw_rays_w(t_data *data)
 {

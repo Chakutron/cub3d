@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+/*
+ * The `open_map` function is responsible for loading the map, adding spaces to
+ * the map data, and checking the validity of the map. It prints status messages
+ * during the process. If the map is invalid, it prints an error message.
+ */
+
 void	open_map(t_data *data)
 {
 	printf("- Loading map..\n\n");

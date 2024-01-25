@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+/*
+ * The `init_variables` function initializes various variables and flags used in
+ * the program. It sets the player's initial state, initializes flags for map
+ * information, initializes keys' states, sets initial game state flags, defines
+ * parameters for raycasting and player movement, and sets the initial
+ * cursor position.
+ */
+
 void	init_variables(t_data *data)
 {
 	data->player.nbr = 0;

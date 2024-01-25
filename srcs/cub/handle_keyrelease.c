@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+/*
+ * The `handle_keyrelease` function updates the key states and adjusts the
+ * game's rendering ratio when keys are released. If the arrow keys or 'WASD'
+ * keys are released, their corresponding movement flags are reset.
+ * Additionally, pressing the '-' key decreases the rendering ratio, while
+ * pressing the '+' key increases it, with limits set between 1 and 5.
+ */
+
 int	handle_keyrelease(int keysym, t_data *data)
 {
 	if (keysym == 119 || keysym == 65362)

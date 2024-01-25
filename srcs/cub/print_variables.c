@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+/*
+ * The `print_variables` function displays various configuration variables and
+ * the map matrix, providing insight into the current state of the map
+ * and textures.
+ */
+
 void	print_variables(t_data *data)
 {
 	int	i;

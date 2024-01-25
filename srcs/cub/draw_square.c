@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+/*
+ * The `draw_square` function draws a square onto the canvas with the specified
+ * color. It iterates over the square's area and sets pixels to the given color.
+ * It also checks for boundaries to ensure it doesn't draw outside the canvas.
+ * Additionally, it handles alternate coloring if the canvas resolution is low.
+ */
+
 void	draw_square(t_data *data)
 {
 	int	y;

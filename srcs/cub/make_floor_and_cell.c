@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+/*
+ * The `make_floor_and_cell` function fills two images (`F_image` and `C_image`)
+ * with colors representing the floor and ceiling, respectively, using the
+ * specified colors stored in the `data` structure.
+ */
+
 void	make_floor_and_cell(t_data *data)
 {
 	int	x;

@@ -12,6 +12,15 @@
 
 #include "cub3d.h"
 
+/*
+ * The `check_surround` function verifies if the element at the specified
+ * position (x, y) in the map matrix is surrounded by valid map elements. It
+ * checks if the element is at the map boundaries or if any adjacent elements
+ * are invalid using the `check_nearly_elems` function. It returns 1 if any
+ * surrounding element is invalid, indicating an invalid map position,
+ * otherwise, it returns 0.
+ */
+
 int	check_surround(t_data *data, int x, int y)
 {
 	if (x == 0 || y == 0)

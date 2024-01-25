@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+/*
+ * The `west_door_management` function toggles the state of doors west of the
+ * player based on their viewing angle. It switches between open and closed
+ * states for the door in front of the player and the door two tiles ahead if
+ * the player is facing west.
+ */
+
 void	west_door_management(t_data *data)
 {
 	if (data->map.matrix[data->player.y][data->player.x - 1] == '2'
@@ -29,6 +36,13 @@ void	west_door_management(t_data *data)
 		&& (data->player.angle > 135 && data->player.angle < 225))
 		data->map.matrix[data->player.y][data->player.x - 2] = '2';
 }
+
+/*
+ * The `east_door_management` function toggles the state of doors east of the
+ * player based on their viewing angle. It switches between open and closed
+ * states for the door in front of the player and the door two tiles ahead if
+ * the player is facing east.
+ */
 
 void	east_door_management(t_data *data)
 {
@@ -48,6 +62,13 @@ void	east_door_management(t_data *data)
 		data->map.matrix[data->player.y][data->player.x + 2] = '2';
 }
 
+/*
+ * The `south_door_management` function toggles the state of doors south of the
+ * player based on their viewing angle. It switches between open and closed
+ * states for the door in front of the player and the door two tiles ahead if
+ * the player is facing south.
+ */
+
 void	south_door_management(t_data *data)
 {
 	if (data->map.matrix[data->player.y + 1][data->player.x] == '2'
@@ -66,6 +87,13 @@ void	south_door_management(t_data *data)
 		data->map.matrix[data->player.y + 2][data->player.x] = '2';
 }
 
+/*
+ * The `north_door_management` function toggles the state of doors north of the
+ * player based on their viewing angle. It switches between open and closed
+ * states for the door in front of the player and the door two tiles ahead if
+ * the player is facing north.
+ */
+
 void	north_door_management(t_data *data)
 {
 	if (data->map.matrix[data->player.y - 1][data->player.x] == '2'
@@ -83,6 +111,14 @@ void	north_door_management(t_data *data)
 		&& (data->player.angle > 45 && data->player.angle < 135))
 		data->map.matrix[data->player.y - 2][data->player.x] = '2';
 }
+
+/*
+ * The `handle_keypress` function manages key presses in the game. It sets flags
+ * based on the pressed keys: 'W' or up arrow for moving forward, 'S' or down
+ * arrow for moving backward, 'A' or left arrow for strafing left, 'D' or right
+ * arrow for strafing right, and spacebar for door management. The function also
+ * updates the game state accordingly.
+ */
 
 int	handle_keypress(int keysym, t_data *data)
 {

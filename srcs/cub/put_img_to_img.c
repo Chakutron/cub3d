@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+/*
+ * The `put_img_to_img` function copies the content of one image (`src`) onto
+ * another image (`dst`) at the specified coordinates `(x, y)`. It iterates over
+ * each pixel in the source image and sets the corresponding pixel in the
+ * destination image to match it.
+ */
+
 void	put_img_to_img(t_image *dst, t_image *src, int x, int y)
 {
 	int	i;

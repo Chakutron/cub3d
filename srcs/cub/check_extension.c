@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+/*
+ * The `check_extension` function verifies if the provided map file has the
+ * correct extension ".cub". It checks if the last four characters of the
+ * filename match ".cub", returning 0 if they do, indicating a valid extension,
+ * and 1 otherwise.
+ */
+
 int	check_extension(t_data *data)
 {
 	int	i;

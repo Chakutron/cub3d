@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+/* 
+ * The `add_spaces2map_2` function extends the map's height by two rows,
+ * reallocates memory, and fills the new rows with spaces. It updates the map
+ * dimensions and ensures each row has the correct width by appending
+ * spaces if needed.
+ */
+
 void	add_spaces2map_2(t_data *data, int y, char **minimap)
 {
 	while (y < data->map.h)

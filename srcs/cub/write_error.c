@@ -12,6 +12,11 @@
 
 #include "cub3d.h"
 
+/*
+ * The `write_error` function outputs an error message to the standard
+ * error stream (`stderr`).
+ */
+
 void	write_error(char *str)
 {
 	write(2, str, ft_strlen(str));

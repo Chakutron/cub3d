@@ -6,11 +6,16 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/18 15:32:07 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:33:35 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/*
+ * Checks all the map and changes the door position from 3(open) to 2(closed).
+ * Verifies if the player is in a door case and let it open.
+ */
 
 void	close_doors(t_data *data)
 {
@@ -32,6 +37,10 @@ void	close_doors(t_data *data)
 	if (data->map.matrix[data->player.y][data->player.x] == '2')
 		data->map.matrix[data->player.y][data->player.x] = '3';
 }
+
+/*
+ * Checks all the map and changes the door position from 2(closed) to 3(open).
+ */
 
 void	open_doors(t_data *data)
 {

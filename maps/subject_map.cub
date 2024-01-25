@@ -1,7 +1,7 @@
-NO textures/N2.xpm
-SO textures/S2.xpm
-WE textures/W2.xpm
-EA textures/E2.xpm
+NO textures/N_wall.xpm
+SO textures/S_wall.xpm
+WE textures/W_wall.xpm
+EA textures/E_wall.xpm
 
 F 0,254,0
 C 0,255,255

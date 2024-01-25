@@ -1,7 +1,7 @@
 NO textures/N2.xpm
 SO textures/S2.xpm
 WE textures/W2.xpm
-EA textures/E2.xpm
+EA file_that_dont_exists.xpm
 
 F 220,600,0
 C 225,30,0

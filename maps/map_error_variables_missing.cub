@@ -1,6 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-EA ./path_to_the_east_texture
+NO textures/N2.xpm
+SO textures/S2.xpm
+EA textures/E2.xpm
+
 
 C 225,30,0
 

@@ -6,7 +6,7 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/14 19:15:34 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:16:25 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ void	print_error(t_data *data, int error)
 	else if (error == 6)
 		write_error("  Wrong map format!\n");
 	write_error("\e[0m");
-	if (error == 1 || error == 4)
+	if (error == 1)
 		close_game(data);
-	else if (error == 3)
+	else if (error == 3 || error == 4)
 		(void)data;
 	else
 		finish_gnl(data);
-	free_variables(data);
+	if (error != 3 && error != 4)
+		free_variables(data);
 	exit(1);
 }

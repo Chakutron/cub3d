@@ -36,7 +36,7 @@ void	print_error(t_data *data, int error)
 	else if (error == 6)
 		write_error("  Wrong map format!\n");
 	write_error("\e[0m");
-	if (error == 1)
+	if (error == 1 || error == 4)
 		close_game(data);
 	else if (error == 3)
 		(void)data;

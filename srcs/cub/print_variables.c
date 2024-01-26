@@ -6,7 +6,7 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/14 19:27:44 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:58:50 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	print_variables(t_data *data)
 {
 	int	i;
 
-	printf("NO file = %s\n", data->map.NO_file);
-	printf("SO file = %s\n", data->map.SO_file);
-	printf("WE file = %s\n", data->map.WE_file);
-	printf("EA file = %s\n", data->map.EA_file);
+	printf("NO file = %s\n", data->map.no_file);
+	printf("SO file = %s\n", data->map.so_file);
+	printf("WE file = %s\n", data->map.we_file);
+	printf("EA file = %s\n", data->map.ea_file);
 	printf("Floor color = 0x%08X (%i, %i, %i)\n", data->map.floor.color,
 		data->map.floor.r, data->map.floor.g, data->map.floor.b);
 	printf("Cell color = 0x%08X (%i, %i, %i)\n", data->map.cell.color,

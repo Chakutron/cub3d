@@ -6,7 +6,7 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/20 17:37:22 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:56:55 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,17 @@ void	load_walk(t_data *data)
 
 void	load_images(t_data *data)
 {
-	data->map.NO_texture = load_image(data->map.NO_file, data);
-	data->map.SO_texture = load_image(data->map.SO_file, data);
-	data->map.WE_texture = load_image(data->map.WE_file, data);
-	data->map.EA_texture = load_image(data->map.EA_file, data);
-	data->map.D_texture = load_image("textures/door.xpm", data);
+	data->map.no_texture = load_image(data->map.no_file, data);
+	data->map.so_texture = load_image(data->map.so_file, data);
+	data->map.we_texture = load_image(data->map.we_file, data);
+	data->map.ea_texture = load_image(data->map.ea_file, data);
+	data->map.d_texture = load_image("textures/door.xpm", data);
 	load_walk(data);
-	data->map.F_image = new_img(WIDTH, HEIGHT / 2, data);
+	data->map.f_image = new_img(WIDTH, HEIGHT / 2, data);
 	printf("- Image created: (floor texture) (ptr=%p) (%ix%i pixels)\n",
-		data->map.F_image.ptr, data->map.F_image.w, data->map.F_image.h);
-	data->map.C_image = new_img(WIDTH, HEIGHT / 2, data);
+		data->map.f_image.ptr, data->map.f_image.w, data->map.f_image.h);
+	data->map.c_image = new_img(WIDTH, HEIGHT / 2, data);
 	printf("- Image created: (ceiling texture) (ptr=%p) (%ix%i pixels)\n",
-		data->map.C_image.ptr, data->map.C_image.w, data->map.C_image.h);
+		data->map.c_image.ptr, data->map.c_image.w, data->map.c_image.h);
 	make_floor_and_cell(data);
 }

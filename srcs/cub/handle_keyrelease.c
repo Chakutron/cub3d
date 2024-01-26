@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_events.c                                    :+:      :+:    :+:   */
+/*   handle_keyrelease.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/14 19:53:20 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:48:58 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ int	handle_keyrelease(int keysym, t_data *data)
 		data->key.a = 0;
 	if (keysym == 100 || keysym == 65363)
 		data->key.d = 0;
-	if (keysym == 65451)
+	if (keysym == 65451 && data->bonus)
 	{
 		data->ratio -= 1;
 		if (data->ratio < 1)
 			data->ratio = 1;
 		update(data);
 	}
-	if (keysym == 65453)
+	if (keysym == 65453 && data->bonus)
 	{
 		data->ratio += 1;
 		if (data->ratio > 5)

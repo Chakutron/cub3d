@@ -6,7 +6,7 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/14 20:03:56 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:01:19 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	unload_walk(t_data *data)
 
 void	unload_images(t_data *data)
 {
-	mlx_destroy_image(data->mlx_ptr, data->map.NO_texture.ptr);
-	mlx_destroy_image(data->mlx_ptr, data->map.SO_texture.ptr);
-	mlx_destroy_image(data->mlx_ptr, data->map.EA_texture.ptr);
-	mlx_destroy_image(data->mlx_ptr, data->map.WE_texture.ptr);
-	mlx_destroy_image(data->mlx_ptr, data->map.D_texture.ptr);
-	mlx_destroy_image(data->mlx_ptr, data->map.F_image.ptr);
-	mlx_destroy_image(data->mlx_ptr, data->map.C_image.ptr);
+	mlx_destroy_image(data->mlx_ptr, data->map.no_texture.ptr);
+	mlx_destroy_image(data->mlx_ptr, data->map.so_texture.ptr);
+	mlx_destroy_image(data->mlx_ptr, data->map.ea_texture.ptr);
+	mlx_destroy_image(data->mlx_ptr, data->map.we_texture.ptr);
+	mlx_destroy_image(data->mlx_ptr, data->map.d_texture.ptr);
+	mlx_destroy_image(data->mlx_ptr, data->map.f_image.ptr);
+	mlx_destroy_image(data->mlx_ptr, data->map.c_image.ptr);
 	unload_walk(data);
 }

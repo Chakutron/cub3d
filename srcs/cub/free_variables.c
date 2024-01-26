@@ -6,7 +6,7 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/14 19:48:59 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:55:39 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	free_variables(t_data *data)
 		free(data->map.matrix);
 	}
 	if (data->map.info.n)
-		free(data->map.NO_file);
+		free(data->map.no_file);
 	if (data->map.info.s)
-		free(data->map.SO_file);
+		free(data->map.so_file);
 	if (data->map.info.w)
-		free(data->map.WE_file);
+		free(data->map.we_file);
 	if (data->map.info.e)
-		free(data->map.EA_file);
+		free(data->map.ea_file);
 }

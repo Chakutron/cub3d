@@ -6,7 +6,7 @@
 /*   By: mchiboub <mchiboub@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:30:57 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/23 18:36:40 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:53:26 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_rc
 	float	yo;
 }			t_rc;
 
-typedef struct	s_r3d
+typedef struct s_r3d
 {
 	float	y_init;
 	float	x_init;
@@ -118,19 +118,19 @@ typedef struct s_info
 typedef struct s_map
 {
 	char	*filename;
-	char	*NO_file;
-	t_image	NO_texture;
-	char	*SO_file;
-	t_image	SO_texture;
-	char	*WE_file;
-	t_image	WE_texture;
-	char	*EA_file;
-	t_image	EA_texture;
-	t_image	D_texture;
+	char	*no_file;
+	t_image	no_texture;
+	char	*so_file;
+	t_image	so_texture;
+	char	*we_file;
+	t_image	we_texture;
+	char	*ea_file;
+	t_image	ea_texture;
+	t_image	d_texture;
 	t_color	floor;
-	t_image	F_image;
+	t_image	f_image;
 	t_color	cell;
-	t_image	C_image;
+	t_image	c_image;
 	int		w;
 	int		h;
 	char	**matrix;
@@ -143,7 +143,7 @@ typedef struct s_map
 
 typedef struct s_walk
 {
-	t_image texture[21];
+	t_image	texture[21];
 	int		index;
 }			t_walk;
 
@@ -165,7 +165,7 @@ typedef struct s_player
 	int		walk_offset;
 }		t_player;
 
-typedef	struct s_keys
+typedef struct s_keys
 {
 	int	w;
 	int	s;
@@ -190,22 +190,21 @@ typedef struct s_rays
 typedef struct s_tmp
 {
 	int		y;
-	int 	x;
-	int 	yy;
-	int 	xx;
+	int		x;
+	int		yy;
+	int		xx;
 	int		y0;
 	int		x0;
 	int		y1;
 	int		x1;
 	int		dx;
 	int		dy;
-	int 	sx;
-	int 	sy;
-	int 	err;
-	int 	e2;
+	int		sx;
+	int		sy;
+	int		err;
+	int		e2;
 	char	*tmp;
 }			t_tmp;
-
 
 typedef struct s_data
 {

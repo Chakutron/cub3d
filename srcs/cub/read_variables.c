@@ -6,7 +6,7 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/23 16:08:04 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:00:46 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	east_variable(t_data *data, char *line)
 {
 	if (!data->map.info.e)
 	{
-		data->map.EA_file = ft_strdup2(&line[3]);
-		if (ft_strlen(data->map.EA_file) > 0)
-			clean_return_line(data->map.EA_file);
+		data->map.ea_file = ft_strdup2(&line[3]);
+		if (ft_strlen(data->map.ea_file) > 0)
+			clean_return_line(data->map.ea_file);
 		data->map.info.e = 1;
-		data->fd2 = open(data->map.EA_file, O_RDONLY);
+		data->fd2 = open(data->map.ea_file, O_RDONLY);
 		if (data->fd2 == -1)
 			print_error(data, 5);
 		close(data->fd2);
@@ -48,11 +48,11 @@ void	west_variable(t_data *data, char *line)
 {
 	if (!data->map.info.w)
 	{
-		data->map.WE_file = ft_strdup2(&line[3]);
-		if (ft_strlen(data->map.WE_file) > 0)
-			clean_return_line(data->map.WE_file);
+		data->map.we_file = ft_strdup2(&line[3]);
+		if (ft_strlen(data->map.we_file) > 0)
+			clean_return_line(data->map.we_file);
 		data->map.info.w = 1;
-		data->fd2 = open(data->map.WE_file, O_RDONLY);
+		data->fd2 = open(data->map.we_file, O_RDONLY);
 		if (data->fd2 == -1)
 			print_error(data, 5);
 		close(data->fd2);
@@ -73,11 +73,11 @@ void	south_variable(t_data *data, char *line)
 {
 	if (!data->map.info.s)
 	{
-		data->map.SO_file = ft_strdup2(&line[3]);
-		if (ft_strlen(data->map.SO_file) > 0)
-			clean_return_line(data->map.SO_file);
+		data->map.so_file = ft_strdup2(&line[3]);
+		if (ft_strlen(data->map.so_file) > 0)
+			clean_return_line(data->map.so_file);
 		data->map.info.s = 1;
-		data->fd2 = open(data->map.SO_file, O_RDONLY);
+		data->fd2 = open(data->map.so_file, O_RDONLY);
 		if (data->fd2 == -1)
 			print_error(data, 5);
 		close(data->fd2);
@@ -98,11 +98,11 @@ void	north_variable(t_data *data, char *line)
 {
 	if (!data->map.info.n)
 	{
-		data->map.NO_file = ft_strdup2(&line[3]);
-		if (ft_strlen(data->map.NO_file) > 0)
-			clean_return_line(data->map.NO_file);
+		data->map.no_file = ft_strdup2(&line[3]);
+		if (ft_strlen(data->map.no_file) > 0)
+			clean_return_line(data->map.no_file);
 		data->map.info.n = 1;
-		data->fd2 = open(data->map.NO_file, O_RDONLY);
+		data->fd2 = open(data->map.no_file, O_RDONLY);
 		if (data->fd2 == -1)
 			print_error(data, 5);
 		close(data->fd2);

@@ -6,7 +6,7 @@
 /*   By: mchiboub <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:37:09 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/23 18:18:16 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:54:43 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	draw_door2(t_data *data, int index, int y, int x)
 		|| get_pixel_img(&data->canvas, x, y)
 		== (unsigned int)data->map.floor.color)
 		put_pixel_img(&(data->canvas), x, y,
-			get_pixel_img(&data->map.D_texture, data->r3d[index].texture_init,
+			get_pixel_img(&data->map.d_texture, data->r3d[index].texture_init,
 				(y - data->r3d[index].y_init) * (49 / (data->r3d[index].y_end
 						- data->r3d[index].y_init))));
 }

@@ -6,7 +6,7 @@
 /*   By: mchiboub <mchiboub@student.42perpignan.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:30:45 by mchiboub          #+#    #+#             */
-/*   Updated: 2024/01/25 17:14:49 by ocassany         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:46:32 by ocassany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	print_help(void)
 {
 	printf("\t╔═══════════════ Keys guide ══════════════╗\n");
 	printf("\t║                                         ║\n");
-	printf("\t║ Movement keys:        🔼         🇼     ║\n");
-	printf("\t║                     ◀️🔽▶️  or 🇦🇸🇩   ║\n");
+	printf("\t║ Movement keys:        🔼         🇼      ║\n");
+	printf("\t║                     ◀️ 🔽▶️   or 🇦 🇸 🇩    ║\n");
 	printf("\t║                                         ║\n");
-	printf("\t║ Toogle BONUS:               🇧          ║\n");
+	printf("\t║ Toogle BONUS:              🇧            ║\n");
 	printf("\t║                                         ║\n");
 	printf("\t╠═════════ Only with BONUS active ════════╣\n");
 	printf("\t║                                         ║\n");

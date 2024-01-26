@@ -13,6 +13,28 @@
 #include "cub3d.h"
 
 /*
+ * Helping guide to the key touches.
+ */
+
+void	print_help(void)
+{
+	printf("\t╔═══════════════ Keys guide ══════════════╗\n");
+	printf("\t║                                         ║\n");
+	printf("\t║ Movement keys:        🔼         🇼     ║\n");
+	printf("\t║                     ◀️🔽▶️  or 🇦🇸🇩   ║\n");
+	printf("\t║                                         ║\n");
+	printf("\t║ Toogle BONUS:               🇧          ║\n");
+	printf("\t║                                         ║\n");
+	printf("\t╠═════════ Only with BONUS active ════════╣\n");
+	printf("\t║                                         ║\n");
+	printf("\t║ Open/Close door:          <space>       ║\n");
+	printf("\t║                                         ║\n");
+	printf("\t║ Zoom minimap:            ➕ and ➖      ║\n");
+	printf("\t║                                         ║\n");
+	printf("\t╚═════════════════════════════════════════╝\n\n\n");
+}
+
+/*
  * The `start_game` function initializes the game window, sets up event hooks
  * for keyboard and mouse input, loads images, and starts the game loop.
  */
@@ -40,6 +62,7 @@ void	start_game(t_data *data)
 		mlx_mouse_hide(data->mlx_ptr, data->win_ptr);
 		load_images(data);
 		printf("\n--- GAME STARTED ---\n\n");
+		print_help();
 		update(data);
 		mlx_loop(data->mlx_ptr);
 	}
